@@ -1,0 +1,21 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      form [label="Support Request Form\nName · Email · Type · Message", fillcolor="#EAF2FF"];
+      details [label="Get response details"];
+      route [label="Support Type\n= IT Support?", shape=diamond, fillcolor="#FFF4E5"];
+      it [label="Run IT Support Agent", fillcolor="#F1EAFF"];
+      hr [label="Run HR Support Agent", fillcolor="#F1EAFF"];
+      itemail [label="Email IT reply to user", fillcolor="#E8F7EE"];
+      hremail [label="Email HR reply to user", fillcolor="#E8F7EE"];
+      form -> details -> route;
+      route -> it [label=" YES"]; it -> itemail;
+      route -> hr [label=" NO"]; hr -> hremail;
+    
+}

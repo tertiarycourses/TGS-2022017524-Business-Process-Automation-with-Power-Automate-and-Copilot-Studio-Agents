@@ -19,11 +19,12 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
+from docx.opc.constants import RELATIONSHIP_TYPE as RT
 
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "3.2"
+VERSION = "6.2-S1"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -43,6 +44,64 @@ VERSIONS = [
      "Course Development Team"],
     ["3.2", "24 Jul 2026", "Reframed Lab 7 as the complete Copilot Studio IT Support RAG "
      "Chatbot outcome: approved FAQ retrieval, citations, negative testing, and grounded refusal.",
+     "Course Development Team"],
+    ["3.3", "24 Jul 2026", "Restructured Labs 8-10 into two-part Teams and website "
+     "experiences: ordinary HTTP Power Automate flow, deterministic agent flow, and guarded "
+     "AI prompt flow.",
+     "Course Development Team"],
+    ["3.4", "24 Jul 2026", "Day 2 now concludes at Lab 10. Retired Lab 11 and "
+     "allocated the remaining guided time to integrated testing, troubleshooting and recap.",
+     "Course Development Team"],
+    ["3.5", "24 Jul 2026", "Made importable Power Automate packages the recommended "
+     "classroom path and added a ready-made Lab 8 website enquiry flow package.",
+     "Course Development Team"],
+    ["3.6", "24 Jul 2026", "Made natural-language flow creation the primary Lab 1 "
+     "route: prompt Copilot, inspect and correct the generated draft, then test; "
+     "retained manual and import recovery routes.",
+     "Course Development Team"],
+    ["3.7", "24 Jul 2026", "Reorganised Copilot Studio Labs 6-10 into two coherent "
+     "projects: prompt-created IT Support agent upgraded with RAG, then one Marina Trust "
+     "agent progressively upgraded with HTTP, deterministic and AI prompt flows.",
+     "Course Development Team"],
+    ["3.8", "24 Jul 2026", "Added a visual architecture flowchart to every lab, "
+     "standardised manual-build and packaged-import routes, and clarified how a "
+     "Copilot Studio agent calls Power Automate agent flows as tools.",
+     "Course Development Team"],
+    ["3.9", "24 Jul 2026", "Reordered the labs from simple to complex: instant, "
+     "scheduled, automated, human approval, HTTP, agent creation, RAG, channel "
+     "deployment, deterministic agent flow and controlled prompt flow.",
+     "Course Development Team"],
+    ["4.0", "24 Jul 2026", "Aligned Lab 6A with the current sandbox flow: POST "
+     "string trigger contract, imported manual label, training Outlook connection, "
+     "classroom recipient, business-banking subject and exact JSON response.",
+     "Course Development Team"],
+    ["5.0", "25 Jul 2026", "Rebuilt the two-day learning journey around Forms-driven "
+     "enquiry, event and leave workflows; specialised IT, HR and Finance agents; "
+     "HTTP/webhook websites; and a multi-timeframe trading-information capstone.",
+     "Course Development Team"],
+    ["5.1", "25 Jul 2026", "Expanded Labs 1-10 into detailed click-by-click activities "
+     "and added a shared labelled workflow flowchart to every lab, Learner Guide activity "
+     "and matching facilitator-deck lab overview.",
+     "Course Development Team"],
+    ["5.2", "25 Jul 2026", "Standardised canonical Lab 1-10 titles, durations, slide ranges "
+     "and shared flowchart mappings across the labs, Learner Guide Markdown, DOCX/PDF, "
+     "Lesson Plan and facilitator deck.",
+     "Course Development Team"],
+    ["6.0", "25 Jul 2026", "Major concept-first overhaul aligned to the 113-slide deck: "
+     "expanded cloud-flow types, trigger design, six Copilot agent building blocks, "
+     "HTTP/webhook foundations, finance tools and the canonical Lab 1-10 sequence.",
+     "Course Development Team"],
+    ["6.0-S1", "25 Jul 2026", "Added supplementary Lab 11 to compare a Copilot agent "
+     "calling a deterministic agent flow with a triggered agent flow calling a "
+     "published agent for structured travel-expense review.",
+     "Course Development Team"],
+    ["6.1", "26 Jul 2026", "Updated Copilot Studio labs for the new agent and workflow interfaces.",
+     "Course Development Team"],
+    ["6.2", "26 Jul 2026", "Updated Lab 9 to use the new Copilot Studio HTTP workflow canvas and Agent node.",
+     "Course Development Team"],
+    ["6.2-S1", "29 Jul 2026", "Retained the AI Trading Advisor as Lab 10 and "
+     "replaced the supplementary Lab 11 activity with the published Forms-based "
+     "Procurement Request approval and outcome-notification workflow.",
      "Course Development Team"],
 ]
 
@@ -83,22 +142,21 @@ DAYS = [
         "labs/Day 1/Module 1 - Workflow Automation Concepts.md",
         "labs/Day 1/Module 2 - Introduction to Power Automate.md",
         "labs/Day 1/Lab 0 - Environment Setup/index.md",
-        "labs/Day 1/Lab 1 - Automated Email Workflow/index.md",
-        "labs/Day 1/Lab 2 - Excel Data Logging Workflow/index.md",
-        "labs/Day 1/Lab 3 - Simple Approval Workflow/index.md",
-        "labs/Day 1/Lab 4 - Scheduled Trigger Workflow/index.md",
-        "labs/Day 1/Lab 5 - Form Submission Workflow/index.md",
-        "labs/Day 1/Lab 6A - External Enquiry Webhook/index.md",
-        "labs/Day 1/Lab 6B - Webhook Chatbot/index.md",
+        "labs/Day 1/Lab 1 - Forms Email Confirmation/index.md",
+        "labs/Day 1/Lab 2 - Forms Enquiry Logging/index.md",
+        "labs/Day 1/Lab 3 - Event Registration Branching/index.md",
+        "labs/Day 1/Lab 4 - Leave Approval/index.md",
+        "labs/Day 1/Module 3 - Business Agents Concepts.md",
+        "labs/Day 1/Lab 5 - IT Support Agent/index.md",
+        "labs/Day 1/Lab 6 - HR Support Agent/index.md",
+        "labs/Day 1/Lab 7 - Support Request Routing/index.md",
     ]),
-    ("Day 2 — Building Business Agents with Copilot Studio", [
-        "labs/Day 2/Module 3 - Business Agents Concepts.md",
-        "labs/Day 2/Lab 6 - Create Your First Agent/index.md",
-        "labs/Day 2/Lab 7 - IT Support RAG Chatbot/index.md",
-        "labs/Day 2/Lab 8 - Add Tools and Actions/index.md",
-        "labs/Day 2/Lab 9 - Sales Enquiry Assistant/index.md",
-        "labs/Day 2/Lab 10 - Procurement Request Workflow/index.md",
-        "labs/Day 2/Lab 11 - Automated Response Generation/index.md",
+    ("Day 2 — HTTP, Webhooks and Agent Websites", [
+        "labs/Day 2/Module 4 - HTTP Requests and Webhooks.md",
+        "labs/Day 2/Lab 8 - Website HTTP Enquiry/index.md",
+        "labs/Day 2/Lab 9 - Finance Agent Web Chat/index.md",
+        "labs/Day 2/Lab 10 - AI Trading Advisor Website/index.md",
+        "labs/Day 2/Lab 11 - Procurement Request Approval/index.md",
     ]),
 ]
 
@@ -109,7 +167,13 @@ LINK = re.compile(r"\[([^\]]+)\]\([^)]+\)")
 def clean(t):
     return LINK.sub(r"\1", t).rstrip()
 
-def md_to_blocks(text):
+def link_copilot_studio(t):
+    return t.replace(
+        "Open Copilot Studio",
+        "[Open Copilot Studio](https://copilotstudio.microsoft.com)",
+    )
+
+def md_to_blocks(text, source_path):
     lines = text.split("\n")
     blocks = []
     i, n = 0, len(lines)
@@ -130,6 +194,13 @@ def md_to_blocks(text):
         m = re.match(r"(#{1,6})\s+(.*)", s)
         if m:
             blocks.append(("h", len(m.group(1)), clean(m.group(2)))); i += 1; continue
+        # image
+        m = re.match(r"!\[([^\]]*)\]\(([^)]+)\)", s)
+        if m:
+            alt, target = m.group(1), m.group(2)
+            absolute = os.path.normpath(os.path.join(os.path.dirname(source_path), target))
+            repo_relative = os.path.relpath(absolute, REPO).replace(os.sep, "/")
+            blocks.append(("image", absolute, alt, repo_relative)); i += 1; continue
         # horizontal rule
         if re.match(r"^(-{3,}|\*{3,}|_{3,})$", s):
             blocks.append(("rule",)); i += 1; continue
@@ -154,11 +225,14 @@ def md_to_blocks(text):
         # numbered list (with indented sub-lines merged into the step)
         if re.match(r"^\d+\.\s+", s):
             items = []
+            start_number = None
             while i < n:
                 raw = lines[i]
-                mm = re.match(r"^\s*\d+\.\s+(.*)", raw)
+                mm = re.match(r"^\s*(\d+)\.\s+(.*)", raw)
                 if mm:
-                    items.append(clean(mm.group(1)))
+                    if start_number is None:
+                        start_number = int(mm.group(1))
+                    items.append(clean(mm.group(2)))
                 elif re.match(r"^\s{2,}\S", raw) and not raw.strip().startswith("```"):
                     # continuation / sub-bullet -> append to current step
                     sub = re.sub(r"^\s*[-*]\s+", "", raw.strip())
@@ -173,15 +247,35 @@ def md_to_blocks(text):
                 else:
                     break
                 i += 1
-            blocks.append(("steps", items)); continue
+            blocks.append(("steps", items, start_number or 1)); continue
         # bullet list
         if re.match(r"^[-*]\s+", s):
             items = []
             while i < n and re.match(r"^\s*[-*]\s+", lines[i]):
                 items.append(clean(re.sub(r"^\s*[-*]\s+", "", lines[i].strip()))); i += 1
             blocks.append(("bullets", items)); continue
-        # plain paragraph
-        blocks.append(("p", clean(s))); i += 1
+        # plain paragraph: join source-wrapped lines so inline Markdown tokens
+        # are not split across separate DOCX paragraphs or page boundaries.
+        buf = [s]
+        i += 1
+        while i < n:
+            nxt = lines[i].strip()
+            if not nxt:
+                break
+            if (
+                nxt.startswith("```")
+                or re.match(r"(#{1,6})\s+", nxt)
+                or re.match(r"!\[([^\]]*)\]\(([^)]+)\)", nxt)
+                or re.match(r"^(-{3,}|\*{3,}|_{3,})$", nxt)
+                or (nxt.startswith("|") and "|" in nxt[1:])
+                or nxt.startswith(">")
+                or re.match(r"^\d+\.\s+", nxt)
+                or re.match(r"^[-*]\s+", nxt)
+            ):
+                break
+            buf.append(nxt)
+            i += 1
+        blocks.append(("p", clean(" ".join(buf))))
     return blocks
 
 # ============================================================================
@@ -203,9 +297,10 @@ p(f"Welcome! This Learner Guide takes you **click-by-click** through every hands
 p("Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a "
   "**Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The "
   "**Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.")
-note("Course flow at a glance — Day 1: Workflow automation concepts + Power Automate (Labs 0-5 and webhook Labs 6A-6B). "
-     "Day 2: Business agents in Copilot Studio + agent-and-flow end-to-end workflows (Labs 6-11), "
-     "then the WSQ assessment (4:00-6:00 PM).")
+note("Course flow at a glance — Day 1: Forms-driven email, Excel, branching and approval "
+     "flows, followed by IT and HR agents and form-to-agent routing (Labs 1-7). Day 2: "
+     "HTTP requests, webhooks, a Finance Agent web chat and the multi-timeframe trading "
+     "advisor website (Labs 8-10), then the WSQ assessment (4:00-6:00 PM).")
 rule()
 
 # Common errors reference (mirrors the deck's quick-fix slide)
@@ -234,7 +329,7 @@ for day_title, files in DAYS:
         if not os.path.exists(path):
             print("  [missing]", rel); continue
         raw = open(path, encoding="utf-8").read()
-        gblocks = md_to_blocks(raw)
+        gblocks = md_to_blocks(raw, path)
         first_h1_done = False
         for gb in gblocks:
             if gb[0] == "h":
@@ -267,7 +362,7 @@ def _toc(blocks):
 
 def render_markdown(blocks):
     out = []; injected = False
-    for b in blocks:
+    for index, b in enumerate(blocks):
         k = b[0]
         if k == "h1":
             out.append(f"# {b[1]}\n")
@@ -284,7 +379,9 @@ def render_markdown(blocks):
         if k == "h2": out.append(f"## {b[1]}\n")
         elif k == "h3": out.append(f"### {b[1]}\n")
         elif k == "p": out.append(f"{b[1]}\n")
-        elif k == "steps": out.append("\n".join(f"{i}. {s}" for i, s in enumerate(b[1], 1)) + "\n")
+        elif k == "steps": out.append("\n".join(
+            f"{i}. {link_copilot_studio(s)}" for i, s in enumerate(b[1], b[2])
+        ) + "\n")
         elif k == "bullets": out.append("\n".join(f"- {s}" for s in b[1]) + "\n")
         elif k == "code": out.append("```\n" + b[1] + "\n```\n")
         elif k == "table":
@@ -295,6 +392,10 @@ def render_markdown(blocks):
                 out.append("| " + " | ".join(r) + " |")
             out.append("")
         elif k == "note": out.append(f"> {b[1]}\n")
+        elif k == "image":
+            # Angle brackets keep repository-relative image paths containing
+            # spaces valid in CommonMark and GitHub Markdown.
+            out.append(f"![{b[2]}](<{b[3]}>)\n")
         elif k == "rule": out.append("---\n")
     return "\n".join(out).strip() + "\n"
 
@@ -305,15 +406,54 @@ def _shade(cell, hexc):
 def _shade_para(pr, hexc="F3F5F8"):
     ppr = pr._p.get_or_add_pPr(); shd = OxmlElement("w:shd")
     shd.set(qn("w:val"),"clear"); shd.set(qn("w:color"),"auto"); shd.set(qn("w:fill"),hexc); ppr.append(shd)
+def _add_hyperlink(par, text, url):
+    relationship_id = par.part.relate_to(url, RT.HYPERLINK, is_external=True)
+    hyperlink = OxmlElement("w:hyperlink")
+    hyperlink.set(qn("r:id"), relationship_id)
+    run = OxmlElement("w:r")
+    run_properties = OxmlElement("w:rPr")
+    color = OxmlElement("w:color"); color.set(qn("w:val"), "0563C1"); run_properties.append(color)
+    underline = OxmlElement("w:u"); underline.set(qn("w:val"), "single"); run_properties.append(underline)
+    run.append(run_properties)
+    label = OxmlElement("w:t"); label.text = text; run.append(label)
+    hyperlink.append(run)
+    par._p.append(hyperlink)
 def _runs(par, text):
-    for part in re.split(r"(\*\*[^*]+\*\*|`[^`]+`)", text):
+    for part in re.split(r"(\*\*.*?\*\*|(?<!\*)\*[^*]+\*(?!\*)|`[^`]+`)", text):
         if not part: continue
         if part.startswith("**") and part.endswith("**"):
-            r = par.add_run(part[2:-2]); r.bold = True
+            r = par.add_run(re.sub(r"[*`]", "", part[2:-2])); r.bold = True
+        elif part.startswith("*") and part.endswith("*"):
+            r = par.add_run(part[1:-1]); r.italic = True
         elif part.startswith("`") and part.endswith("`"):
             r = par.add_run(part[1:-1]); r.font.name = "Consolas"; r.font.color.rgb = RGBColor(0xC7,0x25,0x4E)
         else:
-            par.add_run(part)
+            segments = part.split("Open Copilot Studio")
+            for index, segment in enumerate(segments):
+                if segment:
+                    par.add_run(segment)
+                if index < len(segments) - 1:
+                    _add_hyperlink(par, "Open Copilot Studio", "https://copilotstudio.microsoft.com")
+
+def add_static_toc(doc):
+    p = doc.add_paragraph()
+    p.paragraph_format.page_break_before = True
+    r = p.add_run("TABLE OF CONTENTS"); r.bold = True; r.font.size = Pt(12); r.font.color.rgb = DARK
+    entries = [
+        "Day 1 — Foundations & Power Automate",
+        "Module 1 — Workflow Automation Concepts",
+        "Module 2 — Power Automate Cloud Flows",
+        "Lab 0 — Environment Setup",
+        "Labs 1–4 — Forms, Excel, Branching and Leave Approval",
+        "Module 3 — Copilot Studio Agent Building Blocks",
+        "Labs 5–7 — IT Agent, HR Agent and Support Routing",
+        "Day 2 — HTTP, Webhooks and Agent Websites",
+        "Module 4 — HTTP Requests and Webhooks",
+        "Labs 8–10 — Website Enquiry, Finance Chat and Trading Advisor",
+    ]
+    for entry in entries:
+        doc.add_paragraph(entry, style="List Bullet")
+    doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
 
 def render_docx(blocks):
     doc = Document()
@@ -321,24 +461,47 @@ def render_docx(blocks):
     prodoc.style_headings(doc)
     add_cover_neutral(doc, "Learner Guide", TITLE, VERSION, COURSE_CODE)
     prodoc.add_version_control(doc, VERSIONS)
-    prodoc.add_toc(doc, levels="1-2")
-    for b in blocks:
+    # prodoc adds an explicit page-break paragraph. Remove it and let the TOC
+    # heading's page-break-before control pagination; otherwise a version table
+    # that exactly fills a page can produce a blank footer-only page.
+    version_break = doc.paragraphs[-1]
+    version_break._element.getparent().remove(version_break._element)
+    add_static_toc(doc)
+    for index, b in enumerate(blocks):
         k = b[0]
         if k == "h1": continue
         elif k == "h2":
             doc.add_paragraph(style="Heading 1").add_run(b[1])
         elif k == "h3":
-            doc.add_paragraph(style="Heading 2").add_run(b[1])
+            paragraph = doc.add_paragraph(style="Heading 2")
+            paragraph.add_run(b[1])
+            if b[1].strip().lower() == "workflow visual":
+                paragraph.paragraph_format.page_break_before = True
+            if index + 1 < len(blocks) and blocks[index + 1][0] == "image":
+                paragraph.paragraph_format.keep_with_next = True
         elif k == "p":
-            _runs(doc.add_paragraph(), b[1])
+            paragraph = doc.add_paragraph()
+            _runs(paragraph, b[1])
+            if re.fullmatch(r"\*\*[^*]+\*\*", b[1].strip()):
+                paragraph.paragraph_format.keep_with_next = True
+            if b[1].strip("* ").lower() == "workflow visual":
+                paragraph.paragraph_format.page_break_before = True
+                paragraph.paragraph_format.keep_with_next = True
         elif k == "steps":
-            for s in b[1]:
-                _runs(doc.add_paragraph(style="List Number"), s)
+            # Preserve the list's source start number. This keeps numbered
+            # procedures continuous when a code block splits the Markdown list.
+            for number, s in enumerate(b[1], start=b[2]):
+                paragraph = doc.add_paragraph()
+                paragraph.paragraph_format.left_indent = Inches(0.25)
+                paragraph.paragraph_format.first_line_indent = Inches(-0.25)
+                paragraph.add_run(f"{number}.  ")
+                _runs(paragraph, s)
         elif k == "bullets":
             for s in b[1]:
                 _runs(doc.add_paragraph(style="List Bullet"), s)
         elif k == "code":
             pr = doc.add_paragraph(); _shade_para(pr)
+            pr.paragraph_format.keep_together = True
             r = pr.add_run(b[1]); r.font.name = "Consolas"; r.font.size = Pt(9)
         elif k == "table":
             rows = b[1]
@@ -348,7 +511,7 @@ def render_docx(blocks):
                 for ci, val in enumerate(row):
                     cells[ci].text = ""; pp = cells[ci].paragraphs[0]
                     if ri == 0:
-                        rr = pp.add_run(val); rr.bold = True; rr.font.color.rgb = RGBColor(0xFF,0xFF,0xFF); rr.font.size = Pt(9.5)
+                        rr = pp.add_run(re.sub(r"[*`]", "", val)); rr.bold = True; rr.font.color.rgb = RGBColor(0xFF,0xFF,0xFF); rr.font.size = Pt(9.5)
                         _shade(cells[ci], "1F6FEB")
                     else:
                         _runs(pp, val)
@@ -357,13 +520,38 @@ def render_docx(blocks):
             pr = doc.add_paragraph(); _shade_para(pr, "FFF4E5")
             rr = pr.add_run("Note:  "); rr.bold = True; rr.font.color.rgb = RGBColor(0xB5,0x6A,0x00)
             _runs(pr, b[1])
+        elif k == "image":
+            if os.path.exists(b[1]):
+                pr = doc.add_paragraph()
+                pr.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                pr.paragraph_format.keep_with_next = True
+                pr.add_run().add_picture(b[1], width=Inches(6.25))
+                cap = doc.add_paragraph()
+                cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+                cap.paragraph_format.space_after = Pt(8)
+                rr = cap.add_run(f"Figure: {b[2]}")
+                rr.italic = True
+                rr.font.size = Pt(9)
+                rr.font.color.rgb = GREY
         elif k == "rule":
             pr = doc.add_paragraph(); pr.paragraph_format.space_before = Pt(2); pr.paragraph_format.space_after = Pt(2)
             ppr = pr._p.get_or_add_pPr(); bdr = OxmlElement("w:pBdr"); bot = OxmlElement("w:bottom")
             bot.set(qn("w:val"),"single"); bot.set(qn("w:sz"),"6"); bot.set(qn("w:space"),"1"); bot.set(qn("w:color"),"D0D7DE")
-            bdr.append(bot); ppr.append(bdr)
+            bdr.append(bot)
+            # Paragraph properties are order-sensitive in WordprocessingML;
+            # borders precede the spacing element created above.
+            ppr.insert(0, bdr)
     add_footer_neutral(doc, TITLE)
     prodoc.enable_update_fields(doc)
+    settings = doc.settings._element
+    zoom = settings.find(qn("w:zoom"))
+    if zoom is not None and zoom.get(qn("w:percent")) is None:
+        zoom.set(qn("w:percent"), "100")
+    update_fields = settings.find(qn("w:updateFields"))
+    compat = settings.find(qn("w:compat"))
+    if update_fields is not None and compat is not None:
+        settings.remove(update_fields)
+        compat.addprevious(update_fields)
     return doc
 
 md = render_markdown(B)

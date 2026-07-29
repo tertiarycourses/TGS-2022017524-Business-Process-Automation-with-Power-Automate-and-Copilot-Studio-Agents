@@ -1,0 +1,8 @@
+{
+  "type": "object",
+  "properties": {
+    "prompt": { "type": "string" },
+    "conversationId": { "type": "string" }
+  },
+  "required": ["prompt"]
+}

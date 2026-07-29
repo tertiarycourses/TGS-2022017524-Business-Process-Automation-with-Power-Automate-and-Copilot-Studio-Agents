@@ -93,7 +93,7 @@ This creates a brand-new *work* account such as `admin@yourname.onmicrosoft.com`
 
 ### Step 2: Create your "Course Sandbox" environment (~7 minutes)
 
-An **environment** is a container that holds your flows, agents, and data. For this course we'll create a dedicated **Sandbox** environment with **Dataverse** turned on, so the Day 2 Copilot Studio agents have a database to use.
+An **environment** is a container that holds your flows, agents, and data. For this course we'll create a dedicated **Sandbox** environment with **Dataverse** turned on, so the Day 1 Copilot Studio agents and later HTTP labs have the required services.
 
 1. Open a new tab and go to the **Power Platform admin center**: **<a href="https://admin.powerplatform.microsoft.com" target="_blank" rel="noopener">https://admin.powerplatform.microsoft.com</a>**.
 2. Sign in with the **same account** from Step 1.
@@ -135,11 +135,21 @@ Copilot Studio is where you build the AI **agents** (used on Day 2).
 1. Open a new tab and go to **<a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a>**.
 2. Sign in with the **same account** again.
 3. If prompted, select your **country/region** and select **Start free trial** (or **Try free**). This activates a **30-day Copilot Studio trial** at no cost (when it expires you can extend it once by another 30 days).
-4. Wait for the workspace to load. You'll see the Copilot Studio home page with options to **Create** an agent.
-5. Look at the **Environment selector** in the **top-right corner** and choose **Course Sandbox** — the **same** environment you selected in Power Automate.
-6. Do **not** create an agent yet — you'll do that in a later lab. For now, just confirm the page loads in the correct environment.
+4. Wait for the workspace to load. In the new experience, the Copilot Studio
+   home page shows **Agent** and **Workflow** creation choices.
+5. If the classic home page opens, select **Try it now** or turn on
+   **New experience** before continuing with the course labs.
+6. Look at the **Environment selector** in the **top menu** and choose
+   **Course Sandbox** — the **same** environment you selected in Power
+   Automate.
+7. Do **not** create an agent yet — you'll do that in a later lab. For now, just confirm the page loads in the correct environment.
 
-> **⚠️ Warning — Both tools MUST use the same environment.** Your agents (Copilot Studio) and your flows (Power Automate) can only call each other when they live in the **same** environment. If Power Automate shows *Course Sandbox* but Copilot Studio shows *Default* (or vice-versa), they cannot connect. Fix it now by clicking the top-right selector in each tool and choosing **Course Sandbox**.
+> **⚠️ Warning — Both tools MUST use the same environment.** Your agents
+> (Copilot Studio) and your flows (Power Automate) can only call each other when
+> they live in the **same** environment. If Power Automate shows *Course
+> Sandbox* but Copilot Studio shows *Default* (or vice-versa), they cannot
+> connect. Use the environment selector in each product's top menu and choose
+> **Course Sandbox**.
 
 ---
 
@@ -155,7 +165,7 @@ Run this quick checklist. Each item should already be true if the steps above su
 | 4 | My **Course Sandbox** environment shows status **Ready** | <a href="https://admin.powerplatform.microsoft.com" target="_blank" rel="noopener">https://admin.powerplatform.microsoft.com</a> |
 | 5 | Power Automate home page loads and **Course Sandbox** is selected | <a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a> |
 | 6 | Copilot Studio loads, my trial is active, and **Course Sandbox** is selected | <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> |
-| 7 | Power Automate and Copilot Studio show the **same** environment | Top-right selector in both |
+| 7 | Power Automate and Copilot Studio show the **same** environment | Environment selector in each product's top menu |
 
 If all seven are checked, your environment is ready.
 
@@ -179,7 +189,7 @@ You should now have:
 | "You don't currently qualify for a Microsoft 365 Developer Program sandbox subscription" | The Developer Program now requires a Visual Studio subscription. Use **Option B** (Business trial) instead. |
 | **+ New** environment button is greyed out / missing | Your tenant restricts environment creation. Ask an admin, or use the **Default** environment and select it in both tools. |
 | Environment created but stuck on **Preparing** | Wait 2–3 minutes and refresh the Environments list; provisioning Dataverse takes a moment. |
-| Power Automate says "no environment" | Refresh, re-select your region, then pick **Course Sandbox** in the top-right selector. |
+| Power Automate says "no environment" | Refresh, re-select your region, then pick **Course Sandbox** in the environment selector. |
 | Copilot Studio "Start free trial" button missing | You may already have a license — just proceed. Otherwise sign out and back in. |
 | Different environment shows in each tool | Click the environment selector (top-right) in **both** tools and choose **Course Sandbox**. |
 | No Outlook/Excel tiles | Your account lacks a Microsoft 365 license (and possibly a mailbox) — ask IT or use the Business trial account (Option B). |
@@ -188,10 +198,10 @@ You should now have:
 - Power Automate and Copilot Studio both need a **work/school** account — personal accounts won't work.
 - The **Microsoft 365 Developer Program** is no longer a free path; use a **Business trial** if you need an account.
 - An **environment** is the container for your work; this course uses one named **Course Sandbox** (Sandbox type, Dataverse = Yes).
-- The **#1 setup mistake** is having the two tools on **different environments** — always verify the top-right selector matches in both.
+- The **#1 setup mistake** is having the two tools on **different environments** — always verify the environment selector matches in both.
 
 ## Duration
 ~30–40 minutes
 
 ## Next Steps
-Read [Module 1: Workflow Automation Concepts](../Module%201%20-%20Workflow%20Automation%20Concepts.md) and [Module 2: Introduction to Power Automate](../Module%202%20-%20Introduction%20to%20Power%20Automate.md), then proceed to [Lab 1: Instant Email Flow](../Lab%201%20-%20Instant%20Email%20Flow/index.md).
+Read [Module 1: Workflow Automation Concepts](../Module%201%20-%20Workflow%20Automation%20Concepts.md) and [Module 2: Power Automate Cloud Flows](../Module%202%20-%20Introduction%20to%20Power%20Automate.md), then proceed to [Lab 1 — Form to Email Confirmation](../Lab%201%20-%20Forms%20Email%20Confirmation/index.md).

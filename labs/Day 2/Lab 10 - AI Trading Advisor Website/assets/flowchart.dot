@@ -1,0 +1,30 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      rankdir=TB;
+      page [label="Trading website\nTradingView + symbol + prompt", fillcolor="#EAF2FF"];
+      url [label="Learner-entered\nWebhook URL", fillcolor="#FFF4E5"];
+      trigger [label="HTTP request trigger"];
+      agent [label="Finance Advisor Agent", fillcolor="#F1EAFF"];
+      m1 [label="Twelve Data\n1-minute candles", fillcolor="#E8F7EE"];
+      m15 [label="Twelve Data\n15-minute candles", fillcolor="#E8F7EE"];
+      h1 [label="Twelve Data\n1-hour candles", fillcolor="#E8F7EE"];
+      news [label="NewsAPI\nrecent news", fillcolor="#E8F7EE"];
+      synthesis [label="Compare timeframes + news\nstate uncertainty", fillcolor="#F1EAFF"];
+      response [label="Response JSON\nanalysis + risk note", fillcolor="#EAF2FF"];
+      browser [label="Display analysis + risk note\non trading website", fillcolor="#EAF2FF"];
+      { rank=same; url; page; trigger; agent; }
+      { rank=same; m1; m15; h1; news; }
+      { rank=same; synthesis; response; browser; }
+      url -> page; page -> trigger -> agent;
+      agent -> m1; agent -> m15; agent -> h1; agent -> news;
+      m1 -> synthesis; m15 -> synthesis; h1 -> synthesis; news -> synthesis;
+      synthesis -> response -> browser;
+    
+}

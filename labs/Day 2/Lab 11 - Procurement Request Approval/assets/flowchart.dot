@@ -1,0 +1,24 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      rankdir=LR;
+      form [label="Procurement Request Form\nnew response", fillcolor="#EAF2FF"];
+      details [label="Get response details\nusing dynamic Response Id", fillcolor="#EAF2FF"];
+      approval [label="Start and wait\nfor an approval", fillcolor="#FFF4E5"];
+      outcome [label="Check approval outcome", shape=diamond, fillcolor="#F1EAFF"];
+      approved [label="Send approval email", fillcolor="#E8F7EE"];
+      rejected [label="Send rejection email", fillcolor="#FDECEC"];
+      requester [label="Requester receives\nthe human decision", fillcolor="#EAF2FF"];
+      form -> details -> approval -> outcome;
+      outcome -> approved [label=" APPROVED"];
+      outcome -> rejected [label=" REJECTED"];
+      approved -> requester;
+      rejected -> requester;
+    
+}

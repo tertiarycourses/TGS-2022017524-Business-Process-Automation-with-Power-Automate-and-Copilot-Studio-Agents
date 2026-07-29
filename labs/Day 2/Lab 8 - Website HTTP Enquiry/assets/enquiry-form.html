@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Course Enquiry</title>
+  <style>
+    :root{font-family:Inter,system-ui,sans-serif;color:#10223b;background:#eef4fb}*{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px}
+    main{width:min(720px,100%);background:white;border-radius:20px;padding:28px;box-shadow:0 18px 50px #294d7620}
+    h1{margin:.2rem 0}p{color:#52647a}.connect{background:#f2f7ff;border:1px solid #c9dcf7;padding:16px;border-radius:12px}
+    label{display:block;font-weight:700;margin:14px 0 6px}input,textarea,button{width:100%;font:inherit;border-radius:9px}
+    input,textarea{border:1px solid #b7c4d5;padding:11px}textarea{min-height:110px;resize:vertical}
+    button{border:0;background:#1769e0;color:#fff;padding:12px;font-weight:800;margin-top:14px;cursor:pointer}
+    button.secondary{background:#dce9fa;color:#14385e}.status{margin-top:16px;padding:12px;border-radius:9px;background:#edf2f7}
+    .ok{background:#e5f8ec;color:#145c30}.bad{background:#ffebeb;color:#8f2525}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Course Enquiry</h1>
+  <p>Connect this page to the HTTP-triggered flow you built in Lab 8.</p>
+  <section class="connect">
+    <label for="webhook">Power Automate webhook URL</label>
+    <input id="webhook" type="url" placeholder="https://…logic.azure.com/…">
+    <button id="save" class="secondary" type="button">Save URL in this browser</button>
+  </section>
+  <form id="form">
+    <label for="name">Name</label><input id="name" required>
+    <label for="email">Email</label><input id="email" type="email" required>
+    <label for="tel">Tel</label><input id="tel" type="tel" required>
+    <label for="message">Message</label><textarea id="message" required></textarea>
+    <button type="submit">Send enquiry</button>
+  </form>
+  <div id="status" class="status" role="status">Enter and save your webhook URL before submitting.</div>
+</main>
+<script>
+const key="lab8Webhook", webhook=document.querySelector("#webhook"), statusBox=document.querySelector("#status");
+const nameInput=document.querySelector("#name"), emailInput=document.querySelector("#email"), telInput=document.querySelector("#tel"), messageInput=document.querySelector("#message");
+webhook.value=localStorage.getItem(key)||"";
+document.querySelector("#save").onclick=()=>{
+  try{const u=new URL(webhook.value);if(u.protocol!=="https:")throw 0;localStorage.setItem(key,u.href);show("Webhook URL saved locally.",true)}
+  catch{show("Enter a complete HTTPS webhook URL.",false)}
+};
+function show(message,ok){statusBox.textContent=message;statusBox.className="status "+(ok?"ok":"bad")}
+document.querySelector("#form").onsubmit=async event=>{
+  event.preventDefault();let url;
+  try{url=new URL(webhook.value);if(url.protocol!=="https:")throw 0}catch{return show("Save a valid HTTPS webhook URL first.",false)}
+  const body={name:nameInput.value.trim(),email:emailInput.value.trim(),tel:telInput.value.trim(),message:messageInput.value.trim()};
+  show("Sending…",true);
+  try{
+    const response=await fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify(body)});
+    const data=await response.json().catch(()=>({message:response.statusText}));
+    if(!response.ok)throw new Error(data.message||"Request failed");
+    show(data.message||"Thank you. Your enquiry has been received.",true);
+  }catch(error){show("Could not submit: "+error.message,false)}
+};
+</script>
+<footer><p class="powered-by">Powered by <a href="https://www.tertiaryinfotech.com/" target="_blank" rel="noopener">Tertiary Infotech Academy Pte Ltd</a></p></footer>
+</body>
+</html>

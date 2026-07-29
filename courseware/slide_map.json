@@ -1,0 +1,23 @@
+{
+  "version": "6.0",
+  "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v6.0.pptx",
+  "slides": 113,
+  "sections": {
+    "day_1": "15-69",
+    "day_2": "70-104",
+    "recap_and_assessment": "105-113"
+  },
+  "labs": {
+    "lab_0": "14",
+    "lab_1": "25-28",
+    "lab_2": "31-34",
+    "lab_3": "37-40",
+    "lab_4": "43-46",
+    "lab_5": "57-59",
+    "lab_6": "61-63",
+    "lab_7": "66-69",
+    "lab_8": "77-81",
+    "lab_9": "85-89",
+    "lab_10": "95-104"
+  }
+}

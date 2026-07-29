@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-time WSQ revision of courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx.
+"""One-time WSQ revision of courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v4.pptx.
 
 - Rebrands the cover slide to the new course title + org + UEN + TGS code.
 - Inserts the WSQ admin slides (Digital Attendance, About the Trainer x2,
@@ -21,7 +21,7 @@ from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
 
 # script lives at .claude/skills/course-slides/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
-DECK = os.path.join(REPO, "courseware", "Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx")
+DECK = os.path.join(REPO, "courseware", "Business Process Automation with Power Automate and Copilot Studio Agents-v4.pptx")
 
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
 SHORT = "Business Process Automation with Power Automate & Copilot Studio Agents"

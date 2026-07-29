@@ -17,7 +17,7 @@ description: >
 > **THIS COURSE:** **Business Process Automation with Power Automate and Copilot Studio Agents**
 > · TGS Ref No: **TGS-2022017524** · 2-day course (Day 1: Power Automate foundations,
 > Day 2: Copilot Studio agents + agent-and-flow end-to-end, ending with the assessment).
-> The deck is `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v3.pptx` (all-white theme, Arial, 16:9) — see the
+> The deck is `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v4.pptx` (all-white theme, Arial, 16:9) — see the
 > project `course-slides` skill for how to edit it in place. Course page:
 > https://www.tertiarycourses.com.sg/wsq-create-copilot-chatbots-and-agents-with-microsoft-copilot-studio.html
 > (the website still shows the old course title; the title above is the current one).

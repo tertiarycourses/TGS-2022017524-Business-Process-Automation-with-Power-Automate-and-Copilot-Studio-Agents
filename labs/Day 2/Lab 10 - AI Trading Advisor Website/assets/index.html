@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Multi-Timeframe Market Lab</title>
+  <style>
+    :root{font-family:Inter,system-ui,sans-serif;color:#eef5ff;background:#060b15;--card:#101827;--line:#24324a;--accent:#5ce1a2}*{box-sizing:border-box}
+    body{margin:0}.shell{max-width:1280px;margin:auto;padding:22px}.top{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    h1{margin:.2rem 0}.tag{color:var(--accent);font-weight:800}.grid{display:grid;grid-template-columns:1.6fr 1fr;gap:18px;margin-top:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px}.chart{min-height:540px;padding:0;overflow:hidden}
+    label{display:block;margin:10px 0 5px;font-weight:700}input,textarea,button{font:inherit;border-radius:8px}
+    input,textarea{width:100%;padding:10px;border:1px solid #3a4c69;background:#09101e;color:white}textarea{min-height:110px}
+    button{border:0;background:var(--accent);color:#062018;padding:11px 15px;font-weight:800;cursor:pointer}.secondary{background:#243653;color:white}
+    .row{display:flex;gap:8px}.row input{flex:1}.response{white-space:pre-wrap;min-height:180px;color:#d7e3f6}.risk{color:#f1c979}
+    @media(max-width:850px){.grid{grid-template-columns:1fr}.chart{min-height:450px}.top{align-items:flex-start;flex-direction:column}}
+  </style>
+</head>
+<body><div class="shell">
+  <header class="top"><div><div class="tag">LAB 10 · EDUCATIONAL USE</div><h1>AI Trading Advisor Website</h1><p>TradingView chart plus governed multi-timeframe and news analysis.</p></div></header>
+  <section class="card">
+    <label for="webhook">Power Automate webhook URL</label>
+    <div class="row"><input id="webhook" type="url" placeholder="Paste your generated HTTP trigger URL"><button id="save" class="secondary" type="button">Save URL</button></div>
+    <div id="connection">Not connected</div>
+  </section>
+  <div class="grid">
+    <section class="card chart"><div id="tv_chart"></div></section>
+    <section class="card">
+      <form id="form">
+        <label for="symbol">Symbol</label>
+        <div class="row"><input id="symbol" value="NASDAQ:MSFT" required><button id="update" class="secondary" type="button">Update chart</button></div>
+        <label for="prompt">Analysis question</label>
+        <textarea id="prompt" required>Summarise the 1-minute, 15-minute and 1-hour trend and any material recent news. Explain uncertainty.</textarea>
+        <button id="ask">Ask Finance Advisor Agent</button>
+      </form>
+      <h2>Agent response</h2><div id="response" class="response">Connect your webhook and ask a question.</div>
+      <p class="risk">Educational market information only; not financial advice.</p>
+    </section>
+  </div>
+</div>
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+const key="lab10Webhook", hook=document.querySelector("#webhook"), state=document.querySelector("#connection"), output=document.querySelector("#response");
+const symbolInput=document.querySelector("#symbol"), promptInput=document.querySelector("#prompt");
+hook.value=localStorage.getItem(key)||"";state.textContent=hook.value?"Webhook saved in this browser":"Not connected";
+function ticker(){const raw=symbolInput.value.trim().toUpperCase();return raw.includes(":")?raw.split(":").pop():raw}
+function draw(){document.querySelector("#tv_chart").innerHTML="";if(window.TradingView)new TradingView.widget({autosize:true,symbol:symbolInput.value.trim().toUpperCase(),interval:"15",timezone:"Etc/UTC",theme:"dark",style:"1",locale:"en",container_id:"tv_chart",allow_symbol_change:true,calendar:false})}
+document.querySelector("#save").onclick=()=>{try{const u=new URL(hook.value);if(u.protocol!=="https:")throw 0;localStorage.setItem(key,u.href);state.textContent="Webhook saved in this browser"}catch{state.textContent="Enter a valid HTTPS webhook URL"}};
+document.querySelector("#update").onclick=draw;draw();
+document.querySelector("#form").onsubmit=async e=>{
+  e.preventDefault();let url;try{url=new URL(hook.value);if(url.protocol!=="https:")throw 0}catch{return output.textContent="Save a valid HTTPS webhook URL first."}
+  output.textContent="Gathering multi-timeframe data and news…";
+  try{
+    const res=await fetch(url,{method:"POST",headers:{"Content-Type":"text/plain;charset=UTF-8"},body:JSON.stringify({symbol:ticker(),prompt:promptInput.value.trim()})});
+    const data=await res.json();if(!res.ok)throw new Error(data.message||"Request failed");
+    output.textContent=(data.analysis||"No analysis returned.")+(data.disclaimer?"\n\n"+data.disclaimer:"");
+  }catch(error){output.textContent="Unable to complete analysis: "+error.message}
+};
+</script>
+<footer><p class="powered-by">Powered by <a href="https://www.tertiaryinfotech.com/" target="_blank" rel="noopener">Tertiary Infotech Academy Pte Ltd</a></p></footer>
+</body></html>

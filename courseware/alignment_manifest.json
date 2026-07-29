@@ -1,0 +1,106 @@
+{
+  "version": "6.0",
+  "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v6.0.pptx",
+  "labs": [
+    {
+      "id": "lab_1",
+      "number": 1,
+      "day": 1,
+      "title": "Lab 1 — Form to Email Confirmation",
+      "duration_minutes": 40,
+      "slides": "25-28",
+      "overview_slide": 25,
+      "path": "labs/Day 1/Lab 1 - Forms Email Confirmation/index.md"
+    },
+    {
+      "id": "lab_2",
+      "number": 2,
+      "day": 1,
+      "title": "Lab 2 — Log the Enquiry and Send Email",
+      "duration_minutes": 45,
+      "slides": "31-34",
+      "overview_slide": 31,
+      "path": "labs/Day 1/Lab 2 - Forms Enquiry Logging/index.md"
+    },
+    {
+      "id": "lab_3",
+      "number": 3,
+      "day": 1,
+      "title": "Lab 3 — Event Registration Branching",
+      "duration_minutes": 70,
+      "slides": "37-40",
+      "overview_slide": 37,
+      "path": "labs/Day 1/Lab 3 - Event Registration Branching/index.md"
+    },
+    {
+      "id": "lab_4",
+      "number": 4,
+      "day": 1,
+      "title": "Lab 4 — Leave Application Approval",
+      "duration_minutes": 45,
+      "slides": "43-46",
+      "overview_slide": 43,
+      "path": "labs/Day 1/Lab 4 - Leave Approval/index.md"
+    },
+    {
+      "id": "lab_5",
+      "number": 5,
+      "day": 1,
+      "title": "Lab 5 — IT Support Agent",
+      "duration_minutes": 40,
+      "slides": "57-59",
+      "overview_slide": 57,
+      "path": "labs/Day 1/Lab 5 - IT Support Agent/index.md"
+    },
+    {
+      "id": "lab_6",
+      "number": 6,
+      "day": 1,
+      "title": "Lab 6 — HR Support Agent",
+      "duration_minutes": 40,
+      "slides": "61-63",
+      "overview_slide": 61,
+      "path": "labs/Day 1/Lab 6 - HR Support Agent/index.md"
+    },
+    {
+      "id": "lab_7",
+      "number": 7,
+      "day": 1,
+      "title": "Lab 7 — Support Request Routing",
+      "duration_minutes": 30,
+      "slides": "66-69",
+      "overview_slide": 66,
+      "path": "labs/Day 1/Lab 7 - Support Request Routing/index.md"
+    },
+    {
+      "id": "lab_8",
+      "number": 8,
+      "day": 2,
+      "title": "Lab 8 — Website HTTP Enquiry",
+      "duration_minutes": 80,
+      "slides": "77-81",
+      "overview_slide": 77,
+      "path": "labs/Day 2/Lab 8 - Website HTTP Enquiry/index.md"
+    },
+    {
+      "id": "lab_9",
+      "number": 9,
+      "day": 2,
+      "title": "Lab 9 — Finance Agent Web Chat",
+      "duration_minutes": 80,
+      "slides": "85-89",
+      "overview_slide": 85,
+      "path": "labs/Day 2/Lab 9 - Finance Agent Web Chat/index.md"
+    },
+    {
+      "id": "lab_10",
+      "number": 10,
+      "day": 2,
+      "title": "Lab 10 — AI Trading Advisor Website",
+      "duration_minutes": 110,
+      "slides": "95-104",
+      "overview_slide": 95,
+      "path": "labs/Day 2/Lab 10 - AI Trading Advisor Website/index.md"
+    }
+  ]
+}

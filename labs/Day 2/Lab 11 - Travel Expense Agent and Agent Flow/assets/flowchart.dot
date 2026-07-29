@@ -1,0 +1,29 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      rankdir=TB;
+      staff [label="Staff conversation", fillcolor="#EAF2FF"];
+      agent [label="Expense Claim Agent\npolicy knowledge + instructions", fillcolor="#F1EAFF"];
+      tool [label="Agent flow tool\nfixed policy checks", fillcolor="#E8F7EE"];
+      toolresult [label="Decision + reason + reference", fillcolor="#E8F7EE"];
+      form [label="Expense claim form", fillcolor="#EAF2FF"];
+      flow [label="Triggered agent flow", fillcolor="#FFF4E5"];
+      runagent [label="Run an agent\nstructured review", fillcolor="#F1EAFF"];
+      route [label="High-confidence\npolicy-aligned?", shape=diamond, fillcolor="#FFF4E5"];
+      normal [label="Normal manager approval", fillcolor="#E8F7EE"];
+      human [label="Human exception review", fillcolor="#FDECEC"];
+      outcome [label="Claimant receives\nhuman outcome", fillcolor="#EAF2FF"];
+      staff -> agent -> tool -> toolresult -> agent;
+      form -> flow -> runagent -> route;
+      route -> normal [label=" YES"];
+      route -> human [label=" NO"];
+      normal -> outcome;
+      human -> outcome;
+    
+}

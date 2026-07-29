@@ -1,7 +1,0 @@
-{
-  "applicationId": "APP-20260724-104200",
-  "decision": "REVIEW",
-  "reason": "The application requires enhanced due diligence because PEP status was declared.",
-  "riskFlags": ["PEP"],
-  "emailSent": true
-}

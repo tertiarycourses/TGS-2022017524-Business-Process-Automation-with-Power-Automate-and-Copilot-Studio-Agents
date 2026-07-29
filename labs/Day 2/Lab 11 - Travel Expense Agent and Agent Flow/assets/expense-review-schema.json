@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "decision": {
+      "type": "string",
+      "enum": [
+        "ELIGIBLE_FOR_APPROVAL",
+        "MORE_INFORMATION_REQUIRED",
+        "OUTSIDE_POLICY",
+        "HUMAN_REVIEW"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["HIGH", "MEDIUM", "LOW"]
+    },
+    "reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missingInformation": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "policyReferences": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "decision",
+    "confidence",
+    "reasons",
+    "missingInformation",
+    "policyReferences"
+  ]
+}

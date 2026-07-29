@@ -1,0 +1,21 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      pdf [label="HR Policies.pdf", fillcolor="#EAF2FF"];
+      sharepoint [label="SharePoint\nHR Policy Knowledge", fillcolor="#E8F7EE"];
+      agent [label="HR Support Agent\nInstructions + privacy", fillcolor="#F1EAFF"];
+      teams [label="Employee in Teams", fillcolor="#EAF2FF"];
+      answer [label="Grounded policy answer", fillcolor="#E8F7EE"];
+      escalate [label="HR / manager escalation", fillcolor="#FFF4E5"];
+      pdf -> sharepoint -> agent;
+      teams -> agent;
+      agent -> answer [label=" supported"];
+      agent -> escalate [label=" decision / personal data"];
+    
+}

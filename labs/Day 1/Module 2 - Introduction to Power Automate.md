@@ -1,160 +1,131 @@
-# Module 2: Introduction to Power Automate
+# Module 2: Power Automate Cloud Flows
 
-> **Read this after [Module 1](Module%201%20-%20Workflow%20Automation%20Concepts.md) and before the Day 1 labs.** ~15 minutes.
+Power Automate cloud flows connect Microsoft 365 services and other systems. Every cloud flow has exactly one **trigger** and at least one **action**.
 
-This module turns the **Trigger → Actions → Output** idea from Module 1 into the actual tool you'll use all day: **Power Automate**. By the end you'll recognise the flow types, the common triggers and actions, and the one thing that trips up every beginner — connections.
+## Instant, scheduled and automated flows
 
----
+| Cloud flow | What starts it | Use it when | Course example |
+|---|---|---|---|
+| **Instant cloud flow** | A person deliberately selects a button, runs a flow, or invokes it from an app | The user controls the exact start time | A staff member runs a one-off test or approval |
+| **Scheduled cloud flow** | A **Recurrence** trigger reaches a defined time | Work must happen at fixed intervals even when no new business event occurs | Send a daily digest every weekday at 9:00 AM |
+| **Automated cloud flow** | A business event occurs in a connected service | The process should react immediately to new information | A Microsoft Form response starts Labs 1–4 and 7 |
 
-## 1. What is Power Automate?
+The difference is the **trigger**, not the actions. All three types can send email, update Excel, call an agent, create an approval, or branch on a condition.
 
-**Power Automate** is Microsoft's automation platform. It lets you build **flows** — automated sequences of steps that run across Microsoft 365 and hundreds of other apps, with little or no code. You design a flow visually in a browser by stacking one **trigger** and one or more **actions** (exactly the building blocks from Module 1).
+> **Decision rule:** ask “Who or what should start this process?” A person suggests instant; a clock suggests scheduled; a new record, form, file or message suggests automated.
 
-With Power Automate you can:
+### Instant cloud flow
 
-- React to events — an email arrives, a file is uploaded, a form is submitted
-- Move and transform data between systems — Outlook, Excel, SharePoint, Teams, Dataverse, and more
-- Run approvals, send notifications, and schedule recurring jobs
-- Be called by a Copilot Studio **agent** as a tool (you'll do this on Day 2)
+An **instant** flow waits for a person or application to invoke it deliberately. Typical triggers include **Manually trigger a flow**, **Power Apps**, and a selected-item button in a Microsoft 365 app.
 
-You build flows at **<a href="https://make.powerautomate.com" target="_blank" rel="noopener">https://make.powerautomate.com</a>**, inside the environment you set up in **Lab 0**.
+Use an instant flow when:
 
-> **Low-code, not no-thought.** You don't write code, but you do think like a designer: what starts the flow, what it does, and what data moves between steps.
+- the user must decide exactly when the process starts;
+- the user needs to supply values at run time; or
+- the action is exceptional rather than continuously monitored.
 
-### Two ways to create a flow
+Do not choose an instant flow for unattended monitoring. If a form submission should always be processed, an automated flow is the better design.
 
-Power Automate can create a first draft from a natural-language prompt, or you can assemble the cards manually:
+### Scheduled cloud flow
 
-| Approach | Best use | Maker responsibility |
-|---|---|---|
-| **Create your automation with Copilot / Describe it to design it** | Quickly turn a clear requirement into a suggested trigger and actions | Inspect every generated card, connection, field and expression |
-| **Start from blank** | Learn exact configuration or build when Copilot is unavailable | Select and configure every trigger and action |
+A **scheduled** flow starts from a **Recurrence** trigger. Its configuration defines the start time, frequency, interval and time zone.
 
-In Lab 1 you start with a prompt, then open the designer and correct the generated draft. This is the working habit used throughout the course:
+Use a scheduled flow for work such as:
 
-**Describe → Generate → Review → Test → Improve**
+- a weekday 9:00 AM reminder;
+- an overnight reconciliation;
+- a weekly summary; or
+- a periodic check of items that have not been updated.
 
-### Types of flow you'll build in this course
+Scheduled flows are driven by the clock. They may find no work on a particular run, so design them to handle an empty result safely.
 
-There are four flavours of flow. They differ only in *how they start* — once running, they all do the same kind of work.
+### Automated cloud flow
 
-| Flow type | Started by | Example | Lab |
-|-----------|-----------|---------|-----|
-| **Instant** | A person clicking Run / a button | Send email and log test data on demand | Labs 1–2 |
-| **Scheduled** | A clock/timetable (Recurrence) | Daily reminder at 9 AM | Lab 3 |
-| **Automated** | An event | New form response, new email, new file | Lab 4 |
-| **Human approval** | A flow pauses for a decision | Approve or reject a request, then branch | Lab 5 |
-| **HTTP request** | An external system posts JSON | Website enquiry or deterministic browser chatbot | Labs 6A–6B |
-| **Agent flow** | A Copilot Studio agent | Agent logs a request and returns a result | Lab 9 |
+An **automated** flow listens for a business event in a connector. Examples include **When a new response is submitted**, **When a file is created**, and **When an email arrives**.
 
----
+Use an automated flow when every qualifying event should receive a consistent response. Labs 1–4 and 7 use this type because a Microsoft Forms submission is the business event.
 
-## 2. Common triggers
+### Compare the trigger, not the action
 
-Every flow starts with **exactly one trigger** — the event that kicks it off. These are the ones you'll use most:
+The same **Send an email** action can appear in all three flow types. The flow type is determined by how it starts:
 
-| Trigger | Connector / name | Fires when… | Used in |
-|---------|------------------|-------------|---------|
-| **Email received** | Office 365 Outlook — *"When a new email arrives (V3)"* | Mail lands in a folder | Further practice |
-| **File upload** | OneDrive / SharePoint — *"When a file is created"* | A document is dropped into a folder | Further practice |
-| **Form submission** | Microsoft Forms — *"When a new response is submitted"* | Someone submits your form | Lab 4 |
-| **Schedule** | *"Recurrence"* | A timetable you define is reached | Lab 3 |
-| **Manual** | *"Manually trigger a flow"* | You press **Run** | Labs 1–2 and Lab 5 |
-| **HTTP request** | Request — *"When an HTTP request is received"* | An external website posts JSON | Labs 6A–6B |
-| **Agent call** | *"When an agent calls the flow"* | A Copilot Studio agent runs the flow as a tool | Labs 9–10 |
-
-> **Tip — build with a manual trigger first.** When learning a new flow, start with a **manual** trigger so you can press Run and perfect the actions. Once they work, swap in the real trigger (form, email, schedule). The actions stay exactly the same — only the start event changes.
-
----
-
-## 3. Creating workflow actions
-
-After the trigger, you add **actions** — the work the flow performs. These are the core actions you'll lean on throughout the course:
-
-### Send emails
-*Office 365 Outlook → Send an email (V2).* Send confirmations, notifications, and digests. Use **dynamic content** (outputs from earlier steps) to personalise the subject and body. *(Lab 1)*
-
-### Create Excel entries
-*Excel Online (Business) → Add a row into a table* (and *List rows present in a table*). Log every record into a spreadsheet **table** — this becomes your audit trail and single source of truth. *(Lab 2)*
-
-> Excel actions only see data that lives inside a proper **Table** (Insert → Table), not loose cells. This is a classic first-time gotcha.
-
-### Notifications & approvals
-- *Approvals → Start and wait for an approval.* Pause the flow until a person approves or rejects, then branch on the **Outcome**. *(Lab 5)*
-- Notifications to **Teams** or email keep the right people informed at each step.
-
-Actions are wired together with:
-
-- **Dynamic content** — one step's output becomes the next step's input (Module 1's "outputs")
-- **Conditions** — if/else branching to route the process
-
-> **Heads-up on approvals:** the approver you pick must be a real **user in your Microsoft 365 tenant**. Approvals can't be sent to an outside personal email address — pick someone in your organisation (yourself is fine for testing).
-
-### A note on expressions (fx)
-Sometimes a field needs a small calculation or formatting — today's date, trimmed text, a number comparison. Power Automate provides an **expression editor** (the **fx** button) for this. You'll only need a few simple ones; we'll point them out in the labs when they appear.
-
----
-
-## 4. Connections — how Power Automate reaches your apps
-
-Each connector (Outlook, Excel, Approvals, Forms…) needs a **connection** — a saved sign-in that authorises the flow to act on your behalf. The first time you use a connector, you'll **sign in and consent**.
-
-This is the **number one source of "why won't my flow run?"** for beginners, so commit it to memory:
-
-| Connection state | What you'll see | What to do |
-|------------------|-----------------|------------|
-| **Healthy** | Green / connected | Good to go |
-| **Broken / expired** | Red ⚠️ "Reconnect" | Reconnect before running |
-| **Wrong rights** | **"Unauthorized"** error | The account lacks rights (e.g. no mailbox) — fix or use a different account |
-
-> **The golden rule for every lab:** green connection = ready; red connection = reconnect first. An **Unauthorized** error almost always means: reconnect the connector or check that the signed-in account actually has permission for that action.
-
----
-
-## 5. Importing a packaged Power Automate flow
-
-Every flow-based lab includes its own ZIP beside the lab's `index.md`.
-
-1. Download the individual lab ZIP. Do not extract it.
-2. In Power Automate, select the correct **Course Sandbox** environment.
-3. Open **My flows → Import → Import Package (Legacy)**.
-4. Upload the ZIP.
-5. For the flow, choose **Create as new**.
-6. For every connector, choose an existing connection or create one and sign
-   in.
-7. Select **Import**, open the imported flow and complete the lab's
-   **After import** checklist.
-8. Select tenant-owned resources such as the Microsoft Form, Excel workbook,
-   table, recipient or approver.
-9. **Save → Test**, then inspect the run history.
-
-> **Why connection selection remains:** reusable packages must not contain
-> passwords, access tokens, personal email addresses, tenant IDs, Form IDs or
-> OneDrive file IDs. The flow logic is packaged; Microsoft still requires the
-> learner to authorise resources in their own environment.
-
-## 6. Anatomy of a flow (what you'll see in the designer)
-
-```
-[ TRIGGER ]        ← one event that starts the flow
-    │
-[ Action 1 ]       ← e.g. Get details / read data
-    │
-[ Condition ]      ← optional if/else branch
-   ├── If yes → [ Action ]
-   └── If no  → [ Action ]
-    │
-[ Action 2 ]       ← e.g. Send an email / Add a row
+```text
+Person selects Run     → Instant
+Recurrence time arrives → Scheduled
+Business event occurs   → Automated
 ```
 
-The build-and-verify loop is the same in every lab:
+## Trigger selection and trigger outputs
 
-1. **Save** the flow.
-2. **Test** it — manually, or by triggering the real event.
-3. Review the **run history** — **green = success, red = error** — to confirm it worked or to debug.
+A trigger is the first card and the event subscription for the flow. It answers four design questions:
 
-Get comfortable with this loop today; you'll repeat it dozens of times across the two days.
+1. **Event:** what exactly has to happen?
+2. **Scope:** which form, mailbox, folder, list or environment is monitored?
+3. **Identity:** which connection has permission to listen?
+4. **Output:** which identifiers and values become available to later actions?
 
----
+The trigger output is not always the complete business record. In the Microsoft Forms pattern, the trigger returns a **Response Id**, and **Get response details** uses that identifier to retrieve the answers. This is why the first two cards are both necessary.
 
-**Next:** [Lab 1: Instant Email Flow](Lab%201%20-%20Instant%20Email%20Flow/index.md)
+> A valid cloud flow needs one trigger and at least one action. An HTTP trigger by itself still produces the designer message that the flow needs a trigger **and an action**.
+
+## The course pattern
+
+The Day 1 labs use one connected scenario and expand it gradually:
+
+1. **Lab 1:** form response → confirmation email.
+2. **Lab 2:** form response → Excel audit record → confirmation email.
+3. **Lab 3:** event form → condition → different logging and email outcomes.
+4. **Lab 4:** leave form → approval → approved or rejected notification.
+5. **Labs 5–6:** build and publish specialised Copilot agents.
+6. **Lab 7:** form response → route to the appropriate agent → email its reply.
+
+## Form-trigger pattern
+
+A Microsoft Forms automation normally uses these first two cards:
+
+1. **Microsoft Forms — When a new response is submitted**
+2. **Microsoft Forms — Get response details**
+
+The trigger supplies the **Response Id**. The second action retrieves the answers, which then appear as dynamic content.
+
+```text
+Form submitted
+    ↓
+Get response details
+    ↓
+Use the answers in later actions
+```
+
+## Actions, dynamic content and expressions
+
+- An **action** changes or retrieves something after the trigger.
+- **Dynamic content** is an output token selected from an earlier card, such as the respondent's Email answer.
+- An **expression** calculates a value, such as `utcNow()` for an audit timestamp.
+
+Use tokens and expressions through the designer rather than typing their labels as plain text. A typed word such as `Email` is only text; the coloured Email token carries the actual submitted value.
+
+## Conditions and approvals
+
+A **Condition** evaluates a rule and creates **If yes** and **If no** branches. Test both branches with different submissions. An approval is different: **Start and wait for an approval** pauses the run until the assigned approver responds, then exposes an **Outcome** that a condition can evaluate.
+
+## Connections and verification
+
+Each connector uses a saved connection. Microsoft Forms, Office 365 Outlook, Excel Online (Business), Approvals, SharePoint and Copilot Studio may each ask you to sign in.
+
+For every flow:
+
+1. Confirm the correct environment and account.
+2. Save the flow.
+3. Trigger a realistic test.
+4. Open the run history and inspect inputs and outputs.
+5. Confirm the real-world result: email, row, approval or agent reply.
+
+## Data design rules
+
+- Use dynamic-content tokens, not typed field names.
+- Keep Excel data inside a named **table**.
+- Record timestamps and outcomes for auditability.
+- Test every condition branch.
+- Do not put passwords, API keys or confidential information in instructions, source code or email bodies.
+
+**Next:** [Lab 1 — Form to Email Confirmation](Lab%201%20-%20Forms%20Email%20Confirmation/index.md)

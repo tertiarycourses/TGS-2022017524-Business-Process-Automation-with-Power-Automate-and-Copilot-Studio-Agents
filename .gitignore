@@ -19,3 +19,25 @@ secrets.json
 
 # Confidential WSQ assessments — never push
 assessemnt/
+/assessment/
+/assessment\ /
+
+# Distribution archives (rebuildable — never pushed to GitHub)
+*.zip
+
+# Source material the project was derived from — not ours to republish.
+**/reference/
+**/references/
+# ...except the skill builder scripts, which are a reference implementation the
+# courseware build actually runs.
+!.claude/skills/**/reference/
+!.claude/skills/**/reference/**
+
+# Build scratch / working dirs
+__pycache__/
+*.pyc
+.qa/
+.tmp-pa-import/
+tmp/
+output/
+outputs/

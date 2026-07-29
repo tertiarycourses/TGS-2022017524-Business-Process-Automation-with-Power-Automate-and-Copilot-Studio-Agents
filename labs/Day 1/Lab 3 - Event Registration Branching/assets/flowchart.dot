@@ -1,0 +1,21 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      form [label="Event Registration Form", fillcolor="#EAF2FF"];
+      details [label="Get response details"];
+      joining [label="Joining the Event\n= Yes?", shape=diamond, fillcolor="#FFF4E5"];
+      yeslog [label="Add Yes row\nto EventLog", fillcolor="#E8F7EE"];
+      admin [label="Email participant details\nto administrator", fillcolor="#E8F7EE"];
+      nolog [label="Add No row\nto EventLog", fillcolor="#FDECEC"];
+      user [label="Email user:\nthanks and next time", fillcolor="#FDECEC"];
+      form -> details -> joining;
+      joining -> yeslog [label=" YES"]; yeslog -> admin;
+      joining -> nolog [label=" NO"]; nolog -> user;
+    
+}

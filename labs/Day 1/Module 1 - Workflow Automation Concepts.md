@@ -127,10 +127,10 @@ Read that left to right: an event happens, the flow performs a series of steps, 
 
 | Day | You build | New skill | What it gives you |
 |-----|-----------|-----------|-------------------|
-| **Day 1** | Flows in **Power Automate** | Triggers, actions, outputs | The "hands" that do work — email, Excel logging, approvals |
-| **Day 2** | Agents in **Copilot Studio**, connected to your flows | Structured capture, tools, agent + flow | The "brain & mouth" that talk to people, produce clean data, and hand it to a flow — a complete **end-to-end** workflow |
+| **Day 1** | Flows in **Power Automate** and support agents in **Copilot Studio** | Triggers, actions, outputs, knowledge, instructions and agent routing | The "hands" that do work plus specialist IT and HR assistance |
+| **Day 2** | Websites connected to HTTP-triggered flows and Finance agents | HTTP, webhooks, JSON, tools, market data, news and safeguards | Complete browser → flow → agent → browser experiences |
 
-Day 1 is all about Power Automate. You'll master the trigger → action → output rhythm by building real flows you can run today.
+Day 1 starts with Power Automate and then adds Copilot Studio. You will master the trigger → action → output rhythm, build IT and HR agents, and route a submitted support request to the correct specialist.
 
 ---
 
