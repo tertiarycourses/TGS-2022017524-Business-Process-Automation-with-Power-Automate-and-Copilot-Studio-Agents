@@ -53,7 +53,7 @@ Participants will be able to:
 | 1 | [Trigger and Actions](labs/Lab%201%20-%20Trigger%20and%20Actions/index.md) | 1 | Power Automate + Forms + Outlook |
 | 2 | [Log to Excel](labs/Lab%202%20-%20Log%20to%20Excel/index.md) | 1 | Power Automate + Excel Online |
 | 3 | [Leave Application Approval](labs/Lab%203%20-%20Leave%20Application%20Approval/index.md) | 1 | Power Automate + Approvals |
-| 4 | [Agents](labs/Lab%204%20-%20Agents%20/README.md) | 1 | Copilot Studio agents + agent flows |
+| 4 | [Agents — Procurement, HR, Sales, IT Support](labs/Lab%204%20-%20Agents%20/README.md) | 1 | Copilot Studio agents + agent flows + connected agents |
 | 5 | [Invoke Agents](labs/Lab%205%20-%20Invoke%20Agents/index.md) | 2 | Copilot Studio + SharePoint + Teams |
 | 6 | [HTTP and Application Approval Agent](labs/Lab%206%20-%20HTTP%20and%20Application%20Approval%20Agent/README.md) | 2 | Copilot Studio agent flow + SharePoint |
 | 7 | [HTTP and Chatbot](labs/Lab%207%20-%20HTTP%20and%20Chatbot/README.md) | 2 | Copilot Studio + knowledge + website |
@@ -71,6 +71,9 @@ Full detail, including the ideas each lab teaches, is in [`labs/README.md`](labs
 - Sample question and probe sets (`sample-questions.csv`, `test-applications.csv`)
 - JSON request schemas and agent instruction files
 - Power Automate legacy import packages with the `(NEW)` postfix for Labs 1–3
+- Lab 4 ships a complete build kit for each of its four agents — instructions, skills, tool
+  contracts, mock knowledge (vendor register, staff leave, asset register, 20 course brochures)
+  and connected-agent definitions — plus a Microsoft Teams deployment guide
 
 > **Import packages are not stored in this repository.** The `.zip` flow packages are
 > rebuildable distribution artifacts and are excluded from GitHub by policy. Learners
