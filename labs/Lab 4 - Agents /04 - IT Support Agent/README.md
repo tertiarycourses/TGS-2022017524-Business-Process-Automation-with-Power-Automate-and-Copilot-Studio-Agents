@@ -13,22 +13,24 @@ instruction, a tool or a child agent.
 | Path | What it is |
 |---|---|
 | [`agent/instructions.md`](agent/instructions.md) | The parent agent's Instructions |
-| [`skills/`](skills/) | **The five skills** — one file each |
+| [`skills/`](skills/) | **The five skills** — one folder each, plus the built `.zip` packages |
 | [`tools/tool-descriptions.md`](tools/tool-descriptions.md) | `RaiseTicket`, `CheckTicketStatus`, `LookupAsset` |
 | [`knowledge/`](knowledge/) | Known-issues log, service catalogue, asset register |
 | [`connected-agents/`](connected-agents/) | Three children |
 
 ### The five skills
 
-These match the tenant build exactly. Add each one at **Agent → Skills → +**.
+These match the tenant build exactly. Each is a **skill package** — upload it at
+**Build → Skills → Add skill → Upload a skill**. Build order matters: do Password Reset Procedure
+first, and Raise IT Support Ticket before the three that end at it.
 
-| # | Skill | File |
-|---|---|---|
-| 1 | Hardware Issue Handling | [`skills/hardware-issue-handling.md`](skills/hardware-issue-handling.md) |
-| 2 | Network Troubleshooting | [`skills/network-troubleshooting.md`](skills/network-troubleshooting.md) |
-| 3 | Software Troubleshooting | [`skills/software-troubleshooting.md`](skills/software-troubleshooting.md) |
-| 4 | Raise IT Support Ticket | [`skills/raise-it-support-ticket.md`](skills/raise-it-support-ticket.md) |
-| 5 | Password Reset Procedure | [`skills/password-reset-procedure.md`](skills/password-reset-procedure.md) |
+| # | Skill | Package to upload | Trainer notes |
+|---|---|---|---|
+| 1 | Password Reset Procedure | [`password-reset-procedure.zip`](skills/_packages/password-reset-procedure.zip) | [notes](skills/password-reset-procedure/TEACHING-NOTES.md) |
+| 2 | Raise IT Support Ticket | [`raise-it-support-ticket.zip`](skills/_packages/raise-it-support-ticket.zip) | [notes](skills/raise-it-support-ticket/TEACHING-NOTES.md) |
+| 3 | Hardware Issue Handling | [`hardware-issue-handling.zip`](skills/_packages/hardware-issue-handling.zip) | [notes](skills/hardware-issue-handling/TEACHING-NOTES.md) |
+| 4 | Network Troubleshooting | [`network-troubleshooting.zip`](skills/_packages/network-troubleshooting.zip) | [notes](skills/network-troubleshooting/TEACHING-NOTES.md) |
+| 5 | Software Troubleshooting | [`software-troubleshooting.zip`](skills/_packages/software-troubleshooting.zip) | [notes](skills/software-troubleshooting/TEACHING-NOTES.md) |
 
 ### The three children
 
@@ -64,7 +66,7 @@ this agent is the human gate inside the Access Request flow.
 ## Build order
 
 1. Instructions.
-2. All five skills.
+2. All five skill packages, uploaded one at a time.
 3. Tools — `RaiseTicket` first; it is the one every skill ends at.
 4. Knowledge.
 5. Children, one at a time, testing after each.

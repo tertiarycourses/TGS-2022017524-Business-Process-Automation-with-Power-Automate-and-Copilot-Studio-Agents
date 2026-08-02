@@ -14,7 +14,7 @@ always written, and a human gate that always fires.
 |---|---|---|
 | [`agent/instructions.md`](agent/instructions.md) | The agent-flow **Agent node** instruction — the procurement policy | Flow → Agent node → **Instructions** |
 | [`agent/orchestrator-instructions.md`](agent/orchestrator-instructions.md) | The **top-level agent** instruction — how it talks to colleagues | Agent → **Instructions** |
-| [`skills/`](skills/) | Two Skills — requisition intake, and vendor enquiry | Agent → **Skills → +** |
+| [`skills/`](skills/) | Two skill **packages** — [`raise-requisition.zip`](skills/_packages/raise-requisition.zip), [`vendor-enquiry.zip`](skills/_packages/vendor-enquiry.zip) | Agent → **Build → Skills → Add skill → Upload a skill** |
 | [`tools/`](tools/) | The tool contract + tool descriptions | Agent → **Tools → + Add a tool** |
 | [`knowledge/`](knowledge/) | `vendors.csv`, `procurement-policy.md`, `test-requisitions.csv` | SharePoint list + Agent → **Knowledge** |
 | [`connected-agents/`](connected-agents/) | How Procurement is *consumed by* the other three agents | Agent → **Connected agents** |
@@ -33,7 +33,7 @@ always written, and a human gate that always fires.
 4. **Tools** — attach the published flow, and give it the description from
    [`tools/tool-descriptions.md`](tools/tool-descriptions.md).
 5. **Knowledge** — upload [`knowledge/procurement-policy.md`](knowledge/procurement-policy.md).
-6. **Skills** — add the two files in [`skills/`](skills/).
+6. **Skills** — upload the two packages in [`skills/_packages/`](skills/_packages/), one at a time.
 7. **Test** with [`knowledge/test-requisitions.csv`](knowledge/test-requisitions.csv) — all 13 cases.
 8. **Deploy to Teams** — see [`../_deployment/`](../_deployment/).
 

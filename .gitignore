@@ -24,6 +24,10 @@ assessemnt/
 
 # Distribution archives (rebuildable — never pushed to GitHub)
 *.zip
+# ...except the Lab 4 Copilot Studio skill packages. These ARE the deliverable —
+# learners upload the .zip itself at Skills → Add skill → Upload a skill.
+# Rebuild with: python3 scripts/build_lab4_skill_packages.py
+!labs/**/skills/_packages/*.zip
 
 # Source material the project was derived from — not ours to republish.
 **/reference/

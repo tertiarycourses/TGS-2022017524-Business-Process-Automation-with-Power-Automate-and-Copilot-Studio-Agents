@@ -14,7 +14,7 @@ agents**, and the reason the split is a governance decision rather than a tidine
 | Path | What it is |
 |---|---|
 | [`agent/instructions.md`](agent/instructions.md) | The parent agent's Instructions — routing and refusals |
-| [`skills/`](skills/) | Two Skills — handover discipline, and personal-data handling |
+| [`skills/`](skills/) | Two skill **packages** — [`handover-discipline.zip`](skills/_packages/handover-discipline.zip), [`personal-data-handling.zip`](skills/_packages/personal-data-handling.zip). Upload the second to **all four children too** |
 | [`tools/tool-descriptions.md`](tools/tool-descriptions.md) | `LookupLeaveBalance`, `CreateHRCase` |
 | [`knowledge/`](knowledge/) | `HR Policies.pdf`, mock HR policy, benefits summary, staff leave data |
 | [`connected-agents/`](connected-agents/) | The four children, one folder each |

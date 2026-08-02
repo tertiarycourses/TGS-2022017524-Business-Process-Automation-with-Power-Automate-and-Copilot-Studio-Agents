@@ -47,7 +47,7 @@ price, quantity, number of competing quotes, budget code and needed-by date.
 
 **Outputs** returned to the agent: `routing`, `reason`, `requisitionTotal`, `requisitionId`.
 
-> `policyFlags` is deliberately **not** returned. See [`../skills/vendor-enquiry.md`](../skills/vendor-enquiry.md).
+> `policyFlags` is deliberately **not** returned. See [`../skills/vendor-enquiry/SKILL.md`](../skills/vendor-enquiry/SKILL.md).
 
 ---
 

@@ -61,7 +61,7 @@ routine question. Do not repeat the disclosure back, do not record it, and do no
 it into a case note.
 ```
 
-> Add the [`Personal data handling`](../../skills/personal-data-handling.md) skill to this agent.
+> Upload the [`personal-data-handling.zip`](../../skills/_packages/personal-data-handling.zip) skill package to this agent — the **same package** the parent uses.
 
 ## Knowledge
 

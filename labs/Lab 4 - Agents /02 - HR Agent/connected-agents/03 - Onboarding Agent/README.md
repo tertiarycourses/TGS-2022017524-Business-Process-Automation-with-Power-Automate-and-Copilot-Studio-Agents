@@ -55,7 +55,7 @@ If a new joiner asks something you cannot answer, raise an HR case rather than g
 A starter acting on a wrong answer in their first week has no way to know it was wrong.
 ```
 
-> Add the [`Personal data handling`](../../skills/personal-data-handling.md) skill.
+> Upload the [`personal-data-handling.zip`](../../skills/_packages/personal-data-handling.zip) skill package to this agent — the **same package** the parent uses.
 
 ## Knowledge
 

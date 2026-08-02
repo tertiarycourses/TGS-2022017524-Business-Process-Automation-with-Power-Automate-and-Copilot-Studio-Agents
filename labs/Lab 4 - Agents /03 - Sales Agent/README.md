@@ -22,7 +22,7 @@ acting on an invented fee.
 | Path | What it is |
 |---|---|
 | [`agent/instructions.md`](agent/instructions.md) | Parent agent Instructions |
-| [`skills/`](skills/) | Two Skills — course enquiry, and enrolment intake |
+| [`skills/`](skills/) | Two skill **packages** — [`course-enquiry.zip`](skills/_packages/course-enquiry.zip), [`enrolment-intake.zip`](skills/_packages/enrolment-intake.zip) |
 | [`tools/tool-descriptions.md`](tools/tool-descriptions.md) | `CheckCourseAvailability`, `CreateEnrolmentEnquiry` |
 | [`knowledge/brochures/`](knowledge/brochures/) | **The 20 course brochures**, copied from Lab 9 |
 | [`knowledge/pricing-rules.md`](knowledge/pricing-rules.md) | Discounts — what exists and what does not |

@@ -1,19 +1,10 @@
-# Skill — Course enquiry
+---
+name: course-enquiry
+description: Use whenever someone asks about a course — what we run, what a course covers, how much it costs, how long it takes, when it starts, where it is held, or what is included.
+---
 
-> **Where this goes:** `Sales Agent` → **Skills → +** → name it `Course enquiry`.
+# Course enquiry
 
-**Skill name:** `Course enquiry`
-
-**Description:**
-
-```
-Use whenever someone asks about a course — what we run, what a course covers, how much
-it costs, how long it takes, when it starts, where it is held, or what is included.
-```
-
-**Instructions:**
-
-```
 Answer from the course brochures in your knowledge and from nothing else.
 
 Give the course code with the title every time — "BAK-104 Macaron Masterclass, SGD $420".
@@ -41,22 +32,3 @@ Keep replies to two to four short sentences unless asked for detail. A customer 
 about one course does not want the catalogue.
 
 Never include citation markers, reference numbers or source tags in your reply.
-```
-
----
-
-## Teaching note — the false premise is the hard one
-
-Most grounding failures learners expect are of the form *"invent an answer to a question with no
-answer"*. Those are easy to demonstrate and reasonably easy to instruct away.
-
-The harder failure is the **planted premise**: "Can I get the 40% alumni discount on the sushi
-course?" There is no alumni discount, and a model trying to be helpful has three tempting moves —
-confirm it, offer to check it, or answer the *rest* of the question and let the premise stand.
-
-All three are failures, and the third is the one that gets missed in testing, because the reply
-looks correct. "CUL-203 Japanese Sushi & Sashimi is SGD $980" is a true sentence that has silently
-conceded that a 40% discount might apply to it.
-
-This is why [`../knowledge/pricing-rules.md`](../knowledge/pricing-rules.md) states the absences
-explicitly. The agent can only correct a premise it has been told is false.

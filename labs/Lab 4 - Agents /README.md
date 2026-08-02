@@ -33,11 +33,60 @@ Each agent folder has the same five parts:
 ```
 NN - <Agent>/
 ├── agent/             instructions
-├── skills/            named behaviours
+├── skills/            named behaviours, as uploadable packages
+│   ├── <skill-name>/
+│   │   ├── SKILL.md          ← the skill itself (YAML front matter + Markdown)
+│   │   └── TEACHING-NOTES.md ← trainer commentary, NOT part of the package
+│   └── _packages/
+│       └── <skill-name>.zip  ← upload this
 ├── tools/             flows the agent calls, and their descriptions
 ├── knowledge/         mock data and documents
 └── connected-agents/  the sub-agents, one folder each
 ```
+
+---
+
+## Skills are packages, not text you paste
+
+Every skill in this lab ships as a **skill package** — a `.zip` whose top level contains a
+`SKILL.md` file. That file carries the skill's `name` and `description` in YAML front matter and
+its instructions in Markdown:
+
+```markdown
+---
+name: password-reset-procedure
+description: Use when a colleague cannot sign in, has forgotten their password, is locked
+  out, needs to change their password, or is having trouble with multi-factor authentication.
+---
+
+# Password Reset Procedure
+
+Never ask for a password. Never accept one...
+```
+
+**To add one:** open the agent → **Build** tab → **Skills** → **Add skill** → **Upload a skill**,
+then drag the `.zip` onto the upload box. Copilot Studio validates the file and adds the skill.
+
+Three things follow, and all three are worth naming in class:
+
+- **The `description` is the trigger.** The orchestrator reads it to decide whether the skill is
+  relevant at all. A skill whose description does not match how people actually phrase the request
+  never fires, and its instructions never run — however well written they are. Write it as *"use
+  when someone…"*, not as a summary of the contents.
+- **Everything in the package is read by the model.** That is why the trainer commentary lives in a
+  separate `TEACHING-NOTES.md` that is deliberately excluded from the `.zip`. Explanatory prose
+  inside a skill file is not neutral — it is more instruction text competing for attention.
+- **The same package can go to many agents.** `personal-data-handling.zip` is uploaded to the HR
+  parent *and* all four of its children. That is the argument for packaging over pasting: you can
+  prove all five agents got the same file, and you can replace it in one place.
+
+A single `SKILL.md` file also uploads on its own; the `.zip` is what lets a skill carry supporting
+files alongside it. This lab uses packages throughout so the format is consistent.
+
+> **Rebuilding the packages.** Edit the `SKILL.md`, then run
+> `python3 scripts/build_lab4_skill_packages.py` from the repo root. Add `--check` to validate
+> without writing. The script fails the build if a `SKILL.md` is missing, if the front matter has
+> no `name` or `description`, or if a skill's `name` does not match its folder.
 
 ---
 
@@ -68,7 +117,7 @@ This is the spine of the lab. Every agent is a variation on it.
 | Part | What it is | Enforced? |
 |---|---|---|
 | **Instructions** | Who the agent is, always in force | **No** — probabilistic |
-| **Skill** | A named procedure applied when the topic matches | **No** — the model decides it applies |
+| **Skill** | A named procedure, uploaded as a package, applied when the topic matches | **No** — the model decides it applies |
 | **Knowledge** | Documents the agent may read | **Partly** — it genuinely cannot read what it was not given |
 | **Tool** | A flow that acts outside the conversation | **The flow's own logic is enforced** |
 | **Connected agent** | A separate agent with its own knowledge and audience | **The knowledge boundary is real** |

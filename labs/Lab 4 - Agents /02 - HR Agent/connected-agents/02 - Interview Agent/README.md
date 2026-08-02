@@ -51,7 +51,7 @@ You speak to hiring managers and interviewers. If a candidate reaches you, direc
 to recruitment@keppelridge.example and tell them nothing about the process or the panel.
 ```
 
-> Add the [`Personal data handling`](../../skills/personal-data-handling.md) skill.
+> Upload the [`personal-data-handling.zip`](../../skills/_packages/personal-data-handling.zip) skill package to this agent — the **same package** the parent uses.
 
 ## Knowledge
 

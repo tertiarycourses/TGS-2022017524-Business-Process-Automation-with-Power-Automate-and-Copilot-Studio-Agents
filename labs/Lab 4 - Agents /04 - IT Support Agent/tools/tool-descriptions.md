@@ -121,7 +121,7 @@ date, warranty status and who the device is assigned to.
 
 | Not a tool | Why |
 |---|---|
-| `ResetPassword` | A reset needs identity verification the agent cannot perform. The whole [Password Reset Procedure](../skills/password-reset-procedure.md) skill rests on this being impossible. |
+| `ResetPassword` | A reset needs identity verification the agent cannot perform. The whole [Password Reset Procedure](../skills/password-reset-procedure/SKILL.md) skill rests on this being impossible. |
 | `GrantAccess` | Access changes go through the Access Request Agent, which has a **human gate**. |
 | `InstallSoftware` | Needs admin rights, licence checks and approval for non-catalogue software. |
 | `OrderReplacement` | Purchases belong to Procurement, where the CAPEX rule and the approval gate live. |

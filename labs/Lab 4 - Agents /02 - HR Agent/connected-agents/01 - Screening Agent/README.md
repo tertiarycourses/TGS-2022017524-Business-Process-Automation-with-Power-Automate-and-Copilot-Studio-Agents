@@ -56,7 +56,7 @@ State what you were reading. An assessment that does not name the application it
 from cannot be checked.
 ```
 
-> Add the [`Personal data handling`](../../skills/personal-data-handling.md) skill.
+> Upload the [`personal-data-handling.zip`](../../skills/_packages/personal-data-handling.zip) skill package to this agent — the **same package** the parent uses.
 
 ## Knowledge
 
