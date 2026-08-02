@@ -643,7 +643,7 @@ lab_flow_slide(
     25,
     LAB_META["lab_1"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 1 - Forms Email Confirmation/assets/flowchart.png",
+    "labs/Lab 1 - Forms Email Confirmation/assets/flowchart.png",
 )
 cards(26, "Lab 1 — Design the Form", "Required data", [
     ("Identity", "Name and Email identify the requester and recipient.", BLUE),
@@ -681,7 +681,7 @@ lab_flow_slide(
     31,
     LAB_META["lab_2"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 2 - Forms Enquiry Logging/assets/flowchart.png",
+    "labs/Lab 2 - Forms Enquiry Logging/assets/flowchart.png",
 )
 teaching(
     32,
@@ -719,7 +719,7 @@ lab_flow_slide(
     37,
     LAB_META["lab_3"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 3 - Event Registration Branching/assets/flowchart.png",
+    "labs/Lab 3 - Event Registration Branching/assets/flowchart.png",
 )
 teaching(
     38,
@@ -757,7 +757,7 @@ lab_flow_slide(
     43,
     LAB_META["lab_4"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 4 - Leave Approval/assets/flowchart.png",
+    "labs/Lab 4 - Leave Approval/assets/flowchart.png",
 )
 cards(44, "Lab 4 — Leave Form", "Required information", [
     ("Employee", "Name; Forms captures the responder identity.", BLUE),
@@ -845,7 +845,7 @@ lab_flow_slide(
     57,
     LAB_META["lab_5"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 5 - IT Support Agent/assets/flowchart.png",
+    "labs/Lab 5 - IT Support Agent/assets/flowchart.png",
 )
 cards(58, "Lab 5 — Ground the IT Support Agent", "Knowledge + instructions", [
     ("Role", "First-line support for password, MFA, VPN, Wi-Fi and device loss.", BLUE),
@@ -867,7 +867,7 @@ lab_flow_slide(
     61,
     LAB_META["lab_6"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 6 - HR Support Agent/assets/flowchart.png",
+    "labs/Lab 6 - HR Support Agent/assets/flowchart.png",
 )
 cards(62, "Lab 6 — Ground the HR Support Agent", "SharePoint policy source", [
     ("Explain", "Use approved leave, expenses and workplace-policy content.", GREEN),
@@ -896,7 +896,7 @@ lab_flow_slide(
     66,
     LAB_META["lab_7"]["title"],
     "Shared workflow visual",
-    "labs/Day 1/Lab 7 - Support Request Routing/assets/flowchart.png",
+    "labs/Lab 7 - Support Request Routing/assets/flowchart.png",
 )
 teaching(
     67,
@@ -962,7 +962,7 @@ lab_flow_slide(
     77,
     LAB_META["lab_8"]["title"],
     "Shared workflow visual",
-    "labs/Day 2/Lab 8 - Website HTTP Enquiry/assets/flowchart.png",
+    "labs/Lab 8 - Website HTTP Enquiry/assets/flowchart.png",
 )
 teaching(
     78,
@@ -1014,7 +1014,7 @@ lab_flow_slide(
     85,
     LAB_META["lab_9"]["title"],
     "Shared workflow visual",
-    "labs/Day 2/Lab 9 - Finance Agent Web Chat/assets/flowchart.png",
+    "labs/Lab 9 - Finance Agent Web Chat/assets/flowchart.png",
 )
 cards(86, "Lab 9 — Finance Knowledge Boundary", "Educational use", [
     ("Explain", "Orders, candles, timeframes, volatility and news concepts.", GREEN),
@@ -1075,7 +1075,7 @@ lab_flow_slide(
     95,
     LAB_META["lab_10"]["title"],
     "Shared workflow visual",
-    "labs/Day 2/Lab 10 - AI Trading Advisor Website/assets/flowchart.png",
+    "labs/Lab 10 - AI Trading Advisor Website/assets/flowchart.png",
 )
 cards(96, "Lab 10 — Authorised Data and Agent Tools", "Tool inventory", [
     ("Twelve Data", "Retrieve 1-minute, 15-minute and 1-hour candles.", BLUE),
@@ -1469,25 +1469,25 @@ rebuild(81, "Resources & Where to Go Next", "Continue learning", lambda s: draw_
 
 # Use the exact same workflow PNG in the lab, Learner Guide and facilitator deck.
 lab_flow_slide(22, LAB_META["lab_1"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 1 - Forms Email Confirmation/assets/flowchart.png")
+               "labs/Lab 1 - Forms Email Confirmation/assets/flowchart.png")
 lab_flow_slide(26, LAB_META["lab_2"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 2 - Forms Enquiry Logging/assets/flowchart.png")
+               "labs/Lab 2 - Forms Enquiry Logging/assets/flowchart.png")
 lab_flow_slide(30, LAB_META["lab_3"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 3 - Event Registration Branching/assets/flowchart.png")
+               "labs/Lab 3 - Event Registration Branching/assets/flowchart.png")
 lab_flow_slide(34, LAB_META["lab_4"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 4 - Leave Approval/assets/flowchart.png")
+               "labs/Lab 4 - Leave Approval/assets/flowchart.png")
 lab_flow_slide(42, LAB_META["lab_5"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 5 - IT Support Agent/assets/flowchart.png")
+               "labs/Lab 5 - IT Support Agent/assets/flowchart.png")
 lab_flow_slide(44, LAB_META["lab_6"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 6 - HR Support Agent/assets/flowchart.png")
+               "labs/Lab 6 - HR Support Agent/assets/flowchart.png")
 lab_flow_slide(46, LAB_META["lab_7"]["title"], "Shared workflow visual",
-               "labs/Day 1/Lab 7 - Support Request Routing/assets/flowchart.png")
+               "labs/Lab 7 - Support Request Routing/assets/flowchart.png")
 lab_flow_slide(53, LAB_META["lab_8"]["title"], "Shared workflow visual",
-               "labs/Day 2/Lab 8 - Website HTTP Enquiry/assets/flowchart.png")
+               "labs/Lab 8 - Website HTTP Enquiry/assets/flowchart.png")
 lab_flow_slide(57, LAB_META["lab_9"]["title"], "Shared workflow visual",
-               "labs/Day 2/Lab 9 - Finance Agent Web Chat/assets/flowchart.png")
+               "labs/Lab 9 - Finance Agent Web Chat/assets/flowchart.png")
 lab_flow_slide(62, LAB_META["lab_10"]["title"], "Shared workflow visual",
-               "labs/Day 2/Lab 10 - AI Trading Advisor Website/assets/flowchart.png")
+               "labs/Lab 10 - AI Trading Advisor Website/assets/flowchart.png")
 
 prs.save(DECK)
 print(f"Updated {DECK} ({len(prs.slides)} slides)")

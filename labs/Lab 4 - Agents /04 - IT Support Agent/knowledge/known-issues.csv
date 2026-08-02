@@ -1,0 +1,8 @@
+IncidentRef,Status,Category,AffectedSystem,Summary,Workaround,RaisedDate,LastUpdate
+INC-0142,Open,Network,Shared drive - Level 3,Intermittent slowness accessing the Engineering shared drive from Level 3 switch,Use the SharePoint copy of current project files,2026-07-29,2026-07-31
+INC-0138,Open,Software,AutoCAD,AutoCAD 2026 crashes on opening files saved in the 2027 format,Ask the sender to save down to 2026 format,2026-07-24,2026-07-30
+INC-0151,Open,Network,VPN,VPN disconnects after approximately 90 minutes for users on the KR-VPN-02 gateway,Sign out and back in; a fix is scheduled,2026-07-31,2026-07-31
+INC-0129,Resolved,Software,Outlook,Outlook search returning no results after the June update,Resolved by the July update - restart Outlook,2026-06-18,2026-07-08
+INC-0147,Open,Hardware,Docking stations,Dell WD19 docks not detecting the second monitor after firmware 1.0.9,Connect the second monitor directly to the laptop,2026-07-30,2026-07-31
+INC-0133,Resolved,Network,Guest Wi-Fi,Guest Wi-Fi captive portal not loading on iOS,Resolved 12 July,2026-07-02,2026-07-12
+INC-0155,Open,Software,Bluebeam Revu,Licence check fails when starting Bluebeam offline,Connect to the network before starting the application,2026-08-01,2026-08-01

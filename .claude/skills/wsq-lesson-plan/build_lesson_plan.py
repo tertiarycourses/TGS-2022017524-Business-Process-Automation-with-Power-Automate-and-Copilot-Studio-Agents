@@ -5,10 +5,11 @@
 (TGS-2022017524), Tertiary Infotech Academy Pte Ltd house format.
 
 Daily window 9:00am - 6:00pm (1-hour lunch; tea breaks within).
-Day 1: Power Automate. Day 2: Copilot Studio agents, ending with the
+Day 1: Power Automate workflows then Copilot Studio agents. Day 2: agent flows,
+HTTP, human review and RAG, ending with the
 assessment block: WA 1 hr + PP 1 hr, 4:00 - 6:00pm.
-The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v6.0.pptx
-(113 slides in the concept-first 10-lab sequence).
+The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx
+(57 slides in the concept-first sequence: five concept modules, each followed by its labs).
 
 Writes: courseware/LP-<course>.docx
 """
@@ -26,7 +27,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-lesson-plan/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "6.0"
+VERSION = "7.0"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -35,7 +36,12 @@ with open(os.path.join(REPO, "courseware", "slide_map.json"), encoding="utf-8") 
     SLIDE_MAP = json.load(fh)
 assert SLIDE_MAP["version"] == VERSION
 LAB_SLIDES_RAW = SLIDE_MAP["labs"]
-LAB_SLIDES = {lab_id: value.replace("-", "–") for lab_id, value in LAB_SLIDES_RAW.items()}
+LAB_SLIDES = {lab_id: value.replace("-", "\u2013") for lab_id, value in LAB_SLIDES_RAW.items()}
+# Module/section ranges come from the same map, so inserting slides can never
+# leave the Slides column pointing at the wrong pages.
+MOD = {k: v.replace("-", "\u2013") for k, v in SLIDE_MAP["modules"].items()}
+SEC = {k: v.replace("-", "\u2013") for k, v in SLIDE_MAP["sections"].items()}
+DECK_SLIDES = SLIDE_MAP["slides"]
 with open(os.path.join(REPO, "courseware", "alignment_manifest.json"), encoding="utf-8") as fh:
     ALIGNMENT = json.load(fh)
 assert ALIGNMENT["version"] == VERSION
@@ -78,6 +84,13 @@ VERSIONS = [
     ["6.0", "25 Jul 2026", "Major concept-first overhaul: expanded cloud-flow types, "
      "trigger design, agent building blocks, HTTP/webhook foundations and finance-tool "
      "governance around the canonical 10-lab sequence and 113-slide deck.",
+     "Course Development Team"],
+    ["7.0", "2 Aug 2026", "Realigned to the rebuilt Lab 0-10 sequence (Copilot Studio "
+     "Training Developer environment; trigger/actions, Excel logging, leave approval, "
+     "Copilot Studio agents, agent invocation, three HTTP labs and two RAG labs). Deck "
+     "rebuilt as five concept modules plus synthesis, with a workflow diagram slide for every lab, covering Power Automate, "
+     "Copilot Studio, workflows, agent anatomy, multi-agent orchestration, every trigger "
+     "and action family, RAG and human-in-the-loop.",
      "Course Development Team"],
 ]
 
@@ -148,7 +161,17 @@ def para(doc, text):
 def bullets(doc, items):
     for it in items: doc.add_paragraph(style="List Bullet").add_run(it)
 
+def _toc_field(doc):
+    p = doc.add_paragraph()
+    prodoc._field(p, 'TOC \\o "1-3" \\h \\z \\u', default="")
+
+
 def add_static_toc(doc):
+    # A real Word TOC field so the contents update and hyperlink when opened in
+    # Word, followed by a readable outline for viewers that do not evaluate
+    # fields (LibreOffice headless, and therefore the PDF we ship).
+    _toc_field(doc)
+
     p = doc.add_paragraph()
     r = p.add_run("TABLE OF CONTENTS"); r.bold = True; r.font.size = Pt(12); r.font.color.rgb = DARK
     for item in ("Course Overview", "Learning Outcomes", "Daily Schedule — Day 1",
@@ -195,38 +218,39 @@ LEC = "Lecture & demo"; HND = "Hands-on lab"; DISC = "Facilitated discussion"
 BRK = "—"; ASMT = "Individual assessment"
 
 DAY1 = [
-    ("9:00 – 9:30",  "30 min", "Welcome, WSQ admin & digital attendance, introductions, ground rules, course overview", DISC, "topic", "1–14"),
-    ("9:30 – 10:00", "30 min", "Lab 0: Environment Setup — accounts, Course Sandbox environment check", HND, "lab", LAB_SLIDES["lab_0"]),
-    ("10:00 – 10:40","40 min", "Modules 1–2: workflow automation, triggers, actions, outputs, and instant, scheduled and automated cloud flows", LEC, "topic", "15–24"),
+    ("9:00 – 9:45",  "45 min", "Welcome, WSQ admin & digital attendance, introductions, ground rules, course overview and lab map", DISC, "topic", SEC["course_overview"]),
+    ("9:45 – 10:40", "55 min", "Module 1: business process automation, the Power Platform and the environment, flow anatomy, trigger families, action families", LEC, "topic", "12–17"),
     ("10:40 – 10:55","15 min", "Tea break", BRK, "break", "—"),
-    ("10:55 – 11:35","40 min", f"{LAB_META['lab_1']['title']} — build and verify the form-to-email flow", HND, "lab", LAB_SLIDES["lab_1"]),
-    ("11:35 – 12:20","45 min", f"{LAB_META['lab_2']['title']} — add the Enquiry Log.xlsx audit row", HND, "lab", LAB_SLIDES["lab_2"]),
-    ("12:20 – 12:45","25 min", f"{LAB_META['lab_3']['title']} — Part A: condition concepts, form and test design", LEC, "lab", "35–37"),
+    ("10:55 – 11:35","40 min", f"{LAB_META['lab_0']['title']} — create the Copilot Studio Training (Developer) environment and verify connections", HND, "lab", LAB_SLIDES["lab_0"]),
+    ("11:35 – 12:15","40 min", f"{LAB_META['lab_1']['title']} — build and verify the form-to-email flow", HND, "lab", LAB_SLIDES["lab_1"]),
+    ("12:15 – 12:45","30 min", "Module 1 continued: dynamic content, the run history, and why order matters (commit before you confirm)", LEC, "topic", "18–20"),
     ("12:45 – 1:45", "60 min", "Lunch", BRK, "break", "—"),
-    ("1:45 – 2:30",  "45 min", f"{LAB_META['lab_3']['title']} — Part B: build and test both branches", HND, "lab", LAB_SLIDES["lab_3"]),
-    ("2:30 – 3:15",  "45 min", f"{LAB_META['lab_4']['title']} — build and verify approval/rejection paths", HND, "lab", LAB_SLIDES["lab_4"]),
+    ("1:45 – 2:30",  "45 min", f"{LAB_META['lab_2']['title']} — write the audit row before sending the confirmation", HND, "lab", LAB_SLIDES["lab_2"]),
+    ("2:30 – 3:15",  "45 min", "Module 2: conditions and branching; human in, on and out of the loop; how an approval suspends a running flow", LEC, "topic", MOD["m2"]),
     ("3:15 – 3:30",  "15 min", "Tea break", BRK, "break", "—"),
-    ("3:30 – 4:00",  "30 min", "Copilot agent building blocks: knowledge, skills, tools, memory, model and system instructions", LEC, "topic", "47–56"),
-    ("4:00 – 4:40",  "40 min", f"{LAB_META['lab_5']['title']} — add FAQ knowledge, test and deploy to Teams", HND, "lab", LAB_SLIDES["lab_5"]),
-    ("4:40 – 5:20",  "40 min", f"{LAB_META['lab_6']['title']} — add SharePoint policy knowledge and deploy to Teams", HND, "lab", LAB_SLIDES["lab_6"]),
-    ("5:20 – 5:50",  "30 min", f"{LAB_META['lab_7']['title']} — route to IT or HR and email the reply", HND, "lab", LAB_SLIDES["lab_7"]),
-    ("5:50 – 6:00",  "10 min", "Day 1 recap and evidence check", DISC, "topic", "69"),
+    ("3:30 – 4:15",  "45 min", f"{LAB_META['lab_3']['title']} — build and test the approved and rejected branches", HND, "lab", LAB_SLIDES["lab_3"]),
+    ("4:15 – 5:05",  "50 min", "Module 3: workflow versus agent; agent anatomy — instructions, skills, knowledge, tools; what is actually enforced; connected agents; publishing", LEC, "topic", MOD["m3"]),
+    ("5:05 – 5:50",  "45 min", f"{LAB_META['lab_4']['title']} — assemble the Procurement, HR, Sales and IT Support agents", HND, "lab", LAB_SLIDES["lab_4"]),
+    ("5:50 – 6:00",  "10 min", "Day 1 recap and evidence check", DISC, "topic", MOD["m3"].split("–")[-1]),
 ]
 DAY2 = [
-    ("9:00 – 9:20",  "20 min", "Day 1 recap and Q&A", DISC, "topic", "69–70"),
-    ("9:20 – 10:05", "45 min", "Module 4: HTTP requests, methods, webhooks, JSON contracts, CORS and safe URL handling", LEC, "topic", "71–76"),
-    ("10:05 – 10:40","35 min", f"{LAB_META['lab_8']['title']} — Part A: request contract and HTTP trigger", HND, "lab", "77–79"),
-    ("10:40 – 10:55","15 min", "Tea break", BRK, "break", "—"),
-    ("10:55 – 11:40","45 min", f"{LAB_META['lab_8']['title']} — Part B: connect and test the website", HND, "lab", "80–81"),
-    ("11:40 – 12:15","35 min", f"{LAB_META['lab_9']['title']} — Part A: RAG concepts, create and ground the Finance Agent", HND, "lab", "82–85"),
-    ("12:15 – 1:15", "60 min", "Lunch", BRK, "break", "—"),
-    ("1:15 – 2:00",  "45 min", f"{LAB_META['lab_9']['title']} — Part B: connect and test the HTTP web chat", HND, "lab", "86–89"),
-    ("2:00 – 2:50",  "50 min", f"{LAB_META['lab_10']['title']} — Part A: tools, APIs, market timeframes, news and Finance Advisor configuration", HND, "lab", "90–98"),
-    ("2:50 – 3:00",  "10 min", "Tea break", BRK, "break", "—"),
-    ("3:00 – 4:00",  "60 min", f"{LAB_META['lab_10']['title']} — Part B: connect, test and review safeguards", HND, "lab", "99–104"),
-    ("4:00 – 5:00",  "60 min", "Written Assessment (WA / SAQ) — open book", ASMT, "assess", "—"),
-    ("5:00 – 6:00",  "60 min", "Practical Performance (PP) Assessment — open book", ASMT, "assess", "—"),
+    ("9:00 – 9:10",  "10 min", "Day 1 recap and Q&A", DISC, "topic", MOD["m3"]),
+    ("9:10 – 9:40",  "30 min", f"{LAB_META['lab_5']['title']} — ground the HR agent in SharePoint, test its refusals, publish to Teams", HND, "lab", LAB_SLIDES["lab_5"]),
+    ("9:40 – 10:10", "30 min", "Module 4: agent flows and the Agent node, HTTP request and response, JSON schema, structured output, the boundary of agency", LEC, "topic", MOD["m4"]),
+    ("10:10 – 11:10","60 min", f"{LAB_META['lab_6']['title']} — web form to agent flow, six ordered rules, four decisions", HND, "lab", LAB_SLIDES["lab_6"]),
+    ("11:10 – 11:25","15 min", "Tea break", BRK, "break", "—"),
+    ("11:25 – 12:05","40 min", f"{LAB_META['lab_7']['title']} — the agent alone in public, and the probes that break it", HND, "lab", LAB_SLIDES["lab_7"]),
+    ("12:05 – 1:05", "60 min", "Lunch", BRK, "break", "—"),
+    ("1:05 – 2:05",  "60 min", f"{LAB_META['lab_8']['title']} — the Human review gate and the run that will not proceed", HND, "lab", LAB_SLIDES["lab_8"]),
+    ("2:05 – 2:20",  "15 min", "Module 5: why retrieval rather than a bigger prompt; the RAG pipeline; chunking, embeddings and top_k", LEC, "topic", MOD["m5"]),
+    ("2:20 – 3:00",  "40 min", f"{LAB_META['lab_9']['title']} — RAG as a product setting: three nodes, no ingestion", HND, "lab", LAB_SLIDES["lab_9"]),
+    ("3:00 – 3:15",  "15 min", "Tea break", BRK, "break", "—"),
+    ("3:15 – 3:55",  "40 min", f"{LAB_META['lab_10']['title']} — rebuild the same chatbot on Pinecone and compare the levers", HND, "lab", LAB_SLIDES["lab_10"]),
+    ("3:55 – 4:00",  "5 min",  "Course synthesis and briefing before the assessment", DISC, "topic", SEC["synthesis"]),
+    ("4:00 – 5:00",  "60 min", "Written Assessment (WA / SAQ) — 1 hour, open book", ASMT, "assess", SEC["assessment_and_closing"]),
+    ("5:00 – 6:00",  "60 min", "Practical Performance (PP) Assessment — 1 hour, open book", ASMT, "assess", SEC["assessment_and_closing"]),
 ]
+
 
 def total(rows):
     return sum(int(r[1].split()[0]) for r in rows)
@@ -252,39 +276,42 @@ add_static_toc(doc)
 
 heading(doc, "Course Overview", 1)
 para(doc, "This 2-day, hands-on WSQ course teaches participants to automate real business processes by combining "
-          "Microsoft Power Automate flows with AI agents built in Microsoft Copilot Studio. Day 1 progresses from "
-          "Forms-driven email, Excel, branching and approval flows to specialised IT and HR agents. Day 2 connects "
-          "websites to HTTP-triggered agent flows and ends with a multi-timeframe finance-advisor capstone. Every "
-          "topic follows a concept → demonstration → hands-on lab pattern; participants "
-          "finish with working automations and sit the WSQ assessment at the end of Day 2.")
+          "Microsoft Power Automate flows with AI agents built in Microsoft Copilot Studio. The course is taught "
+          "concepts first: five concept modules each introduce the ideas and the decision rules, and the labs that "
+          "follow apply them. Day 1 moves from deterministic Forms-driven flows (email, Excel logging, approval "
+          "branching) to Copilot Studio agents assembled from instructions, skills, knowledge, tools and connected "
+          "agents. Day 2 puts an agent behind a website over HTTP, adds a human review gate, and grounds an agent in "
+          "documents with RAG — first with built-in knowledge, then with an external Pinecone vector store. "
+          "Participants finish with working automations and sit the WSQ assessment at the end of Day 2.")
 info_table(doc, [
     ("Course Title", TITLE),
     ("TGS Ref No", COURSE_CODE),
     ("Duration", "2 Days (9:00am – 6:00pm), incl. 1-hour lunch and tea breaks; assessment on Day 2, 4:00 – 6:00pm"),
     ("Delivery", "Instructor-led, hands-on (physical / virtual)"),
     ("Audience", "Business and operations staff who want to automate repetitive work; no coding required"),
-    ("Prerequisites", "Basic Microsoft 365 familiarity (Outlook, Excel); a Power Platform environment (see Lab 0)"),
-    ("Labs", "10 step-by-step labs across 2 days (7 on Day 1 and 3 on Day 2), plus 4 concept modules and environment setup"),
+    ("Prerequisites", "Basic Microsoft 365 familiarity (Outlook, Excel); a Microsoft 365 work or school account and a Power Platform Developer environment with Copilot Credits (see Lab 0)"),
+    ("Labs", "11 step-by-step labs across 2 days (Lab 0 setup plus Labs 1–10: five on Day 1 and six on Day 2), driven by 5 concept modules"),
     ("Assessment", "Written Assessment (SAQ) 1 hr + Practical Performance (PP) 1 hr — Day 2, 4:00 – 6:00pm, open book"),
 ])
 
 heading(doc, "Learning Outcomes", 1)
 para(doc, "By the end of the course, participants will be able to:")
 bullets(doc, [
-    "Explain business workflow automation and the Trigger → Actions → Output model.",
-    "Differentiate instant, scheduled and automated cloud flows and choose the correct trigger.",
-    "Build Forms-driven Power Automate flows that send email, log data, branch and run approvals.",
-    "Create IT, HR and Finance agents, ground them with approved knowledge, and deploy appropriate agents to Teams.",
-    "Connect websites to HTTP-triggered flows using learner-entered webhook URLs and structured JSON responses.",
-    "Combine multi-timeframe market-data and news tools in a governed educational Finance Advisor Agent.",
+    "Explain business process automation and the Trigger → Actions → Output model, and identify the four trigger families and the six action families.",
+    "Build Forms-driven Power Automate flows that send email, log data to Excel, branch on a condition and suspend for a human approval.",
+    "Describe an agent as instructions, skills, knowledge, tools and connected agents, and state which of those the model can ignore.",
+    "Create and ground Copilot Studio agents in approved SharePoint knowledge, test their refusals, and publish them to Microsoft Teams.",
+    "Connect a website to an HTTP-triggered agent flow, apply a JSON schema and use structured output to branch on the agent's decision.",
+    "Apply the boundary of agency and human-in-the-loop patterns so consequential actions require a person before they take effect.",
+    "Build a Retrieval Augmented Generation chatbot with built-in knowledge and with an external Pinecone vector store, and justify the choice between them.",
 ])
 
 heading(doc, "Daily Schedule", 1)
 para(doc, "The Slides column maps each session to the matching slides in the facilitator deck "
-          "(Business Process Automation with Power Automate and Copilot Studio Agents-v6.0.pptx, 113 slides) so trainers can pace delivery against the deck.")
+          f"(Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx, {DECK_SLIDES} slides) so trainers can pace delivery against the deck.")
 for nm, theme, rows in [
-    ("Day 1 — Foundations & Power Automate", "Workflow concepts + your first five flows", DAY1),
-    ("Day 2 — Building Business Agents with Copilot Studio & Assessment", "Agents, knowledge/RAG, tools, agent + flow end-to-end, then sit the assessment", DAY2),
+    ("Day 1 — Workflows, then Agents", "Modules 1–3: automation concepts, triggers and actions, control flow and human in the loop, then agent anatomy — Labs 0–4", DAY1),
+    ("Day 2 — Agent Flows, Human Review, RAG & Assessment", "Modules 4–5: HTTP and the boundary of agency, the human review gate, and RAG twice over — Labs 5–10, then the assessment", DAY2),
 ]:
     heading(doc, nm, 2)
     para(doc, theme + ".")
@@ -309,25 +336,27 @@ heading(doc, "Tools & Resources", 1)
 info_table(doc, [
     ("Microsoft Power Automate", "make.powerautomate.com — build and run flows"),
     ("Microsoft Copilot Studio", "copilotstudio.microsoft.com — build and publish agents"),
-    ("Power Platform admin center", "admin.powerplatform.microsoft.com — create the Course Sandbox environment (Dataverse)"),
-    ("Microsoft 365", "Outlook, Excel (OneDrive), Microsoft Forms"),
+    ("Power Platform admin center", "admin.powerplatform.microsoft.com — create the Copilot Studio Training Developer environment (Dataverse + Copilot Credits)"),
+    ("Microsoft 365", "Outlook, Excel (OneDrive), Microsoft Forms, SharePoint and Microsoft Teams"),
+    ("Pinecone", "pinecone.io — free-tier vector database, required for Lab 10 only"),
     ("Learner Guide", "Full step-by-step guide for every lab (LMS + course GitHub repository)"),
     ("LMS", LMS + " — courseware download, TRAQOM, assessment submission"),
 ])
 
 heading(doc, "Assessment", 1)
-para(doc, "The summative WSQ assessment is taken on Day 2, 4:00 – 6:00pm, and is open book "
+para(doc, "The summative WSQ assessment is taken at the end of Day 2 and is open book "
           "(slides, Learner Guide and approved materials only):")
 bullets(doc, [
-    "Written Assessment (WA / SAQ) — 1 hour, 4:00 – 5:00pm. Open-ended short-answer questions testing the knowledge from Modules 1–3.",
-    "Practical Performance (PP) — 1 hour, 5:00 – 6:00pm. Candidates build a working flow and agent, mirroring the hands-on labs.",
+    "Written Assessment (WA / SAQ) — 1 hour. Open-ended short-answer questions testing the knowledge from Modules 1–5.",
+    "Practical Performance (PP) — 1 hour. Candidates build a working flow and agent, mirroring the hands-on labs.",
     "Assessment flow: TRAQOM survey (QR on the LMS) → Assessment digital attendance → WA then PP → submit answers on the LMS → sign the Assessment Summary Record.",
     "WSQ funding requires a minimum of 75% attendance AND a Competent (C) assessment outcome.",
     f"Courseware and the assessment are on the LMS: {LMS}",
 ])
 para(doc, "Formative assessment is continuous: each lab includes a Checkpoint that the facilitator verifies before "
-          "the class moves on. Labs 8–10 progressively verify an ordinary HTTP flow, a deterministic agent flow, "
-          "and a guarded prompt flow across Microsoft Teams and website channels.")
+          "the class moves on. Labs 6–8 progressively verify an HTTP-triggered agent flow, an unsupervised public "
+          "chatbot and a blocking human review gate; Labs 9–10 verify the same grounded chatbot built two different "
+          "ways, including the probes that test whether either will invent an answer.")
 
 add_footer(doc)
 prodoc.enable_update_fields(doc)

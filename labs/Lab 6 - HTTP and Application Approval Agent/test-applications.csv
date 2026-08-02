@@ -1,0 +1,11 @@
+Test Case,Expected Decision,Expected Flags,Rule That Fires,Full Name,NRIC,Date of Birth,Nationality,Residency Status,Email,Account Type,Employment Status,Occupation,Annual Income,Source of Funds,Initial Deposit,PEP,Tax Resident Outside Singapore
+TC1 - Happy path,APPROVED,,STEP 6 approval,Marcus Ng Jun Hao,S9512345F,1995-03-18,Singaporean,Citizen,<your-email>,Savings,Employed,Software Engineer,58000,Salary,1000,FALSE,FALSE
+TC2 - Existing customer,DUPLICATE,,STEP 1 duplicate check,Tan Wei Ming,S8412345D,1984-07-02,Singaporean,Citizen,<your-email>,Current,Employed,Operations Manager,72000,Salary,5000,FALSE,FALSE
+TC3 - Fixed Deposit below income floor,REJECTED,,STEP 4 account eligibility,Priya Raman,S9223456G,1992-11-08,Singaporean,Citizen,<your-email>,Fixed Deposit,Employed,Administrator,20000,Salary,12000,FALSE,FALSE
+TC4 - Current account not gainfully employed,REJECTED,,STEP 4 account eligibility,Lim Hui Shan,S9334567H,1993-05-22,Singaporean,Citizen,<your-email>,Current,Unemployed,None,0,Savings,4000,FALSE,FALSE
+TC5 - Lowercase and padded NRIC of an existing customer,DUPLICATE,,STEP 1 duplicate check after normalisation,  tan wei ming  , s8412345d ,1984-07-02,Singaporean,Citizen,<your-email>,Savings,Employed,Operations Manager,72000,Salary,1000,FALSE,FALSE
+TC6 - Politically exposed person,REVIEW,PEP,STEP 3 KYC / AML screening,Datuk Ahmad Faizal,S7745678J,1977-01-30,Malaysian,Permanent Resident,<your-email>,Savings,Employed,Government Adviser,180000,Salary,20000,TRUE,FALSE
+TC7 - Applicant under 18,REJECTED,MINOR,STEP 2 age,Chloe Tan Xin Yi,T1056789K,2010-09-14,Singaporean,Citizen,<your-email>,Student Account,Student,Student,0,Gift or Inheritance,50,FALSE,FALSE
+TC8 - Savings below minimum initial deposit,REJECTED,,STEP 5 minimum initial deposit,Rajesh Kumar,S9467890L,1994-02-11,Singaporean,Citizen,<your-email>,Savings,Employed,Technician,42000,Salary,200,FALSE,FALSE
+TC9 - Foreign tax resident,REVIEW,CRS_FATCA,STEP 3 KYC / AML screening,Emily Watson,G7812345M,1988-06-25,British,Employment Pass,<your-email>,Savings,Employed,Consultant,145000,Salary,8000,FALSE,TRUE
+TC10 - Under 18 and politically exposed,REJECTED,MINOR,STEP 2 age fires before STEP 3 and stops,Nurul Hakim,T1167890N,2011-04-03,Singaporean,Citizen,<your-email>,Savings,Student,Student,0,Gift or Inheritance,600,TRUE,FALSE

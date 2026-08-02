@@ -1,23 +1,36 @@
 {
-  "version": "6.0",
-  "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v6.0.pptx",
-  "slides": 113,
-  "sections": {
-    "day_1": "15-69",
-    "day_2": "70-104",
-    "recap_and_assessment": "105-113"
-  },
-  "labs": {
-    "lab_0": "14",
-    "lab_1": "25-28",
-    "lab_2": "31-34",
-    "lab_3": "37-40",
-    "lab_4": "43-46",
-    "lab_5": "57-59",
-    "lab_6": "61-63",
-    "lab_7": "66-69",
-    "lab_8": "77-81",
-    "lab_9": "85-89",
-    "lab_10": "95-104"
-  }
+ "version": "7.0",
+ "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx",
+ "slides": 68,
+ "sections": {
+  "admin": "1-6",
+  "course_overview": "7-11",
+  "module_1": "12-23",
+  "module_2": "24-28",
+  "module_3": "29-39",
+  "module_4": "40-49",
+  "module_5": "50-56",
+  "synthesis": "57-60",
+  "assessment_and_closing": "61-68"
+ },
+ "modules": {
+  "m1": "12-20",
+  "m2": "24-27",
+  "m3": "29-37",
+  "m4": "40-46",
+  "m5": "50-54"
+ },
+ "labs": {
+  "lab_0": "21",
+  "lab_1": "22",
+  "lab_2": "23",
+  "lab_3": "28",
+  "lab_4": "38",
+  "lab_5": "39",
+  "lab_6": "47",
+  "lab_7": "48",
+  "lab_8": "49",
+  "lab_9": "55",
+  "lab_10": "56"
+ }
 }

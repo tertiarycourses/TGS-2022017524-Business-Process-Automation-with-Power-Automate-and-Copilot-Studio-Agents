@@ -26,7 +26,7 @@ from docx.oxml import OxmlElement
 
 # script lives at .claude/skills/wsq-assessment/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
-OUT = os.path.join(REPO, "assessemnt")
+OUT = os.path.join(REPO, "assessment")
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
@@ -127,72 +127,113 @@ def answer_box(d, height_cm=5.0, hint=""):
 # (tag, question, model answer points, source)
 WRITTEN = [
     ("K1",
-     "ACME Pte Ltd still records every customer enquiry by hand: a customer emails, someone copies the details "
-     "into a spreadsheet, then a salesperson is told to reply. Explain what business workflow automation is, and "
-     "describe how the Trigger → Actions → Output model would apply if ACME automated this enquiry process.",
-     ["Business workflow automation = using software to run a repeatable series of business steps automatically, "
-      "instead of a person doing each step by hand (Module 1).",
-      "Trigger — the event that starts the workflow: a new enquiry email arrives in the sales mailbox.",
-      "Actions — what the workflow does: extract the details, add a row into the Excel enquiries table, "
-      "notify/email the salesperson.",
-      "Output — the result produced/passed on: the logged row, the notification, and the customer reply.",
+     "ACME Pte Ltd still records every course enquiry by hand: a learner submits a form, someone reads it and "
+     "re-types the details into a spreadsheet, then someone remembers to reply. Explain what business process "
+     "automation actually removes from a process like this, and describe how the Trigger \u2192 Actions \u2192 Output "
+     "model would apply if ACME automated it.",
+     ["Business process automation is not simply doing the work faster \u2014 it removes the HAND-OFF, the point where "
+      "a person re-types what another system already knows. That hand-off is where the delay, the typo and the "
+      "forgotten reply live (Module 1).",
+      "Trigger \u2014 the event that starts the flow: a new response is submitted to the Microsoft Form.",
+      "Actions \u2014 what the flow does: get the response details, add a row to the Excel enquiry table, send the "
+      "confirmation email to the address the learner entered.",
+      "Output \u2014 the result: the logged audit row, the confirmation email, and a run history a supervisor can read.",
+      "Benefits to name: consistency (same result every time, including at 3am), traceability (every run leaves a "
+      "history), capacity (people move to the judgement calls the machine cannot make).",
       "(Any equivalent mapping of trigger/actions/output to the enquiry process is acceptable.)"],
-     "Module 1 · Slides 16–27"),
+     "Module 1 \u00b7 Slides 13\u201315"),
+
     ("K2",
-     "ACME's operations manager asks you which of the company's processes should be automated first. State three "
-     "traits that make a task a good candidate for automation, and give one example of a business process that "
-     "shows all three traits.",
-     ["Repetitive — the task is done the same way many times (e.g. daily/weekly).",
-      "Rule-based — it follows clear \"if this, then that\" logic with no judgement calls.",
-      "Time-consuming — it involves manual copying, chasing or re-typing.",
-      "Example: logging every incoming invoice to a spreadsheet and chasing the manager for approval "
-      "(or any similar process that is repetitive, rule-based and time-consuming)."],
-     "Module 1 · Slides 17–19"),
+     "Power Automate groups triggers into four families. Name all FOUR families, state what makes each one fire, "
+     "and give the business example used in this course for each. Then explain why the order of the two actions in "
+     "Lab 2 \u2014 writing the Excel audit row and sending the confirmation email \u2014 is a business decision rather "
+     "than a technical one.",
+     ["Manual \u2014 a person presses Run. Example: an instant cloud flow, or a button in the mobile app or Teams.",
+      "Scheduled \u2014 a clock reaches a time. Example: a Recurrence trigger; the time zone must be set or it runs "
+      "on UTC.",
+      "Automated \u2014 an event happens in a system. Example: 'When a new response is submitted' from Microsoft "
+      "Forms (Labs 1, 2, 3).",
+      "Request \u2014 something calls in from outside. Example: 'When an HTTP request is received' (Labs 6\u201310) or "
+      "'When an agent calls the workflow' (Labs 4, 6).",
+      "Order: LOG, THEN CONFIRM. If the email fails, the enquiry is still on the register and someone can chase "
+      "it \u2014 you have a record of a missed reply.",
+      "If you confirm first and the row fails, you have promised a customer a reply that nobody can see; the "
+      "evidence of the promise is gone.",
+      "The principle: commit the record of the obligation BEFORE you create the obligation."],
+     "Module 1 \u00b7 Slides 16, 20"),
+
     ("K3",
-     "Describe THREE types of Power Automate cloud flow covered in the course, the event that starts each one, and "
-     "give a business example of when you would use each type.",
-     ["Instant / manual flow — started when a person presses Run; e.g. a one-click email or test workflow (Lab 1).",
-      "Scheduled flow — started by a Recurrence timetable; e.g. a Monday 9:00 AM weekly reminder or stock check (Lab 4).",
-      "Automated flow — started by an event: a new form response, a new email arriving, or a file being uploaded; "
-      "e.g. logging each form submission to Excel (Lab 5).",
-      "(Agent flow — started when a Copilot Studio agent calls the flow as a tool — is also acceptable as one of the three.)"],
-     "Module 2 · Slides 28–40"),
+     "A colleague's flow finishes with a green tick, but the confirmation email arrives with an empty name. "
+     "Explain why a green run is not proof of a correct run, describe what most likely went wrong with the "
+     "dynamic value, and outline how you would use the run history to find and fix it.",
+     ["A reference to nothing resolves to EMPTY, not to an error \u2014 so the flow succeeds while carrying a blank "
+      "value. This is the single most common fault in the course.",
+      "Most likely cause: the dynamic value was TYPED by hand instead of being inserted with the \u26a1 picker, so it "
+      "stayed dead text and never resolved to the earlier step's output.",
+      "Fix: delete the typed text and re-insert the value with the picker so it renders as a coloured token.",
+      "Run history procedure: open My flows \u2192 the flow \u2192 Run history (or the Activity tab in an agent flow); "
+      "expand each step to see its inputs and outputs; find the step whose input was blank \u2014 not a red error.",
+      "Three states that look alike: Succeeded with the right data; Succeeded with EMPTY data; still Running "
+      "because it is waiting for a person. Only the first is done; the second is the dangerous one.",
+      "Republish and run ONE test \u2014 one change per publish-and-test cycle, or a failure becomes uninterpretable."],
+     "Module 1 \u00b7 Slides 18\u201319"),
+
     ("K4",
-     "Your colleague's flow fails at the Send an email step with an \"Unauthorized\" error. Explain what a connector "
-     "is in Power Automate, name three connectors used in this course, and state the likely cause of the error and "
-     "how to fix it.",
-     ["A connector links a flow to a service and provides its triggers and actions; a connection is your signed-in "
-      "account for that connector.",
-      "Any three of: Office 365 Outlook, Excel Online (Business), Approvals, Microsoft Forms, OneDrive for Business, "
-      "Microsoft Teams.",
-      "Cause: the connection is broken/expired, or the signed-in account has no mailbox / lacks rights.",
-      "Fix: reconnect the Office 365 Outlook connection with a valid, mailbox-enabled tenant account "
-      "(green tick = ready, red = reconnect)."],
-     "Module 2 · Slides 33–40"),
+     "Distinguish human IN the loop, human ON the loop and human OUT of the loop \u2014 stating for each who decides, "
+     "who acts, and whether the AI can proceed alone. Identify which pattern the Lab 3 leave approval and the "
+     "Lab 8 client-reply gate use, and explain how you would prove in class that the Lab 8 gate is real.",
+     ["Human IN the loop: AI proposes, the human decides; the human authorises and the system acts. The AI CANNOT "
+      "proceed \u2014 it blocks.",
+      "Human ON the loop: the AI decides and acts; a human monitors and can intervene. Supervision is after the fact.",
+      "Human OUT of the loop: the AI decides and acts, and nobody checks.",
+      "Lab 3 and Lab 8 are both human IN the loop \u2014 the run genuinely suspends until a person responds. Labs 6, "
+      "7, 9 and 10 are deliberately out of the loop.",
+      "Proof: submit an enquiry, then open Activity. The run says Running \u2014 and it will still say Running "
+      "tomorrow. Nothing times out, nothing defaults, nothing proceeds. That pause is the deliverable.",
+      "Also acceptable: approvals must be sent to the Microsoft Teams Approvals app, not Outlook \u2014 on a live "
+      "tenant Outlook created the request and never delivered the mail, and the run sat at Running looking healthy.",
+      "A rejection must be routed to a NAMED person, never to silence."],
+     "Module 2 \u00b7 Slides 22\u201324"),
+
     ("K5",
-     "ACME wants a customer-service agent built in Microsoft Copilot Studio. Name the main building blocks of a "
-     "Copilot Studio agent and what each is for, and explain how Knowledge (RAG / grounding) keeps the agent's "
-     "answers accurate.",
-     ["Instructions — plain-language directions that shape the agent's behaviour and tone.",
-      "Knowledge — documents/websites the agent answers from.",
-      "Topics — conversation flows (Ask a question, Condition, Message nodes) for structured dialogues.",
-      "Tools — things the agent can do, including Power Automate (agent) flows.",
-      "Variables — where captured answers are stored and passed onward.",
-      "RAG (Retrieval-Augmented Generation): the agent retrieves relevant passages from the uploaded sources and "
-      "generates an answer grounded in them — preventing made-up answers (hallucination)."],
-     "Module 3 · Slides 50–59 · Labs 6–7"),
+     "A Copilot Studio agent is assembled from instructions, skills, knowledge, tools and connected agents. For "
+     "each of these five parts, state what it is and whether it is ENFORCED. Then explain the design principle "
+     "this leads to, and why 'a tool the agent does not have' is itself a control.",
+     ["Instructions \u2014 who the agent is, always in force. NOT enforced: probabilistic.",
+      "Skill \u2014 a named procedure applied when the topic matches. NOT enforced: the model decides it applies.",
+      "Knowledge \u2014 documents the agent may read. PARTLY enforced: it genuinely cannot read what it was not given.",
+      "Tool \u2014 a flow that acts outside the conversation. ENFORCED: the flow's own logic runs whatever the agent "
+      "believed.",
+      "Connected agent \u2014 a separate agent with its own knowledge and audience. ENFORCED: the knowledge boundary "
+      "is real (though the conversation still crosses it).",
+      "The principle: A CONTROL THE MODEL CANNOT REACH BEATS A RULE YOU ASKED IT TO FOLLOW.",
+      "A tool the agent does not have is a control because the absence is structural, not probabilistic \u2014 the IT "
+      "Support Agent has no ResetPassword tool, and that absence is the only unbreakable part of its password rules.",
+      "Related: the schema beats the prompt \u2014 a field that exists will eventually be filled, so leave it out of "
+      "the tool contract rather than asking the model nicely."],
+     "Module 3 \u00b7 Slides 27\u201328"),
+
     ("K6",
-     "ACME's Procurement Assistant agent must hand a purchase request to a Power Automate flow that logs the request "
-     "and emails the manager. Name the trigger and the closing action the flow must use, and describe how data is "
-     "passed between the agent and the flow. State one best practice for this agent + flow integration.",
-     ["Trigger: \"When an agent calls the flow\"; closing action: \"Respond to the agent\".",
-      "The agent's topic adds the flow as a tool; the agent's variables (e.g. item, quantity, cost) are mapped to the "
-      "flow's input parameters, and the flow's outputs are returned to the agent via Respond to the agent.",
-      "Both the agent and the flow must live in the SAME environment or the agent cannot see the flow.",
-      "Best practice (any one): keep tool names/descriptions clear so orchestration picks the right tool; validate "
-      "inputs with Ask a question (Number entity); notify on every branch so there are no dead ends; test the happy "
-      "path and every branch."],
-     "Modules 3–4 · Slides 60–64, 75–81 · Labs 10, 14"),
+     "Explain what Retrieval Augmented Generation (RAG) is and why it is preferred to pasting every document into "
+     "the agent's instructions. Define chunk, embedding and top_k. Then compare the built-in Copilot Studio "
+     "knowledge source (Lab 9) with an external Pinecone vector store (Lab 10), and state what determines which "
+     "one is the right choice.",
+     ["RAG = retrieve, then generate. Instead of giving the model everything and hoping it finds the answer, you "
+      "retrieve only the two or three documents that resemble the question and give it only those.",
+      "Why not paste everything: the instruction exceeds what the model can read, it starts ignoring the middle, "
+      "every question costs the price of all the documents, and a fee change means editing the prompt.",
+      "Chunk \u2014 how a document is split (in Lab 10, one brochure = one record).",
+      "Embedding \u2014 text represented as a list of numbers (llama-text-embed-v2, 1024 dimensions).",
+      "top_k \u2014 how many documents come back from the search (3 in Lab 10).",
+      "Built-in (Lab 9): 3 nodes, no ingestion, but the embedding model, chunking and top_k are all HIDDEN, and "
+      "citation markers leak into the reply; a changed fee means waiting for a re-crawl.",
+      "Pinecone (Lab 10): 5 nodes and a one-off ingestion script, but chunking, the embedding model and top_k are "
+      "YOUR call, there are no citation markers, and a changed fee means re-ingesting.",
+      "Neither is the right answer in general. Which is right depends on whether the person maintaining it will "
+      "ever need those levers \u2014 a staffing question, not a technical one.",
+      "Also creditable: retrieval decides whether generation can possibly be right; and a grounded agent must "
+      "still be probed for invention because a confident wrong answer raises no error."],
+     "Module 5 \u00b7 Slides 42\u201345"),
 ]
 
 WA_NAME = f"WA (SAQ) - {TITLE}"
@@ -228,88 +269,110 @@ def build_written_answers():
 
 # ================================================================ PRACTICAL (3 tasks, A1-A7)
 SCENARIO = (
-    "Scenario: ACME Pte Ltd is a growing trading company. Staff currently email purchase requests to the "
-    "operations manager, who copies them into a spreadsheet and replies by hand. ACME wants you — as taught in "
-    "this course — to automate the process end to end: a Power Automate flow to log and approve requests, a "
-    "Copilot Studio agent to capture requests in a conversation, and the agent connected to the flow. "
-    "Build everything in your Course Sandbox environment (Power Automate and Copilot Studio must use the SAME "
-    "environment)."
+    "Scenario: ACME Pte Ltd runs a small training academy. Learners submit course enquiries on a form, staff "
+    "re-type them into a spreadsheet, and someone eventually replies by hand. Managers approve staff leave over "
+    "email, and nobody can find the decision afterwards. ACME wants you \u2014 as taught in this course \u2014 to "
+    "automate the enquiry process, put a human gate on an approval, and stand up a grounded agent that answers "
+    "policy questions without inventing anything. Build everything in your Copilot Studio Training (Developer) "
+    "environment. Power Automate and Copilot Studio must be pointed at the SAME environment."
 )
 
 PP_TASKS = [
-    ("Task 1 — Build the approval & logging flow (Power Automate)",
-     "In make.powerautomate.com, create an instant cloud flow named PP Purchase Approval that: "
-     "(a) is started manually with two text inputs — Item and Cost; "
-     "(b) adds a row into an Excel Online (Business) table (columns: Item, Cost, Date — use utcNow() via the fx "
-     "expression editor for Date); "
-     "(c) starts an approval with \"Start and wait for an approval\" assigned to yourself; and "
-     "(d) uses a Condition on the approval Outcome to send an \"Approved\" email if Approve, otherwise a "
-     "\"Rejected\" email. Run the flow once and approve it.",
-     "Take a screenshot of the whole flow in the designer AND a screenshot of the successful run, and paste them "
-     "in the box below: (A1, A2, A3)"),
-    ("Task 2 — Build the Procurement Assistant agent (Copilot Studio)",
-     "In copilotstudio.microsoft.com (same environment), create an agent named PP Procurement Assistant with: "
-     "(a) instructions that make it a polite internal procurement helper; "
-     "(b) a topic New Request that uses Ask a question nodes to capture the Item (text) and the Cost (Number "
-     "entity) into variables; and "
-     "(c) a Message node that confirms the captured values back to the user. "
-     "Test the conversation in the Test pane.",
-     "Take a screenshot of the topic (showing the question nodes and variables) AND the Test pane conversation, "
-     "and paste them in the box below: (A4, A5)"),
-    ("Task 3 — Connect the agent to the flow (end to end)",
-     "Make the agent do the work: (a) create an agent flow with the trigger \"When an agent calls the flow\" that "
-     "receives Item and Cost as inputs, logs them to your Excel table, sends the notification email, and returns a "
-     "confirmation with \"Respond to the agent\"; (b) add this flow as a tool at the end of your New Request topic "
-     "and map the topic's variables to the flow inputs; and (c) test end to end in the Test pane — the row must "
-     "appear in Excel and the email must arrive.",
-     "Take a screenshot of the topic showing the tool node with the mapped inputs AND a screenshot of the Excel "
-     "row / email produced by your test, and paste them in the box below: (A6, A7)"),
+    ("Task 1 \u2014 Build the enquiry flow: trigger, actions and the audit row (Power Automate) \u2014 mirrors Lab 1 and Lab 2",
+     "In make.powerautomate.com, create an automated cloud flow named PP Course Enquiry that: "
+     "(a) is started by the Microsoft Forms trigger \"When a new response is submitted\" on a form with the "
+     "questions Name, Email, Tel and Message; "
+     "(b) uses \"Get response details\" so the four answers become dynamic content; "
+     "(c) adds a row into an Excel Online (Business) table with the enquiry details AND a timestamp \u2014 use the "
+     "fx expression editor for the date, not typed text; and "
+     "(d) THEN sends a personalised confirmation email to the address the learner entered in the form. "
+     "The audit row must be written BEFORE the email is sent. Submit the form once and confirm the run succeeds. "
+     "Every dynamic value must be inserted with the \u26a1 picker.",
+     "Take a screenshot of the whole flow in the designer, a screenshot of the successful run history showing the "
+     "step inputs/outputs, AND a screenshot of the Excel row, and paste them in the box below: (A1, A2, A3)"),
+    ("Task 2 \u2014 Add a human gate: the approval that suspends the run (Power Automate) \u2014 mirrors Lab 3",
+     "Create a second automated cloud flow named PP Leave Approval that: "
+     "(a) is started by a Microsoft Forms leave-application response; "
+     "(b) uses \"Start and wait for an approval\" assigned to a tenant user (yourself), sent to Microsoft Teams "
+     "\u2014 not Outlook; and "
+     "(c) uses a Condition on the approval Outcome so that Approve sends an approval email to the applicant and "
+     "Reject sends a rejection email that includes the approver's comments. Both branches must be built. "
+     "Submit the form, show the run SUSPENDED at the approval while it waits, then respond and let it complete.",
+     "Take a screenshot of the flow showing BOTH condition branches, a screenshot of the run while it is still "
+     "waiting at the approval, AND a screenshot of the completed run with the correct email, and paste them in "
+     "the box below: (A4, A5)"),
+    ("Task 3 \u2014 Build and ground a Copilot Studio agent, then prove it refuses (Copilot Studio) \u2014 mirrors Lab 5 and Lab 9",
+     "In copilotstudio.microsoft.com (SAME environment), create an agent named PP Policy Assistant that: "
+     "(a) has instructions stating its identity, that it must answer only from the approved source, at least one "
+     "explicit refusal, and where to escalate; "
+     "(b) has a SharePoint document as a knowledge source, with the source status Ready, \"Use general knowledge\" "
+     "turned OFF and the \"Search all websites\" chip REMOVED; and "
+     "(c) is tested in the Preview pane with THREE probes: one question the document answers, one question the "
+     "document does not cover, and one request the agent must refuse. The agent must say it does not know rather "
+     "than invent an answer.",
+     "Take a screenshot of the Instructions, a screenshot of the knowledge source showing status Ready, AND a "
+     "screenshot of the Preview conversation showing all three probes and their answers, and paste them in the "
+     "box below: (A6, A7)"),
 ]
 
 PP_ANSWERS = [
-    ("Task 1 (A1, A2, A3) — model build steps (mirrors Labs 1, 2, 3)", [
-        "Create → Instant cloud flow → name PP Purchase Approval → trigger \"Manually trigger a flow\" (Lab 1).",
-        "In the trigger, Add an input → Text twice: Item, Cost (Lab 3 pattern).",
-        "+ Add an action → \"Add a row into a table\" (Excel Online (Business)) → pick Location / Document Library / "
-        "File / Table; map Item and Cost tokens; for Date use the fx expression editor with "
-        "formatDateTime(utcNow(),'yyyy-MM-dd HH:mm') so it becomes a token, not literal text (Lab 2).",
-        "+ Add an action → \"Start and wait for an approval\" → Approval type: Approve/Reject – First to respond; "
-        "Assigned to: yourself picked from the people picker (must be a tenant user) (Lab 3).",
-        "+ Add an action → Condition → Outcome is equal to Approve. True: Send an email (V2) \"Approved\". "
-        "False: Send an email (V2) \"Rejected\" (Lab 3).",
-        "Save → Test → Manually → enter Item/Cost → approve from the Approvals hub → run shows all green ticks.",
-        "Competent when: flow runs successfully; row logged with a real date; approval received and actioned; "
-        "correct email on each branch."]),
-    ("Task 2 (A4, A5) — model build steps (mirrors Labs 6, 9)", [
-        "Copilot Studio → confirm the environment selector (top-right) shows Course Sandbox — the same environment "
-        "as Power Automate (Labs 0, 6).",
-        "Left nav Agents → Create blank agent → the agent's Overview page opens; Details → Edit → name it "
-        "PP Procurement Assistant; Instructions → Edit → \"You are ACME's polite internal procurement helper…\" "
-        "→ Save (Lab 6).",
-        "Topics → + Add a topic → From blank → name New Request; give it a clear description (generative "
-        "orchestration selects topics by description) (Lab 9).",
-        "Ask a question node 1: \"What item do you need?\" → Identify: User's entire response → save to variable "
-        "item (Lab 9).",
-        "Ask a question node 2: \"What is the estimated cost?\" → Identify: Number → save to variable cost — the "
-        "Number entity re-asks on invalid input (Lab 9).",
-        "Message node: \"You requested {item} at ${cost}. Thank you!\" using the variable chips.",
-        "Test in the Test pane: trigger the topic, answer both questions, see the confirmation message.",
-        "Competent when: agent exists with sensible instructions; both variables captured with the right entity "
-        "types; confirmation echoes the values."]),
-    ("Task 3 (A6, A7) — model build steps (mirrors Labs 8, 10)", [
-        "In the New Request topic, after the questions: + → Add a tool → New agent flow (opens Power Automate with "
-        "the \"When an agent calls the flow\" trigger) (Labs 10, 14).",
-        "In the trigger, Add an input → Text: Item; Number: Cost.",
-        "Add \"Add a row into a table\" (map the trigger tokens) and \"Send an email (V2)\" (to yourself, subject "
-        "\"New purchase request\", body with the tokens).",
-        "End with \"Respond to the agent\" → output confirmation (e.g. \"Logged\"). Click Publish — publishing "
-        "saves and publishes the agent flow in one step (Lab 10).",
-        "Back in the topic, the flow appears as a tool node — map topic variables item → Item and cost → Cost "
-        "(refresh if the flow is not listed; agent and flow must be in the same environment) (Lab 10).",
-        "Optionally end the topic with a Message node using the flow's output.",
-        "Test pane: run the whole conversation → confirm the Excel row appears and the email arrives.",
-        "Competent when: agent flow uses the correct trigger/response actions; inputs mapped from the topic "
-        "variables; end-to-end test produces the row and the email."]),
+    ("Task 1 (A1, A2, A3) \u2014 model build steps (mirrors Lab 1 and Lab 2)", [
+        "Confirm the environment selector shows Copilot Studio Training in BOTH products before building (Lab 0).",
+        "Create \u2192 Automated cloud flow \u2192 name PP Course Enquiry \u2192 trigger \"When a new response is "
+        "submitted\" \u2192 select the Course Enquiry Form (Lab 1).",
+        "+ New step \u2192 \"Get response details\" \u2192 same Form Id \u2192 insert the trigger's Response Id token "
+        "with the \u26a1 picker. Without this step the four answers are not available as dynamic content (Lab 1).",
+        "+ New step \u2192 Excel Online (Business) \u2192 \"Add a row into a table\" \u2192 pick Location / Document "
+        "Library / File / Table (EnquiryLog); map Name, Email, Tel and Message as tokens; for Timestamp use the fx "
+        "expression editor with formatDateTime(utcNow(),'yyyy-MM-dd HH:mm') so it resolves at run time (Lab 2).",
+        "+ New step \u2192 Office 365 Outlook \u2192 \"Send an email (V2)\" \u2192 To = the Email answer token from "
+        "Get response details (NOT the flow owner); write a personalised body using the Name token (Lab 1).",
+        "ORDER IS ASSESSED: the Excel action must sit ABOVE the email action. Commit the record of the obligation "
+        "before creating the obligation \u2014 if the email fails the enquiry is still on the register (Lab 2).",
+        "Save \u2192 submit the form \u2192 open Run history \u2192 expand each step and confirm the inputs are populated, "
+        "not blank.",
+        "Competent when: the run succeeds; the Excel row contains the submitted values and a real timestamp; the "
+        "email reaches the address entered on the form; the Excel action precedes the email action; no value was "
+        "typed by hand where a token was required."]),
+    ("Task 2 (A4, A5) \u2014 model build steps (mirrors Lab 3)", [
+        "Create \u2192 Automated cloud flow \u2192 name PP Leave Approval \u2192 Forms trigger on the Leave Application "
+        "Form \u2192 add \"Get response details\" (Lab 3).",
+        "+ New step \u2192 Approvals \u2192 \"Start and wait for an approval\" \u2192 Approval type: Approve/Reject \u2013 "
+        "First to respond; Title and Details built from the response tokens; Assigned to: a real tenant user chosen "
+        "from the people picker (Lab 3).",
+        "The request must go to the Microsoft Teams Approvals app. On a live tenant Outlook created the request and "
+        "never delivered the mail \u2014 the run then sits at Running looking perfectly healthy (Lab 3).",
+        "+ New step \u2192 Condition \u2192 Outcome is equal to Approve. TRUE branch: Send an email (V2) confirming "
+        "approval. FALSE branch: Send an email (V2) with the rejection AND the approver's Comments token (Lab 3).",
+        "Both branches must be built. A rejection routed to silence is indistinguishable, from the applicant's "
+        "side, from a request that was lost.",
+        "Evidence of the gate: after submitting, the run shows as Running and stays suspended at the approval "
+        "action until a person responds \u2014 nothing times out and nothing defaults (Module 2).",
+        "Competent when: the run genuinely suspends at the approval; the approval is actioned from Teams; the "
+        "Condition reads Outcome; and the correct email is sent on each of the two branches."]),
+    ("Task 3 (A6, A7) \u2014 model build steps (mirrors Lab 5 and Lab 9)", [
+        "Copilot Studio \u2192 confirm the environment selector shows Copilot Studio Training \u2014 the SAME "
+        "environment as Power Automate, or the agent cannot see the flow (Lab 0, Lab 5).",
+        "Agents \u2192 New agent \u2192 name PP Policy Assistant (Lab 5).",
+        "Instructions must state four things (Module 3): IDENTITY \u2014 'You are ACME's policy information "
+        "assistant.'; SOURCE RULE \u2014 'Answer using only the approved SharePoint policy source.'; REFUSAL \u2014 "
+        "'Do not expose, request or infer personal employee records' / 'Do not guarantee approval.'; ESCALATION "
+        "\u2014 'When the source is insufficient, say so and direct the user to HR.'",
+        "Never paste an @{...} expression into the Instructions box \u2014 it is a rich-text editor and a reference "
+        "to a node that does not exist resolves to EMPTY rather than erroring (Module 3).",
+        "Knowledge \u2192 Add knowledge \u2192 SharePoint \u2192 paste the approved folder/file URL \u2192 name and "
+        "describe the source \u2192 wait for status Ready. If it reports a permission failure, fix SharePoint access "
+        "(Lab 5).",
+        "Turn OFF 'Use general knowledge' and REMOVE the 'Search all websites' chip, which is on by default. "
+        "Otherwise a fact from the open web is indistinguishable from one in the approved document (Lab 9).",
+        "Grounding is not only about giving the agent facts \u2014 it is about taking away every other source of them.",
+        "Probe in Preview with three cases: (1) a question the document answers \u2014 the answer must reflect the "
+        "document; (2) a question the document does not cover \u2014 it must say so, not improvise; (3) a request it "
+        "must refuse, e.g. another employee's records or a guarantee of approval \u2014 it must refuse and escalate.",
+        "A confident wrong answer raises no error: the run is green and the reply is fluent, which is exactly why "
+        "the refusal probes are assessed (Module 5).",
+        "Competent when: the instructions carry identity, source rule, refusal and escalation; the knowledge source "
+        "is Ready with general knowledge off; and all three probes behave correctly, including the refusal."]),
 ]
 
 def build_pp_paper():

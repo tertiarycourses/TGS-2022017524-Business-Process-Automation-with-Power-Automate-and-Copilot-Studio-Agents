@@ -1,0 +1,14 @@
+TestCase,Requester,Department,Vendor,ItemDescription,UnitPrice,Quantity,CompetingQuotes,BudgetCode,NeededBy,ExpectedRouting,ExpectedFlag,WhatItProves
+TC1,Aisyah Rahman,Operations,Orchard Office Solutions,A4 copier paper 80gsm box,42.00,10,3,OP-1120,2026-09-15,AUTO,,Clean run - approved vendor, small total, quotes present, valid budget code
+TC2,Daniel Lim,Operations,Bukit Timah Consumables,Warehouse cleaning consumables bulk order,890.00,15,3,OP-1120,2026-09-30,APPROVAL,ABOVE_THRESHOLD,Total 13350 crosses the 10000 threshold on a NON-capex vendor - the only way STEP 4 is reachable
+TC3,Priya Menon,IT,Tampines IT Distributors,Engineering workstation,2450.00,1,3,IT-3300,2026-10-01,APPROVAL,CAPEX,Capital expenditure at 2450 - far under 10000 but CAPEX fires first
+TC4,Marcus Tan,Facilities,Marina Facilities Management,Emergency chiller repair,7800.00,1,1,FM-4010,2026-08-20,APPROVAL,SINGLE_SOURCE,One quote on 7800 - single-source fires before CAPEX even though Facilities is capex
+TC5,Wei Ling Ho,Engineering,Woodlands Precision Tools,Calibration jig set,1200.00,2,3,EN-2041,2026-09-10,BLOCKED,VENDOR_SUSPENDED,Vendor is on the register but Suspended - registered is not the same as approved
+TC6,Rajesh Kumar,Operations,Bright Star Trading,Assorted workshop consumables,300.00,4,3,OP-1120,2026-09-05,BLOCKED,UNAPPROVED_VENDOR,Vendor absent from the register entirely
+TC7,Nurul Hidayah,Facilities,Serangoon Technical Services,Quarterly HVAC servicing,450.00,2,3,FM-4010,2026-09-22,APPROVAL,VENDOR_UNDER_REVIEW,Under Review routes to a human even though only 900 - status beats amount
+TC8,Kenneth Ng,Operations,Jurong Safety Equipment,Safety helmets EN397,28.00,20,3,,2026-09-18,RETURNED,INVALID_BUDGET_CODE,Budget code missing - returned to requester, not escalated
+TC9,Siti Aminah,Operations,Bukit Timah Consumables,Pantry supplies monthly,180.00,6,3,OPS-112,2026-09-12,RETURNED,INVALID_BUDGET_CODE,Budget code malformed - three letters and three digits
+TC10,Jonathan Chee,IT,Redhill Software Licensing,Design suite annual renewal 40 seats,250.00,40,3,IT-3300,2026-09-25,APPROVAL,ABOVE_THRESHOLD,Total is exactly 10000 on a non-capex vendor - at the threshold, not under it
+TC11,Farah Ismail,IT,Redhill Software Licensing,CAD seat annual renewal,1900.00,1,1,IT-3300,2026-09-28,AUTO,,Single quote but only 1900 - single-source needs 5000 or more, so it does not fire
+TC12,Alvin Goh,Engineering,sembawang industrial supplies,Coupling spares,150.00,8,3,EN-2041,2026-09-14,AUTO,,Lowercase vendor name - total 1200 is under every threshold, so ONLY the lookup is being tested; watch whether it still matches
+TC13,Lydia Soh,Operations,Bukit Timah Consumables,Site welfare supplies annual,1400.00,9,1,OP-1120,2026-10-05,APPROVAL,SINGLE_SOURCE,Total 12600 - BOTH single-source and threshold would fire; proves STEP 2 is evaluated before STEP 4

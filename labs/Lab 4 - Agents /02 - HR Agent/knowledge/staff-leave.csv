@@ -1,0 +1,15 @@
+EmployeeEmail,EmployeeName,Department,JoinDate,AnnualLeaveEntitlement,AnnualLeaveTaken,AnnualLeaveRemaining,MedicalLeaveRemaining,CarriedForward,AsAtDate
+aisyah.rahman@keppelridge.example,Aisyah Rahman,Operations,2019-03-11,19,7,12,14,2,2026-07-31
+daniel.lim@keppelridge.example,Daniel Lim,Operations,2023-06-01,16,11,5,9,0,2026-07-31
+priya.menon@keppelridge.example,Priya Menon,IT,2021-09-20,16,4,12,14,3,2026-07-31
+marcus.tan@keppelridge.example,Marcus Tan,Facilities,2014-01-06,21,15,6,12,5,2026-07-31
+wei.ling.ho@keppelridge.example,Wei Ling Ho,Engineering,2022-11-14,16,2,14,14,0,2026-07-31
+rajesh.kumar@keppelridge.example,Rajesh Kumar,Operations,2026-04-01,14,0,10,14,0,2026-07-31
+nurul.hidayah@keppelridge.example,Nurul Hidayah,Facilities,2020-02-17,16,9,7,11,1,2026-07-31
+kenneth.ng@keppelridge.example,Kenneth Ng,Operations,2016-08-29,19,12,7,14,0,2026-07-31
+siti.aminah@keppelridge.example,Siti Aminah,Operations,2024-01-15,16,6,10,13,0,2026-07-31
+jonathan.chee@keppelridge.example,Jonathan Chee,IT,2018-05-07,19,18,1,14,4,2026-07-31
+farah.ismail@keppelridge.example,Farah Ismail,IT,2025-10-06,14,3,8,14,0,2026-07-31
+alvin.goh@keppelridge.example,Alvin Goh,Engineering,2013-07-22,21,5,16,14,5,2026-07-31
+lydia.soh@keppelridge.example,Lydia Soh,Operations,2021-04-19,16,8,8,14,2,2026-07-31
+hui.min.chan@keppelridge.example,Hui Min Chan,Engineering,2026-06-15,14,0,7,14,0,2026-07-31

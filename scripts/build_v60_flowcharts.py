@@ -7,14 +7,14 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 
 LABS = {
-    "labs/Day 1/Lab 1 - Forms Email Confirmation/assets": r'''
+    "labs/Lab 1 - Forms Email Confirmation/assets": r'''
       form [label="Course Enquiry Form\nName · Email · Tel · Message", fillcolor="#EAF2FF"];
       trigger [label="When a new response\nis submitted"];
       details [label="Get response details"];
       email [label="Send confirmation email\nto submitted Email", fillcolor="#E8F7EE"];
       form -> trigger -> details -> email;
     ''',
-    "labs/Day 1/Lab 2 - Forms Enquiry Logging/assets": r'''
+    "labs/Lab 2 - Forms Enquiry Logging/assets": r'''
       form [label="Course Enquiry Form", fillcolor="#EAF2FF"];
       trigger [label="Form response trigger"];
       details [label="Get response details"];
@@ -22,7 +22,7 @@ LABS = {
       email [label="Send confirmation email", fillcolor="#FFF4E5"];
       form -> trigger -> details -> excel -> email;
     ''',
-    "labs/Day 1/Lab 3 - Event Registration Branching/assets": r'''
+    "labs/Lab 3 - Event Registration Branching/assets": r'''
       form [label="Event Registration Form", fillcolor="#EAF2FF"];
       details [label="Get response details"];
       joining [label="Joining the Event\n= Yes?", shape=diamond, fillcolor="#FFF4E5"];
@@ -34,7 +34,7 @@ LABS = {
       joining -> yeslog [label=" YES"]; yeslog -> admin;
       joining -> nolog [label=" NO"]; nolog -> user;
     ''',
-    "labs/Day 1/Lab 4 - Leave Approval/assets": r'''
+    "labs/Lab 4 - Leave Approval/assets": r'''
       form [label="Leave Application Form", fillcolor="#EAF2FF"];
       details [label="Get response details"];
       approval [label="Start and wait\nfor an approval", fillcolor="#FFF4E5"];
@@ -45,7 +45,7 @@ LABS = {
       outcome -> approved [label=" YES"];
       outcome -> rejected [label=" NO"];
     ''',
-    "labs/Day 1/Lab 5 - IT Support Agent/assets": r'''
+    "labs/Lab 5 - IT Support Agent/assets": r'''
       teams [label="Employee in Teams", fillcolor="#EAF2FF"];
       agent [label="IT Support Agent\nInstructions + safety", fillcolor="#F1EAFF"];
       faq [label="IT Support FAQ.pdf\nApproved knowledge", fillcolor="#E8F7EE"];
@@ -55,7 +55,7 @@ LABS = {
       agent -> grounded [label=" supported"];
       agent -> escalate [label=" unsupported / sensitive"];
     ''',
-    "labs/Day 1/Lab 6 - HR Support Agent/assets": r'''
+    "labs/Lab 6 - HR Support Agent/assets": r'''
       pdf [label="HR Policies.pdf", fillcolor="#EAF2FF"];
       sharepoint [label="SharePoint\nHR Policy Knowledge", fillcolor="#E8F7EE"];
       agent [label="HR Support Agent\nInstructions + privacy", fillcolor="#F1EAFF"];
@@ -67,7 +67,7 @@ LABS = {
       agent -> answer [label=" supported"];
       agent -> escalate [label=" decision / personal data"];
     ''',
-    "labs/Day 1/Lab 7 - Support Request Routing/assets": r'''
+    "labs/Lab 7 - Support Request Routing/assets": r'''
       form [label="Support Request Form\nName · Email · Type · Message", fillcolor="#EAF2FF"];
       details [label="Get response details"];
       route [label="Support Type\n= IT Support?", shape=diamond, fillcolor="#FFF4E5"];
@@ -79,7 +79,7 @@ LABS = {
       route -> it [label=" YES"]; it -> itemail;
       route -> hr [label=" NO"]; hr -> hremail;
     ''',
-    "labs/Day 2/Lab 8 - Website HTTP Enquiry/assets": r'''
+    "labs/Lab 8 - Website HTTP Enquiry/assets": r'''
       rankdir=TB;
       url [label="Learner pastes\nWebhook URL", fillcolor="#FFF4E5"];
       page [label="Enquiry website\nName · Email · Tel · Message", fillcolor="#EAF2FF"];
@@ -92,7 +92,7 @@ LABS = {
       { rank=same; email; response; status; }
       url -> page; page -> post -> trigger -> email -> response -> status;
     ''',
-    "labs/Day 2/Lab 9 - Finance Agent Web Chat/assets": r'''
+    "labs/Lab 9 - Finance Agent Web Chat/assets": r'''
       rankdir=TB;
       url [label="Learner pastes\nWebhook URL", fillcolor="#FFF4E5"];
       chat [label="Finance chat page\nUser prompt", fillcolor="#EAF2FF"];
@@ -106,7 +106,7 @@ LABS = {
       url -> chat; chat -> trigger -> agent -> response -> browser;
       kb -> agent;
     ''',
-    "labs/Day 2/Lab 10 - AI Trading Advisor Website/assets": r'''
+    "labs/Lab 10 - AI Trading Advisor Website/assets": r'''
       rankdir=TB;
       page [label="Trading website\nTradingView + symbol + prompt", fillcolor="#EAF2FF"];
       url [label="Learner-entered\nWebhook URL", fillcolor="#FFF4E5"];
@@ -127,7 +127,7 @@ LABS = {
       m1 -> synthesis; m15 -> synthesis; h1 -> synthesis; news -> synthesis;
       synthesis -> response -> browser;
     ''',
-    "labs/Day 2/Lab 11 - Travel Expense Agent and Agent Flow/assets": r'''
+    "labs/Lab 11 - Travel Expense Agent and Agent Flow/assets": r'''
       rankdir=TB;
       staff [label="Staff conversation", fillcolor="#EAF2FF"];
       agent [label="Expense Claim Agent\npolicy knowledge + instructions", fillcolor="#F1EAFF"];
@@ -147,7 +147,7 @@ LABS = {
       normal -> outcome;
       human -> outcome;
     ''',
-    "labs/Day 2/Lab 11 - Procurement Request Approval/assets": r'''
+    "labs/Lab 11 - Procurement Request Approval/assets": r'''
       rankdir=LR;
       form [label="Procurement Request Form\nnew response", fillcolor="#EAF2FF"];
       details [label="Get response details\nusing dynamic Response Id", fillcolor="#EAF2FF"];

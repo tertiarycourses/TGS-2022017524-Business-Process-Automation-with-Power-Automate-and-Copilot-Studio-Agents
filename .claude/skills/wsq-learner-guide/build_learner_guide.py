@@ -24,7 +24,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "6.2-S1"
+VERSION = "7.0"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -32,7 +32,7 @@ VERSIONS = [
     ["1.0", "24 Jun 2026", "Initial release — full 3-day, 17-lab learner guide.",
      "Course Development Team"],
     ["2.0", "2 Jul 2026", "WSQ revision — new course title, labs updated to the current "
-     "Copilot Studio / Power Automate UI, Course Sandbox environment, WSQ cover page.",
+     "Copilot Studio / Power Automate UI, dedicated course environment, WSQ cover page.",
      "Course Development Team"],
     ["3.0", "3 Jul 2026", "Course restructured from 3 days to 2 days — Day 1: Power Automate "
      "(Labs 0-5), Day 2: Copilot Studio agents (Labs 6-11) ending with the WSQ assessment. "
@@ -103,6 +103,15 @@ VERSIONS = [
      "replaced the supplementary Lab 11 activity with the published Forms-based "
      "Procurement Request approval and outcome-notification workflow.",
      "Course Development Team"],
+    ["7.0", "2 Aug 2026", "Rebuilt around the canonical Lab 0-10 sequence and five new "
+     "concept modules (business process automation and Power Automate; control flow and "
+     "human in the loop; Copilot Studio agents; agent flows, HTTP and the boundary of "
+     "agency; retrieval augmented generation). Lab 0 now creates a Copilot Studio Training "
+     "Developer environment with Copilot Credits. Labs cover trigger and actions, Excel "
+     "logging, leave approval, four Copilot Studio agents, agent invocation and grounding, "
+     "three HTTP labs including a blocking human review gate, and RAG built twice - with "
+     "built-in knowledge and with Pinecone.",
+     "Course Development Team"],
 ]
 
 # ---- neutral (un-branded) cover + footer: this is client training, no Tertiary branding ----
@@ -138,34 +147,44 @@ def add_footer_neutral(doc, title):
 
 # ---- course structure: ordered (day-heading, [files]) ----
 DAYS = [
-    ("Day 1 — Foundations & Power Automate", [
-        "labs/Day 1/Module 1 - Workflow Automation Concepts.md",
-        "labs/Day 1/Module 2 - Introduction to Power Automate.md",
-        "labs/Day 1/Lab 0 - Environment Setup/index.md",
-        "labs/Day 1/Lab 1 - Forms Email Confirmation/index.md",
-        "labs/Day 1/Lab 2 - Forms Enquiry Logging/index.md",
-        "labs/Day 1/Lab 3 - Event Registration Branching/index.md",
-        "labs/Day 1/Lab 4 - Leave Approval/index.md",
-        "labs/Day 1/Module 3 - Business Agents Concepts.md",
-        "labs/Day 1/Lab 5 - IT Support Agent/index.md",
-        "labs/Day 1/Lab 6 - HR Support Agent/index.md",
-        "labs/Day 1/Lab 7 - Support Request Routing/index.md",
+    ("Day 1 — Workflows, then Agents", [
+        "labs/Module 1 - Business Process Automation and Power Automate.md",
+        "labs/Lab 0 - Environment Setup/index.md",
+        "labs/Lab 1 - Trigger and Actions/index.md",
+        "labs/Lab 2 - Log to Excel/index.md",
+        "labs/Module 2 - Control Flow and Human in the Loop.md",
+        "labs/Lab 3 - Leave Application Approval/index.md",
+        "labs/Module 3 - Copilot Studio Agents.md",
+        "labs/Lab 4 - Agents /README.md",
     ]),
-    ("Day 2 — HTTP, Webhooks and Agent Websites", [
-        "labs/Day 2/Module 4 - HTTP Requests and Webhooks.md",
-        "labs/Day 2/Lab 8 - Website HTTP Enquiry/index.md",
-        "labs/Day 2/Lab 9 - Finance Agent Web Chat/index.md",
-        "labs/Day 2/Lab 10 - AI Trading Advisor Website/index.md",
-        "labs/Day 2/Lab 11 - Procurement Request Approval/index.md",
+    ("Day 2 — Agent Flows, Human Review and RAG", [
+        "labs/Lab 5 - Invoke Agents/index.md",
+        "labs/Module 4 - Agent Flows, HTTP and the Boundary of Agency.md",
+        "labs/Lab 6 - HTTP and Application Approval Agent/README.md",
+        "labs/Lab 7 - HTTP and Chatbot/README.md",
+        "labs/Lab 8 - HTTP and Human Review/README.md",
+        "labs/Module 5 - Retrieval Augmented Generation.md",
+        "labs/Lab 9 - RAG with Knowledge Base/README.md",
+        "labs/Lab 10 - RAG with Pinecone/README.md",
     ]),
 ]
+
 
 # ============================================================================
 # Markdown -> generic blocks
 # ============================================================================
 LINK = re.compile(r"\[([^\]]+)\]\([^)]+\)")
+# Lab markdown carries raw <a href="..." target="_blank">text</a> for new-tab links.
+# Word has no equivalent, and the raw tag would print literally — keep the text only.
+_ANCHOR_RE = re.compile(r'<a\s+[^>]*href="([^"]+)"[^>]*>(.*?)</a>', re.I | re.S)
+_TAG_RE = re.compile(r"</?(?:a|span|div|br)\b[^>]*>", re.I)
+
+
+def strip_html(t):
+    t = _ANCHOR_RE.sub(lambda m: m.group(2).strip() or m.group(1), t)
+    return _TAG_RE.sub("", t)
 def clean(t):
-    return LINK.sub(r"\1", t).rstrip()
+    return LINK.sub(r"\1", strip_html(t)).rstrip()
 
 def link_copilot_studio(t):
     return t.replace(
@@ -219,6 +238,11 @@ def md_to_blocks(text, source_path):
             buf = []
             while i < n and lines[i].strip().startswith(">"):
                 buf.append(re.sub(r"^\s*>\s?", "", lines[i]).rstrip()); i += 1
+            # A callout often opens with its own "### Heading" line and may carry a
+            # fenced code sample. Word has no nested heading or fence inside a Note
+            # box, so drop the markers and keep the words.
+            buf = [re.sub(r"^\s*#{1,6}\s*", "", x) for x in buf]
+            buf = [x for x in buf if not x.strip().startswith("```")]
             content = clean(" ".join(x for x in buf if x.strip()))
             if content: blocks.append(("note", content))
             continue
@@ -285,7 +309,10 @@ B = []
 def h2(t): B.append(("h2", t))
 def h3(t): B.append(("h3", t))
 def p(t):  B.append(("p", t))
-def note(t): B.append(("note", t))
+def note(t):
+    # A blockquote may contain its own "### Heading" line; Word has no nested
+    # heading inside a callout, so print the words without the hash markers.
+    B.append(("note", re.sub(r"(?m)^\s*#{1,6}\s*", "", t)))
 def rule(): B.append(("rule",))
 
 # Title + intro
@@ -298,9 +325,11 @@ p("Work through the labs **in order**: each one builds on the skills of the lab 
   "**Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The "
   "**Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.")
 note("Course flow at a glance — Day 1: Forms-driven email, Excel, branching and approval "
-     "flows, followed by IT and HR agents and form-to-agent routing (Labs 1-7). Day 2: "
-     "HTTP requests, webhooks, a Finance Agent web chat and the multi-timeframe trading "
-     "advisor website (Labs 8-10), then the WSQ assessment (4:00-6:00 PM).")
+     "flows - trigger and actions, Excel logging and a leave approval that pauses for a "
+     "manager - then Copilot Studio agents and what they are made of (Labs 0-4). Day 2: "
+     "grounding and publishing an agent, three HTTP labs including a blocking human review "
+     "gate, and RAG built twice - with built-in knowledge and with Pinecone (Labs 5-10), "
+     "then the WSQ assessment (4:00-6:00 PM).")
 rule()
 
 # Common errors reference (mirrors the deck's quick-fix slide)
@@ -318,7 +347,7 @@ B.append(("table", [
     ["An unwanted ‘For each’ wraps your action", "You inserted a list/array value into a single-value field",
      "Use single-value fields (Outcome, trigger inputs); delete the For each and re-add a plain action"],
     ["Agent can’t see its flow", "Agent and flow are in different environments",
-     "Set both Copilot Studio and Power Automate to the same environment (Course Sandbox)"],
+     "Set both Copilot Studio and Power Automate to the same environment (Copilot Studio Training)"],
 ]))
 rule()
 
@@ -435,22 +464,26 @@ def _runs(par, text):
                 if index < len(segments) - 1:
                     _add_hyperlink(par, "Open Copilot Studio", "https://copilotstudio.microsoft.com")
 
+def _toc_field(doc):
+    p = doc.add_paragraph()
+    prodoc._field(p, 'TOC \\o "1-3" \\h \\z \\u', default="")
+
+
 def add_static_toc(doc):
+    # A real Word TOC field so the contents update and hyperlink when opened in
+    # Word, followed by a readable outline for viewers that do not evaluate
+    # fields (LibreOffice headless, and therefore the PDF we ship).
+    _toc_field(doc)
+
     p = doc.add_paragraph()
     p.paragraph_format.page_break_before = True
     r = p.add_run("TABLE OF CONTENTS"); r.bold = True; r.font.size = Pt(12); r.font.color.rgb = DARK
-    entries = [
-        "Day 1 — Foundations & Power Automate",
-        "Module 1 — Workflow Automation Concepts",
-        "Module 2 — Power Automate Cloud Flows",
-        "Lab 0 — Environment Setup",
-        "Labs 1–4 — Forms, Excel, Branching and Leave Approval",
-        "Module 3 — Copilot Studio Agent Building Blocks",
-        "Labs 5–7 — IT Agent, HR Agent and Support Routing",
-        "Day 2 — HTTP, Webhooks and Agent Websites",
-        "Module 4 — HTTP Requests and Webhooks",
-        "Labs 8–10 — Website Enquiry, Finance Chat and Trading Advisor",
-    ]
+    entries = []
+    for day_name, files in DAYS:
+        entries.append(day_name)
+        for rel in files:
+            stem = os.path.basename(os.path.dirname(rel)) if os.path.basename(rel) in ("index.md", "README.md") else os.path.basename(rel)[:-3]
+            entries.append("    " + stem)
     for entry in entries:
         doc.add_paragraph(entry, style="List Bullet")
     doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)

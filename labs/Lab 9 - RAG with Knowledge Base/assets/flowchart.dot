@@ -1,0 +1,17 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.5", ranksep="0.7",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=13,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      q [label="Visitor question", fillcolor="#EAF2FF"];
+      trig [label="When an HTTP request\nis received"];
+      ag [label="Agent\nSharePoint knowledge source\ngeneral knowledge OFF", fillcolor="#F1EAFE"];
+      resp [label="Grounded answer\nor \"we don't run that\"", fillcolor="#E8F7EE"];
+      docs [label="20 brochures\nin SharePoint", fillcolor="#FFF4E5"];
+      q -> trig -> ag -> resp;
+      docs -> ag [label="retrieved"];
+}

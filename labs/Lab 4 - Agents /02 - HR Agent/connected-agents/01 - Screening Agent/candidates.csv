@@ -1,0 +1,12 @@
+CandidateRef,RoleApplied,YearsExperience,HighestQualification,GraduationYear,PERegistered,RelevantSector,SoftwareNamed,NoticePeriodWeeks,ApplicationComplete,Notes
+C-101,Site Engineer,6,BEng Civil Engineering,2019,No,Building construction,AutoCAD; Civil 3D,4,Yes,Two projects listed with dates and values
+C-102,Site Engineer,9,BEng Civil Engineering,2015,,Infrastructure,AutoCAD; Revit,8,Yes,PE field left blank on the form
+C-103,Site Engineer,2,Diploma Civil Engineering,2023,No,Building construction,AutoCAD,2,Yes,Below the experience criterion
+C-104,Site Engineer,14,MEng Structural Engineering,2008,Yes,Infrastructure; marine,AutoCAD; Revit; Tekla,12,Yes,Longest experience of the pool
+C-105,Site Engineer,5,BEng Civil Engineering,2020,No,Residential fit-out,AutoCAD,4,No,No project dates given; employment history incomplete
+C-106,Site Engineer,7,BEng Mechanical Engineering,2017,No,Building services,AutoCAD; Navisworks,6,Yes,Degree is Mechanical not Civil
+C-107,Site Engineer,4,BEng Civil Engineering,2018,No,Building construction,AutoCAD; Civil 3D,4,Yes,Two-year gap between 2021 and 2023 with no explanation given
+C-201,Procurement Executive,3,Diploma Business Studies,2022,,Manufacturing,SAP Ariba,4,Yes,Named two vendor-management systems
+C-202,Procurement Executive,8,BBA Supply Chain,2016,,Engineering services,SAP Ariba; Coupa,8,Yes,Managed a panel of 40 vendors
+C-203,Procurement Executive,1,BBA Marketing,2025,,Retail,None named,2,Yes,Below the experience criterion; sector unrelated
+C-204,Procurement Executive,5,BBA Supply Chain,2019,,Construction,Coupa,6,No,Referee details missing

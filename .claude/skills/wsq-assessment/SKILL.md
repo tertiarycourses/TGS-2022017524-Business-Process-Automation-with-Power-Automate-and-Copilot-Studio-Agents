@@ -12,7 +12,7 @@ Single-source generator: `.claude/skills/wsq-assessment/build_assessment_course.
 ## Hard rules (do not break)
 - **NO multiple choice — every question is OPEN-ENDED.** The WA uses open-ended short-answer questions with boxed answer areas; the PP uses build tasks with screenshot-evidence boxes.
 - **Question counts are fixed: WA = 6 questions (K1–K6), PP = 3 tasks (A1–A7).** Revisions keep these counts.
-- **WA = KNOWLEDGE** drawn from the concept modules and slides. Sources: `labs/Day 1/Module 1`, `Module 2`, `Module 3`, and `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v4.pptx` (86 slides). Each answer-key item cites its module/slides.
+- **WA = KNOWLEDGE** drawn from the concept modules and slides. Sources: `labs/Module 1`, `Module 2`, `Module 3`, and `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v4.pptx` (86 slides). Each answer-key item cites its module/slides.
 - **PP = PRACTICAL.** One coherent **ACME Pte Ltd** scenario; the **model answers are the lab build steps** (cite the labs in `labs/`). Tasks: 1 = Power Automate flow (Excel log + approval + condition), 2 = Copilot Studio agent (topic + Ask a question + variables), 3 = agent + flow integration ("When an agent calls the flow" / "Respond to the agent").
 - Both instruments carry the WSQ house **cover page** (org + UEN + title + TGS Ref No + Conducted by) — cover page only, no version-control record.
 - Timings match the Lesson Plan: Day 2, 4:00–6:00pm — WA 1 hr, PP 1 hr, open book.

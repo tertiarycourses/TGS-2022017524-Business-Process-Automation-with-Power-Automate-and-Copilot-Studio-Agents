@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = (
     ROOT
-    / "labs/Day 2/Lab 11 - Travel Expense Agent and Agent Flow"
+    / "labs/Lab 11 - Travel Expense Agent and Agent Flow"
     / "Lab11-Check-Travel-Expense-Agent-Flow-Solution.zip"
 )
 FLOW_ID = "a6959ce7-6317-51f5-a776-a5d4a76f3411"

@@ -754,7 +754,7 @@ def lab_specs() -> list[dict]:
     return [
         {
             "id": "lab_1",
-            "folder": "Day 1/Lab 1 - Forms Email Confirmation",
+            "folder": "Lab 1 - Forms Email Confirmation",
             "filename": "Lab1-Form-to-Email-Confirmation-NEW.zip",
             "description": "Forms response, response details and user confirmation email.",
             "connectors": ["shared_microsoftforms", "shared_office365"],
@@ -762,7 +762,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_2",
-            "folder": "Day 1/Lab 2 - Forms Enquiry Logging",
+            "folder": "Lab 2 - Forms Enquiry Logging",
             "filename": "Lab2-Log-Enquiry-and-Send-Email-NEW.zip",
             "description": "Forms response, Enquiry Log.xlsx row and confirmation email.",
             "connectors": [
@@ -774,7 +774,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_3",
-            "folder": "Day 1/Lab 3 - Event Registration Branching",
+            "folder": "Lab 3 - Event Registration Branching",
             "filename": "Lab3-Event-Registration-Branching-NEW.zip",
             "description": "Forms response, Yes/No branch, Event Log.xlsx and email.",
             "connectors": [
@@ -786,7 +786,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_4",
-            "folder": "Day 1/Lab 4 - Leave Approval",
+            "folder": "Lab 4 - Leave Approval",
             "filename": "Lab4-Leave-Application-Approval-NEW.zip",
             "description": "Leave form, manager approval and outcome emails.",
             "connectors": [
@@ -798,7 +798,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_7",
-            "folder": "Day 1/Lab 7 - Support Request Routing",
+            "folder": "Lab 7 - Support Request Routing",
             "filename": "Lab7-Support-Request-Routing-NEW.zip",
             "description": "Forms response routed to IT or HR agent, then emailed.",
             "connectors": [
@@ -810,7 +810,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_8",
-            "folder": "Day 2/Lab 8 - Website HTTP Enquiry",
+            "folder": "Lab 8 - Website HTTP Enquiry",
             "filename": "Lab8-Website-HTTP-Enquiry-NEW.zip",
             "description": "Website HTTP request, admin email and JSON response.",
             "connectors": ["shared_office365"],
@@ -818,7 +818,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_9",
-            "folder": "Day 2/Lab 9 - Finance Agent Web Chat",
+            "folder": "Lab 9 - Finance Agent Web Chat",
             "filename": "Lab9-Finance-Agent-Web-Chat-NEW.zip",
             "description": "Website prompt, Finance agent and JSON response.",
             "connectors": ["shared_microsoftcopilotstudio"],
@@ -826,7 +826,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_10",
-            "folder": "Day 2/Lab 10 - AI Trading Advisor Website",
+            "folder": "Lab 10 - AI Trading Advisor Website",
             "filename": "Lab10-AI-Trading-Advisor-Website-NEW.zip",
             "description": "Multi-timeframe data, news, Finance Advisor agent and JSON.",
             "connectors": ["shared_microsoftcopilotstudio"],
@@ -834,7 +834,7 @@ def lab_specs() -> list[dict]:
         },
         {
             "id": "lab_11",
-            "folder": "Day 2/Lab 11 - Procurement Request Approval",
+            "folder": "Lab 11 - Procurement Request Approval",
             "filename": "Lab11-Procurement-Request-Approval-NEW.zip",
             "description": (
                 "Procurement form, human approval and outcome notification emails."

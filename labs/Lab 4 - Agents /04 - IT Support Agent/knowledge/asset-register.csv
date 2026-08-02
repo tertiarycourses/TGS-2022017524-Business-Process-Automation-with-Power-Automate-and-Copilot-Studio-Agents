@@ -1,0 +1,16 @@
+AssetTag,DeviceType,Model,PurchaseDate,WarrantyExpiry,WarrantyStatus,AssignedTo,Department,Location,Status
+KR-LT-0142,Laptop,Dell Latitude 5540,2022-03-15,2025-03-15,Expired,wei.ling.ho@keppelridge.example,Engineering,Office - Level 3,In use
+KR-LT-0156,Laptop,Dell Latitude 5540,2023-01-20,2026-01-20,Expired,daniel.lim@keppelridge.example,Operations,Office - Level 2,In use
+KR-LT-0171,Laptop,Dell Precision 5680,2024-06-11,2027-06-11,Active,priya.menon@keppelridge.example,IT,Office - Level 4,In use
+KR-LT-0188,Laptop,Dell Latitude 5550,2025-02-03,2028-02-03,Active,aisyah.rahman@keppelridge.example,Operations,Office - Level 2,In use
+KR-LT-0193,Laptop,Dell Latitude 5550,2025-09-18,2028-09-18,Active,farah.ismail@keppelridge.example,IT,Office - Level 4,In use
+KR-LT-0201,Laptop,Dell Latitude 5550,2026-06-02,2029-06-02,Active,,Engineering,Store,Available
+KR-RG-0044,Rugged laptop,Dell Latitude 7330 Rugged,2023-08-22,2026-08-22,Active,marcus.tan@keppelridge.example,Facilities,Site - Tuas,In use
+KR-RG-0051,Rugged laptop,Dell Latitude 7330 Rugged,2024-11-05,2027-11-05,Active,nurul.hidayah@keppelridge.example,Facilities,Site - Jurong,In use
+KR-WS-0012,Workstation,Dell Precision 7960,2021-11-30,2024-11-30,Expired,alvin.goh@keppelridge.example,Engineering,Office - Level 3,In use
+KR-DK-0233,Docking station,Dell WD19,2022-05-14,2025-05-14,Expired,wei.ling.ho@keppelridge.example,Engineering,Office - Level 3,In use
+KR-DK-0247,Docking station,Dell WD22TB4,2024-09-09,2027-09-09,Active,priya.menon@keppelridge.example,IT,Office - Level 4,In use
+KR-MN-0318,Monitor,Dell U2723QE,2023-04-18,2026-04-18,Expired,daniel.lim@keppelridge.example,Operations,Office - Level 2,In use
+KR-PH-0102,Mobile phone,Samsung Galaxy A55,2025-03-27,2027-03-27,Active,marcus.tan@keppelridge.example,Facilities,Site - Tuas,In use
+KR-PR-0007,Printer,HP LaserJet E52645,2022-09-01,2025-09-01,Expired,,Shared,Office - Level 2,In use
+KR-LT-0119,Laptop,Dell Latitude 5530,2021-07-12,2024-07-12,Expired,,Operations,Store,Beyond economic repair

@@ -132,7 +132,7 @@ travel_policy = build("Travel Expense Policy.pdf", "Travel Expense Policy", "Fic
 ])
 travel_policy_asset = (
     ROOT
-    / "labs/Day 2/Lab 11 - Travel Expense Agent and Agent Flow/assets"
+    / "labs/Lab 11 - Travel Expense Agent and Agent Flow/assets"
     / "Travel Expense Policy.pdf"
 )
 travel_policy_asset.parent.mkdir(parents=True, exist_ok=True)
