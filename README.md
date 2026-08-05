@@ -2,9 +2,9 @@
 
 [![Duration](https://img.shields.io/badge/Duration-2%20Days-orange)]()
 [![Labs](https://img.shields.io/badge/Labs-11%20Hands--On-purple)]()
-[![Version](https://img.shields.io/badge/Courseware-7.0-blue)]()
+[![Version](https://img.shields.io/badge/Courseware-7.1-blue)]()
 
-This repository contains the Version 7.0 materials for the two-day WSQ course
+This repository contains the Version 7.1 materials for the two-day WSQ course
 **Business Process Automation with Power Automate and Copilot Studio Agents**
 (`TGS-2022017524`).
 
@@ -94,7 +94,7 @@ detailed build parts, test evidence and troubleshooting.
 | Learner Guide (Markdown) | [LEARNER-GUIDE.md](LEARNER-GUIDE.md) |
 | Learner Guide (Word/PDF) | `courseware/LG-Business Process Automation with Power Automate and Copilot Studio Agents.docx/.pdf` |
 | Lesson Plan (Word/PDF) | `courseware/LP-Business Process Automation with Power Automate and Copilot Studio Agents.docx/.pdf` |
-| Facilitator deck | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx/.pdf` |
+| Facilitator deck | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.1.pptx/.pdf` |
 
 `courseware/alignment_manifest.json` and `courseware/slide_map.json` are the single source of
 truth that keeps the deck, Lesson Plan, Learner Guide and labs aligned.
@@ -103,7 +103,7 @@ Rebuild everything:
 
 ```bash
 python3 scripts/build_v70_deck.py                                # facilitator deck
-python3 scripts/patch_v70_new_copilot_studio.py                  # new-Copilot-Studio slides + training accounts
+python3 scripts/patch_v70_new_copilot_studio.py                  # new-Copilot-Studio slides + training accounts -> v7.1
 python3 scripts/check_deck_layout.py                             # layout guard
 python3 .claude/skills/wsq-lesson-plan/build_lesson_plan.py      # Lesson Plan
 python3 .claude/skills/wsq-learner-guide/build_learner_guide.py  # Learner Guide

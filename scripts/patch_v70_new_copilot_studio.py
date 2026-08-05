@@ -32,7 +32,8 @@ from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
 CW = ROOT / "courseware"
-DECK = CW / "Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx"
+DECK_IN = CW / "Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx"
+DECK = CW / "Business Process Automation with Power Automate and Copilot Studio Agents-v7.1.pptx"
 ASSETS = Path(sys.argv[1]) if len(sys.argv) > 1 else CW / "reference"
 
 BLUE = RGBColor(0x1F, 0x6F, 0xEB)
@@ -54,7 +55,7 @@ FOOTER_TEXT = (
 
 BOTTOM_LIMIT = 6.88
 
-prs = Presentation(DECK)
+prs = Presentation(DECK_IN)
 SW, SH = prs.slide_width, prs.slide_height
 
 # ---------------------------------------------------------------- primitives
@@ -499,6 +500,14 @@ for s in prs.slides:
                     r.text = ("The new workflow designer  ·  the Agent node inside a flow  ·  HTTP request and "
                               "response  ·  structured output  ·  the human review gate")
 
+# --- 3b. bump the cover version (content changed materially) ---------------
+for sh in prs.slides[0].shapes:
+    if sh.has_text_frame:
+        for p in sh.text_frame.paragraphs:
+            for r in p.runs:
+                if "Version 7.0" in r.text:
+                    r.text = r.text.replace("Version 7.0 (2 Aug 2026)", "Version 7.1 (6 Aug 2026)")
+
 # --- 4. renumber every footer page number ----------------------------------
 for no, s in enumerate(prs.slides, 1):
     for sh in s.shapes:
@@ -540,6 +549,8 @@ with zipfile.ZipFile(DECK) as zin:
             if last[info.filename] == idx:
                 zout.writestr(info, zin.read(info))
 shutil.move(tmp, DECK)
+if DECK_IN.exists():
+    DECK_IN.unlink()
 
 print(f"Saved {DECK.name} with {len(prs.slides)} slides")
 for i, s in enumerate(prs.slides, 1):

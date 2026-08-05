@@ -45,3 +45,8 @@ __pycache__/
 tmp/
 output/
 outputs/
+
+# Local-only history: superseded deck carrying third-party reference screenshots,
+# and the top-level archive of legacy assessment-plan documents.
+courseware/archive/*-with-reference-slides.pptx
+/archive/

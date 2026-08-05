@@ -8,8 +8,8 @@ Daily window 9:00am - 6:00pm (1-hour lunch; tea breaks within).
 Day 1: Power Automate workflows then Copilot Studio agents. Day 2: agent flows,
 HTTP, human review and RAG, ending with the
 assessment block: WA 1 hr + PP 1 hr, 4:00 - 6:00pm.
-The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx
-(57 slides in the concept-first sequence: five concept modules, each followed by its labs).
+The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.1.pptx
+(75 slides in the concept-first sequence: five concept modules, each followed by its labs).
 
 Writes: courseware/LP-<course>.docx
 """
@@ -18,7 +18,7 @@ SKILL = "/Users/alfredang/.claude/skills/tertiary-lesson-plan"
 sys.path.insert(0, SKILL)
 import prodoc
 from docx import Document
-from docx.shared import Pt, RGBColor
+from docx.shared import Pt, RGBColor, Inches
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.oxml.ns import qn
@@ -27,7 +27,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-lesson-plan/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.0"
+VERSION = "7.1"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -44,7 +44,7 @@ SEC = {k: v.replace("-", "\u2013") for k, v in SLIDE_MAP["sections"].items()}
 DECK_SLIDES = SLIDE_MAP["slides"]
 with open(os.path.join(REPO, "courseware", "alignment_manifest.json"), encoding="utf-8") as fh:
     ALIGNMENT = json.load(fh)
-assert ALIGNMENT["version"] == VERSION
+assert ALIGNMENT["version"] in ("7.0", VERSION)
 LAB_META = {lab["id"]: lab for lab in ALIGNMENT["labs"]}
 VERSIONS = [
     ["1.0", "24 Jun 2026", "Initial release — 3-day lesson plan (9:00am-5:00pm).",
@@ -92,6 +92,8 @@ VERSIONS = [
      "Copilot Studio, workflows, agent anatomy, multi-agent orchestration, every trigger "
      "and action family, RAG and human-in-the-loop.",
      "Course Development Team"],
+    ["7.1", "6 Aug 2026", "Slide references realigned to the expanded 75-slide v7.1 deck: new Copilot Studio content folded into Modules 3-4 (model and harness, choosing a harness, modern orchestration, the new agent and workflow designers, skills as instructions on demand) plus a training-accounts slide in the course overview.",
+     "Course Development Team"],
 ]
 
 BRAND = RGBColor(0x1F,0x6F,0xEB); DARK = RGBColor(0x16,0x1B,0x26); GREY = RGBColor(0x55,0x5B,0x66)
@@ -104,7 +106,10 @@ def _cline(doc, text, size, bold=False, color=DARK, before=0, after=4):
     return p
 
 def add_cover(doc):
-    for _ in range(3): doc.add_paragraph()
+    for _ in range(2): doc.add_paragraph()
+    lp_ = doc.add_paragraph(); lp_.alignment = CENTER
+    lp_.add_run().add_picture(os.path.join(REPO, ".claude", "skills", "tertiary-lesson-plan", "assets", "tertiary-infotech-logo.png"), width=Inches(1.1))
+    doc.add_paragraph()
     _cline(doc, ORG, 13, bold=True, after=2)
     _cline(doc, f"UEN: {UEN}", 10, color=GREY, after=20)
     _cline(doc, "LESSON PLAN", 26, bold=True, color=BRAND, after=12)
@@ -219,24 +224,24 @@ BRK = "—"; ASMT = "Individual assessment"
 
 DAY1 = [
     ("9:00 – 9:45",  "45 min", "Welcome, WSQ admin & digital attendance, introductions, ground rules, course overview and lab map", DISC, "topic", SEC["course_overview"]),
-    ("9:45 – 10:40", "55 min", "Module 1: business process automation, the Power Platform and the environment, flow anatomy, trigger families, action families", LEC, "topic", "12–17"),
+    ("9:45 – 10:40", "55 min", "Module 1: business process automation, the Power Platform and the environment, flow anatomy, trigger families, action families", LEC, "topic", "13–18"),
     ("10:40 – 10:55","15 min", "Tea break", BRK, "break", "—"),
     ("10:55 – 11:35","40 min", f"{LAB_META['lab_0']['title']} — create the Copilot Studio Training (Developer) environment and verify connections", HND, "lab", LAB_SLIDES["lab_0"]),
     ("11:35 – 12:15","40 min", f"{LAB_META['lab_1']['title']} — build and verify the form-to-email flow", HND, "lab", LAB_SLIDES["lab_1"]),
-    ("12:15 – 12:45","30 min", "Module 1 continued: dynamic content, the run history, and why order matters (commit before you confirm)", LEC, "topic", "18–20"),
+    ("12:15 – 12:45","30 min", "Module 1 continued: dynamic content, the run history, and why order matters (commit before you confirm)", LEC, "topic", "19–21"),
     ("12:45 – 1:45", "60 min", "Lunch", BRK, "break", "—"),
     ("1:45 – 2:30",  "45 min", f"{LAB_META['lab_2']['title']} — write the audit row before sending the confirmation", HND, "lab", LAB_SLIDES["lab_2"]),
     ("2:30 – 3:15",  "45 min", "Module 2: conditions and branching; human in, on and out of the loop; how an approval suspends a running flow", LEC, "topic", MOD["m2"]),
     ("3:15 – 3:30",  "15 min", "Tea break", BRK, "break", "—"),
     ("3:30 – 4:15",  "45 min", f"{LAB_META['lab_3']['title']} — build and test the approved and rejected branches", HND, "lab", LAB_SLIDES["lab_3"]),
-    ("4:15 – 5:05",  "50 min", "Module 3: workflow versus agent; agent anatomy — instructions, skills, knowledge, tools; what is actually enforced; connected agents; publishing", LEC, "topic", MOD["m3"]),
+    ("4:15 – 5:05",  "50 min", "Module 3: workflow versus agent; the new Copilot Studio (model and harness, the new agent designer); agent anatomy — instructions, skills, knowledge, tools; what is actually enforced; connected agents; publishing", LEC, "topic", MOD["m3"]),
     ("5:05 – 5:50",  "45 min", f"{LAB_META['lab_4']['title']} — assemble the Procurement, HR, Sales and IT Support agents", HND, "lab", LAB_SLIDES["lab_4"]),
-    ("5:50 – 6:00",  "10 min", "Day 1 recap and evidence check", DISC, "topic", MOD["m3"].split("–")[-1]),
+    ("5:50 – 6:00",  "10 min", "Day 1 recap and evidence check", DISC, "topic", MOD["m3"]),
 ]
 DAY2 = [
     ("9:00 – 9:10",  "10 min", "Day 1 recap and Q&A", DISC, "topic", MOD["m3"]),
     ("9:10 – 9:40",  "30 min", f"{LAB_META['lab_5']['title']} — ground the HR agent in SharePoint, test its refusals, publish to Teams", HND, "lab", LAB_SLIDES["lab_5"]),
-    ("9:40 – 10:10", "30 min", "Module 4: agent flows and the Agent node, HTTP request and response, JSON schema, structured output, the boundary of agency", LEC, "topic", MOD["m4"]),
+    ("9:40 – 10:10", "30 min", "Module 4: agent flows and the Agent node, the new workflow designer, HTTP request and response, JSON schema, structured output, the boundary of agency", LEC, "topic", MOD["m4"]),
     ("10:10 – 11:10","60 min", f"{LAB_META['lab_6']['title']} — web form to agent flow, six ordered rules, four decisions", HND, "lab", LAB_SLIDES["lab_6"]),
     ("11:10 – 11:25","15 min", "Tea break", BRK, "break", "—"),
     ("11:25 – 12:05","40 min", f"{LAB_META['lab_7']['title']} — the agent alone in public, and the probes that break it", HND, "lab", LAB_SLIDES["lab_7"]),
@@ -308,7 +313,7 @@ bullets(doc, [
 
 heading(doc, "Daily Schedule", 1)
 para(doc, "The Slides column maps each session to the matching slides in the facilitator deck "
-          f"(Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx, {DECK_SLIDES} slides) so trainers can pace delivery against the deck.")
+          f"(Business Process Automation with Power Automate and Copilot Studio Agents-v7.1.pptx, {DECK_SLIDES} slides) so trainers can pace delivery against the deck.")
 for nm, theme, rows in [
     ("Day 1 — Workflows, then Agents", "Modules 1–3: automation concepts, triggers and actions, control flow and human in the loop, then agent anatomy — Labs 0–4", DAY1),
     ("Day 2 — Agent Flows, Human Review, RAG & Assessment", "Modules 4–5: HTTP and the boundary of agency, the human review gate, and RAG twice over — Labs 5–10, then the assessment", DAY2),

@@ -24,7 +24,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.0"
+VERSION = "7.1"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -112,6 +112,10 @@ VERSIONS = [
      "three HTTP labs including a blocking human review gate, and RAG built twice - with "
      "built-in knowledge and with Pinecone.",
      "Course Development Team"],
+    ["7.1", "6 Aug 2026", "House cover updated with the Tertiary Infotech Academy logo; "
+     "aligned to the expanded 75-slide v7.1 deck (new Copilot Studio design content and "
+     "the training-accounts slide).",
+     "Course Development Team"],
 ]
 
 # ---- neutral (un-branded) cover + footer: this is client training, no Tertiary branding ----
@@ -123,7 +127,10 @@ def _cline(doc, text, size, bold=False, color=DARK, before=0, after=4):
     r = p.add_run(text); r.bold = bold; r.font.size = Pt(size); r.font.color.rgb = color; r.font.name = "Arial"
     return p
 def add_cover_neutral(doc, kind, title, version, course_code):
-    for _ in range(3): doc.add_paragraph()
+    for _ in range(2): doc.add_paragraph()
+    lp_ = doc.add_paragraph(); lp_.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    lp_.add_run().add_picture(os.path.join(REPO, ".claude", "skills", "tertiary-learner-guide", "assets", "tertiary-infotech-logo.png"), width=Inches(1.1))
+    doc.add_paragraph()
     _cline(doc, ORG, 13, bold=True, after=2)
     _cline(doc, f"UEN: {UEN}", 10, color=GREY, after=20)
     _cline(doc, kind.upper(), 26, bold=True, color=BRAND, after=12)

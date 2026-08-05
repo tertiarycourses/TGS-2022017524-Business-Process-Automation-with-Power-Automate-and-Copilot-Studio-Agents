@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 7.0**
+**Course Code:** TGS-2022017524  ·  **Version 7.1**
 
 ### Document Version Control Record
 
@@ -28,6 +28,7 @@
 | 6.2 | 26 Jul 2026 | Updated Lab 9 to use the new Copilot Studio HTTP workflow canvas and Agent node. | Course Development Team |
 | 6.2-S1 | 29 Jul 2026 | Retained the AI Trading Advisor as Lab 10 and replaced the supplementary Lab 11 activity with the published Forms-based Procurement Request approval and outcome-notification workflow. | Course Development Team |
 | 7.0 | 2 Aug 2026 | Rebuilt around the canonical Lab 0-10 sequence and five new concept modules (business process automation and Power Automate; control flow and human in the loop; Copilot Studio agents; agent flows, HTTP and the boundary of agency; retrieval augmented generation). Lab 0 now creates a Copilot Studio Training Developer environment with Copilot Credits. Labs cover trigger and actions, Excel logging, leave approval, four Copilot Studio agents, agent invocation and grounding, three HTTP labs including a blocking human review gate, and RAG built twice - with built-in knowledge and with Pinecone. | Course Development Team |
+| 7.1 | 6 Aug 2026 | House cover updated with the Tertiary Infotech Academy logo; aligned to the expanded 75-slide v7.1 deck (new Copilot Studio design content and the training-accounts slide). | Course Development Team |
 
 ## Table of Contents
 
@@ -1067,7 +1068,7 @@ This is the spine of Lab 4, and the most important table in the course.
 | Part | What it is | Enforced? |
 | --- | --- | --- |
 | **Instructions** | Who the agent is, always in force | **No** — probabilistic |
-| **Skill** | A named procedure, uploaded as a package, applied when the topic matches | **No** — the model decides it applies |
+| **Skill** | A named procedure applied when the topic matches | **No** — the model decides it applies |
 | **Knowledge** | Documents the agent may read | **Partly** — it genuinely cannot read what it was not given |
 | **Tool** | A flow that acts outside the conversation | **Yes** — the flow's own logic is enforced |
 | **Connected agent** | A separate agent with its own knowledge and audience | **Yes** — the knowledge boundary is real |
@@ -1227,7 +1228,7 @@ NN - <Agent>/
 
 Every skill in this lab ships as a **skill package** — a `.zip` whose top level contains a `SKILL.md` file. That file carries the skill's `name` and `description` in YAML front matter and its instructions in Markdown:
 
-```markdown
+```
 ---
 name: password-reset-procedure
 description: Use when a colleague cannot sign in, has forgotten their password, is locked
@@ -1241,13 +1242,23 @@ Never ask for a password. Never accept one...
 
 **To add one:** open the agent → **Build** tab → **Skills** → **Add skill** → **Upload a skill**, then drag the `.zip` onto the upload box. Copilot Studio validates the file and adds the skill.
 
-Three things follow, and all three matter:
+Three things follow, and all three are worth naming in class:
 
-- **The `description` is the trigger.** The orchestrator reads it to decide whether the skill is relevant at all. A skill whose description does not match how people actually phrase the request never fires, and its instructions never run — however well written they are. Write it as *"use when someone…"*, not as a summary of the contents.
-- **Everything in the package is read by the model.** That is why the trainer commentary lives in a separate `TEACHING-NOTES.md` that is deliberately excluded from the `.zip`. Explanatory prose inside a skill file is not neutral — it is more instruction text competing for attention.
-- **The same package can go to many agents.** `personal-data-handling.zip` is uploaded to the HR parent *and* all four of its children. That is the argument for packaging over pasting: you can prove all five agents got the same file, and you can replace it in one place.
+- **The `description` is the trigger.** The orchestrator reads it to decide whether the skill is
+
+relevant at all. A skill whose description does not match how people actually phrase the request never fires, and its instructions never run — however well written they are. Write it as *"use when someone…"*, not as a summary of the contents.
+
+- **Everything in the package is read by the model.** That is why the trainer commentary lives in a
+
+separate `TEACHING-NOTES.md` that is deliberately excluded from the `.zip`. Explanatory prose inside a skill file is not neutral — it is more instruction text competing for attention.
+
+- **The same package can go to many agents.** `personal-data-handling.zip` is uploaded to the HR
+
+parent *and* all four of its children. That is the argument for packaging over pasting: you can prove all five agents got the same file, and you can replace it in one place.
 
 A single `SKILL.md` file also uploads on its own; the `.zip` is what lets a skill carry supporting files alongside it. This lab uses packages throughout so the format is consistent.
+
+> **Rebuilding the packages.** Edit the `SKILL.md`, then run `python3 scripts/build_lab4_skill_packages.py` from the repo root. Add `--check` to validate without writing. The script fails the build if a `SKILL.md` is missing, if the front matter has no `name` or `description`, or if a skill's `name` does not match its folder.
 
 ---
 
