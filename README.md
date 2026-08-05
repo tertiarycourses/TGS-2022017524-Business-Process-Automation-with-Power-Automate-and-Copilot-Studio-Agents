@@ -39,11 +39,11 @@ Participants will be able to:
 
 | Module | Covers | Slides |
 |---|---|---|
-| [Module 1 — Business Process Automation and Power Automate](labs/Module%201%20-%20Business%20Process%20Automation%20and%20Power%20Automate.md) | BPA, the Power Platform, the environment, flow anatomy, all four trigger families, all six action families, dynamic content, run history, commit order | 12–20 |
-| [Module 2 — Control Flow and Human in the Loop](labs/Module%202%20-%20Control%20Flow%20and%20Human%20in%20the%20Loop.md) | Conditions and branching; human in / on / out of the loop; how an approval suspends a run | 21–24 |
-| [Module 3 — Copilot Studio Agents](labs/Module%203%20-%20Copilot%20Studio%20Agents.md) | Workflow versus agent; agent anatomy; what is actually enforced; instructions, knowledge, tools; connected agents; publishing | 25–33 |
-| [Module 4 — Agent Flows, HTTP and the Boundary of Agency](labs/Module%204%20-%20Agent%20Flows,%20HTTP%20and%20the%20Boundary%20of%20Agency.md) | Agent flows, HTTP request/response, JSON schema, structured output, the boundary of agency, the human review gate | 34–40 |
-| [Module 5 — Retrieval Augmented Generation](labs/Module%205%20-%20Retrieval%20Augmented%20Generation.md) | Why retrieval; ingestion and retrieval; chunking, embeddings, top_k; built-in versus external; probing for invention | 41–45 |
+| [Module 1 — Business Process Automation and Power Automate](labs/Module%201%20-%20Business%20Process%20Automation%20and%20Power%20Automate.md) | BPA, the Power Platform, the environment, flow anatomy, all four trigger families, all six action families, dynamic content, run history, commit order | 13–24 |
+| [Module 2 — Control Flow and Human in the Loop](labs/Module%202%20-%20Control%20Flow%20and%20Human%20in%20the%20Loop.md) | Conditions and branching; human in / on / out of the loop; how an approval suspends a run | 25–29 |
+| [Module 3 — Copilot Studio Agents](labs/Module%203%20-%20Copilot%20Studio%20Agents.md) | Workflow versus agent; the new Copilot Studio (model + harness, choosing a harness, modern orchestration, the new agent designer); agent anatomy; what is actually enforced; instructions; skills as instructions on demand; knowledge, tools; connected agents; publishing | 30–45 |
+| [Module 4 — Agent Flows, HTTP and the Boundary of Agency](labs/Module%204%20-%20Agent%20Flows,%20HTTP%20and%20the%20Boundary%20of%20Agency.md) | Agent flows, the new workflow designer, HTTP request/response, JSON schema, structured output, the boundary of agency, the human review gate | 46–56 |
+| [Module 5 — Retrieval Augmented Generation](labs/Module%205%20-%20Retrieval%20Augmented%20Generation.md) | Why retrieval; ingestion and retrieval; chunking, embeddings, top_k; built-in versus external; probing for invention | 57–63 |
 
 ### Labs
 
@@ -103,6 +103,7 @@ Rebuild everything:
 
 ```bash
 python3 scripts/build_v70_deck.py                                # facilitator deck
+python3 scripts/patch_v70_new_copilot_studio.py                  # new-Copilot-Studio slides + training accounts
 python3 scripts/check_deck_layout.py                             # layout guard
 python3 .claude/skills/wsq-lesson-plan/build_lesson_plan.py      # Lesson Plan
 python3 .claude/skills/wsq-learner-guide/build_learner_guide.py  # Learner Guide
