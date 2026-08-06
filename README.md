@@ -115,6 +115,7 @@ python3 scripts/patch_v70_new_copilot_studio.py                  # new-Copilot-S
 python3 scripts/patch_v71_personal_accounts.py                   # Microsoft 365 personal accounts slide
 python3 scripts/patch_v72_lab5_rename.py                         # Lab 5 -> Calling Agent from Workflow -> v7.2
 python3 scripts/patch_v73_labs_4b_5b_settings_publish.py         # Labs 4b/5b, Agent Settings, publish channels -> v7.3
+python3 scripts/patch_v73_lab_screenshots.py                     # lab workflow screenshots on the lab slides
 python3 scripts/check_deck_layout.py                             # layout guard
 python3 .claude/skills/wsq-lesson-plan/build_lesson_plan.py      # Lesson Plan
 python3 .claude/skills/wsq-learner-guide/build_learner_guide.py  # Learner Guide

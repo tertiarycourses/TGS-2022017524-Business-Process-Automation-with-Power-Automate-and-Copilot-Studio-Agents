@@ -50,3 +50,8 @@ outputs/
 # and the top-level archive of legacy assessment-plan documents.
 courseware/archive/*-with-reference-slides.pptx
 /archive/
+
+# Course-specific assessment builders — they embed the confidential question
+# papers and model answers. The generic engine (build_assessment.py) stays.
+.claude/skills/wsq-assessment/build_assessment_course.py
+.claude/skills/wsq-assessment/build_wsq_assessment.py
