@@ -18,6 +18,7 @@ agents**, and the reason the split is a governance decision rather than a tidine
 | [`tools/tool-descriptions.md`](tools/tool-descriptions.md) | `LookupLeaveBalance`, `CreateHRCase` |
 | [`knowledge/`](knowledge/) | `HR Policies.pdf`, mock HR policy, benefits summary, staff leave data |
 | [`connected-agents/`](connected-agents/) | The four children, one folder each |
+| [`webchat/`](webchat/) | **Optional extension:** an HR intranet landing page with the agent as a chat widget, via the Microsoft 365 Agents SDK — the signed-in-user story on a web page |
 
 ### The four children
 
@@ -95,3 +96,13 @@ suggest.
 Parent + **Policy and Benefits** only. You still teach the handover, the tool call and the Teams
 deployment. You lose the cross-tree crossing, which is the best discussion in the lab — so if you
 cut, cut Screening and Interview and keep Onboarding.
+
+---
+
+## Optional extension — the agent on a web page
+
+[`webchat/`](webchat/) puts the published HR Agent on a Keppel Ridge intranet landing page as a
+chat widget, using the **Microsoft 365 Agents SDK** Copilot Studio client. The user in the widget
+is the signed-in Entra user — the same identity story as Teams, on a page you own — and the lab's
+closing demonstration is the same question answering differently for two signed-in users.
+30–40 minutes, after the parent is deployed and tested.

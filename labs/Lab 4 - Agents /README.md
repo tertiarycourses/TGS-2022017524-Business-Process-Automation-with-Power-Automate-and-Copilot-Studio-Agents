@@ -26,7 +26,10 @@ at a human review in Teams.
 | 3 | [**Sales Agent**](03%20-%20Sales%20Agent/) | 3 | **Grounding** in 20 real brochures, and refusing to invent |
 | 4 | [**IT Support Agent**](04%20-%20IT%20Support%20Agent/) | 3 | **Skills** as named procedures, and what a skill is *not* |
 
-Plus [**`_deployment/`**](_deployment/) — publishing to Microsoft Teams.
+Plus [**`_deployment/`**](_deployment/) — publishing to Microsoft Teams — and an optional
+extension, [**the HR Agent on a web page**](02%20-%20HR%20Agent/webchat/): an HR landing page with
+the agent as a chat widget via the **Microsoft 365 Agents SDK**, keeping the signed-in Entra
+identity.
 
 Each agent folder has the same five parts:
 
@@ -102,6 +105,7 @@ complete agent flow from scratch, and everything after it reuses that shape.
 | 3 | [Sales](03%20-%20Sales%20Agent/) | 50–60 min | Upload the [20 brochures](03%20-%20Sales%20Agent/knowledge/brochures/) first |
 | 4 | [IT Support](04%20-%20IT%20Support%20Agent/) | 45–55 min | 5 skills, 3 children |
 | — | [Deploy to Teams](_deployment/) | 20–25 min | Then ~5 min per agent |
+| — | [HR Agent on a web page](02%20-%20HR%20Agent/webchat/) | 30–40 min | Optional — chat widget on a landing page via the Agents SDK |
 
 Short on time: Procurement + HR (parent + Policy & Benefits) + deployment covers the whole idea.
 

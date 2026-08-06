@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>People &amp; Culture — Keppel Ridge Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="index.css" />
+  <script src="https://unpkg.com/botframework-webchat@4.18.0/dist/webchat.js"></script>
+  <script src="https://unpkg.com/@azure/msal-browser@4.13.1/lib/msal-browser.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "@microsoft/agents-copilotstudio-client": "https://unpkg.com/@microsoft/agents-copilotstudio-client@1.7.2/dist/src/browser.mjs"
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap header-row">
+      <div class="wordmark">
+        <span class="wordmark-main">Keppel Ridge Engineering</span>
+        <span class="wordmark-sub">People &amp; Culture</span>
+      </div>
+      <nav class="site-nav">
+        <a href="#leave">Leave &amp; benefits</a>
+        <a href="#joiners">New joiners</a>
+        <a href="#recruitment">Recruitment</a>
+        <a href="#handbook">Handbook</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <h1>How can HR help you today</h1>
+      <p>
+        Leave, benefits, claims, onboarding and recruitment — start with the HR Assistant in the
+        corner of this page, or browse the links below. You are signed in with your Keppel Ridge
+        Microsoft account, so the assistant answers for you, not for a generic visitor.
+      </p>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <section class="cards">
+      <a class="card" id="leave" href="#leave">
+        <h2>Leave &amp; benefits</h2>
+        <p>Check your leave balance, submit a leave application, and see what the medical and
+          dental schemes cover.</p>
+        <span class="card-hint">Ask the HR Assistant: “How much annual leave do I have left?”</span>
+      </a>
+      <a class="card" id="joiners" href="#joiners">
+        <h2>New joiners</h2>
+        <p>Day-one checklists, equipment and system access for a starter, and what a manager
+          arranges before the first Monday.</p>
+        <span class="card-hint">Ask: “My new hire starts on the 1st — what do I need to arrange?”</span>
+      </a>
+      <a class="card" id="recruitment" href="#recruitment">
+        <h2>Recruitment</h2>
+        <p>For recruiters and hiring managers — shortlists, interview scheduling and interviewer
+          packs.</p>
+        <span class="card-hint">Ask: “Schedule a first-round interview for the Site Engineer role.”</span>
+      </a>
+      <a class="card" id="handbook" href="#handbook">
+        <h2>Staff handbook</h2>
+        <p>Working hours, flexible-work arrangements, conduct and everything else in HR-HB-2026.</p>
+        <span class="card-hint">Ask: “Can I work from home two days a week?”</span>
+      </a>
+    </section>
+
+    <section class="notice">
+      <h2>Before you ask</h2>
+      <p>
+        The HR Assistant routes your question to the right specialist and can submit a leave
+        application on your behalf. It does not make HR decisions — approvals stay with your
+        manager. Anything sensitive, or anything about another person, goes to
+        <span class="mono">hr@keppelridge.example</span> and a human being.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Keppel Ridge Engineering Pte Ltd — fictional classroom company. This page is a training
+        exercise; no real person or record appears here.</p>
+    </div>
+  </footer>
+
+  <!-- ── HR Assistant chat widget ─────────────────────────────────────── -->
+  <div class="chat-widget">
+    <div class="chat-panel" id="chatPanel" hidden>
+      <div class="chat-header">
+        <div>
+          <div class="chat-title">HR Assistant</div>
+          <div class="chat-subtitle">Keppel Ridge Engineering</div>
+        </div>
+        <button class="chat-close" id="chatClose" aria-label="Close chat">×</button>
+      </div>
+      <div class="chat-body">
+        <div class="chat-status" id="chatStatus">Connecting…</div>
+        <div id="webchat" role="main"></div>
+      </div>
+    </div>
+    <button class="chat-launcher" id="chatLauncher" aria-label="Open the HR Assistant">
+      <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+        <path fill="currentColor" d="M12 3C6.9 3 3 6.5 3 10.8c0 2.4 1.2 4.5 3.2 5.9-.1.9-.5 2.2-1.6 3.3 0 0 2.6-.1 4.6-1.6.9.2 1.8.4 2.8.4 5.1 0 9-3.5 9-7.9S17.1 3 12 3z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

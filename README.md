@@ -74,6 +74,9 @@ Full detail, including the ideas each lab teaches, is in [`labs/README.md`](labs
 - Lab 4 ships a complete build kit for each of its four agents — instructions, skills, tool
   contracts, mock knowledge (vendor register, staff leave, asset register, 20 course brochures)
   and connected-agent definitions — plus a Microsoft Teams deployment guide
+- Optional Lab 4 extension: the HR Agent embedded in a web landing page as a chat widget
+  via the Microsoft 365 Agents SDK (`labs/Lab 4 - Agents /02 - HR Agent/webchat/`),
+  keeping the signed-in Entra identity
 
 > **Import packages are not stored in this repository.** The `.zip` flow packages are
 > rebuildable distribution artifacts and are excluded from GitHub by policy. Learners
