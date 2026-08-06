@@ -37,6 +37,14 @@ import urllib.request
 
 REMOTE = os.environ.get("GDRIVE_REMOTE", "gdrive")
 API = os.environ.get("LMS_TMS_API", "https://lms-tms.tertiaryinfotech.com")
+# Machine auth: the LMS accepts a server-side service key in the x-api-key header
+# (lib/auth/serviceKey.ts in ai-lms-tms). Set LMS_TMS_API_KEY in the shell env —
+# never hardcode it here; this file is pushed to GitHub.
+API_KEY = os.environ.get("LMS_TMS_API_KEY", "")
+
+
+def _lms_headers():
+    return {"x-api-key": API_KEY} if API_KEY else {}
 
 # Drive subfolder -> (canonical name, lowercase hint for fuzzy match)
 FOLDERS = {
@@ -278,10 +286,13 @@ def course_code_from_courseware(repo):
 
 def get_json(url):
     try:
-        with urllib.request.urlopen(url, timeout=60) as r:
+        req = urllib.request.Request(url, headers=_lms_headers() if url.startswith(API) else {})
+        with urllib.request.urlopen(req, timeout=60) as r:
             return json.loads(r.read())
     except urllib.error.HTTPError as e:
-        raise SystemExit(f"GET {url} -> {e.code}: {e.read()[:300].decode(errors='replace')}")
+        hint = ("\nThe LMS API requires machine auth — set LMS_TMS_API_KEY to the service key "
+                "(EXTERNAL_API_KEY_FOR_CLAWDBOT in ai-lms-tms)." if e.code == 401 else "")
+        raise SystemExit(f"GET {url} -> {e.code}: {e.read()[:300].decode(errors='replace')}{hint}")
     except urllib.error.URLError as e:
         raise SystemExit(f"GET {url} failed: {e.reason}")
 
@@ -318,7 +329,7 @@ def put_multipart(url, fields):
     req = urllib.request.Request(
         url, data=body, method="PUT",
         headers={"Content-Type": f"multipart/form-data; boundary={boundary}",
-                 "Content-Length": str(len(body))})
+                 "Content-Length": str(len(body)), **_lms_headers()})
     try:
         with urllib.request.urlopen(req, timeout=120) as r:
             return r.status, json.loads(r.read() or "{}")
