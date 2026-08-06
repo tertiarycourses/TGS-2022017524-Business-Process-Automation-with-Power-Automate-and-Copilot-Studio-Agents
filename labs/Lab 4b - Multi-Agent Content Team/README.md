@@ -36,6 +36,13 @@ beginners thinking of a career switch"* — and runs it through a small content 
 The Marketing Manager owns the conversation and **delegates**; each connected agent handles one
 task and hands back. Nothing is final until the human says so.
 
+## Workflow visual
+
+![Lab 4b multi-agent content team workflow](assets/flowchart.png)
+
+One topic in, one approved post out: the Manager delegates through Research, Blog and Review in
+turn, then presents the draft and verdict back to the human for approval.
+
 ## The four agents
 
 | # | Agent | Has | Teaches |
@@ -130,3 +137,7 @@ That turns the convention into a control, and reuses exactly what Lab 8 builds.
 | Blog draft has a fee that is not in any brochure | Blog Agent still has **Search all websites** on | Remove it — the Blog Agent gets facts only from the brief |
 | Review verdict is a rubber stamp ("all good!") | Checklist skill did not fire | The skill's description must match review requests — re-upload the package, then re-probe with a draft that breaks a rule |
 | A child asks the human questions mid-task | Normal — a connected agent may clarify | Keep task handoffs self-contained: the Manager's instructions tell it to pass a complete brief |
+
+---
+
+**Next:** [Lab 5 — Calling Agent from Workflow](../Lab%205%20-%20Calling%20Agent%20from%20Workflow/index.md)

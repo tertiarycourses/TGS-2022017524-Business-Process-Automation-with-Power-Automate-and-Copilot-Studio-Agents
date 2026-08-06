@@ -1,0 +1,25 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.55",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      human [label="Human\ngives the topic", fillcolor="#EAF2FF"];
+      manager [label="Marketing Manager Agent\norchestrates, never writes", fillcolor="#F3E9FF"];
+      research [label="Research Agent\nbrochures + web,\nlabelled apart", fillcolor="#EAF2FF"];
+      blog [label="Blog Agent\nwrites from the brief,\nno web search", fillcolor="#E8F7F1"];
+      review [label="Review Agent\nchecklist; did not\nwrite the draft", fillcolor="#FFF4E5"];
+      approve [label="Human\napproves the final post", fillcolor="#E8F7F1"];
+
+      human -> manager [label="  topic"];
+      manager -> research [label="  1. research brief"];
+      research -> blog [label="  2. brief"];
+      blog -> review [label="  3. draft"];
+      review -> manager [label="  4. verdict"];
+      manager -> approve [label="  draft + review verdict", style=dashed];
+
+      { rank=same; research; blog; review; }
+}

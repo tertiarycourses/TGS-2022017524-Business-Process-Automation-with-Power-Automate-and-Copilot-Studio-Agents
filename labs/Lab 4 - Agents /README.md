@@ -44,7 +44,10 @@ NN - <Agent>/
 ├── skills/            named behaviours, as uploadable packages
 │   ├── <skill-name>/
 │   │   ├── SKILL.md          ← the skill itself (YAML front matter + Markdown)
-│   │   └── TEACHING-NOTES.md ← trainer commentary, NOT part of the package
+│   │   ├── manual/           ← USER-MANUAL.md — how to use the skill
+│   │   ├── templates/        ← TEMPLATE.md — fill-in template for the task
+│   │   ├── scripts/          ← CONVERSATION-SCRIPT.md — test utterances
+│   │   └── references/       ← REFERENCE.md — quick-reference rules
 │   └── _packages/
 │       └── <skill-name>.zip  ← upload this
 ├── tools/             flows the agent calls, and their descriptions
@@ -72,8 +75,42 @@ description: Use when a colleague cannot sign in, has forgotten their password, 
 Never ask for a password. Never accept one...
 ```
 
-**To add one:** open the agent → **Build** tab → **Skills** → **Add skill** → **Upload a skill**,
-then drag the `.zip` onto the upload box. Copilot Studio validates the file and adds the skill.
+### Uploading a skill package — step by step
+
+Every agent README below says *"upload the skills"*; this is the procedure it means. It is the
+same for every skill in this lab.
+
+1. In [Copilot Studio](https://copilotstudio.microsoft.com), confirm the environment selector
+   (top right) shows **Copilot Studio Training**, then open the agent from **Agents**.
+2. Open the agent's **Skills** section — the **Skills** tab on the agent's page (if you do not
+   see it, look under **+ Add** on the overview).
+3. Select **Add skill**, then **Upload a skill**.
+4. Find the `.zip` in this repository under the agent's own folder —
+   `<NN - Agent>/skills/_packages/<skill-name>.zip` — and drag it onto the upload box (or use
+   **Browse** and pick it). Upload the package from `_packages/`, **not** the skill's source
+   folder: the zip already has `SKILL.md` at its top level with no wrapping folder, which is the
+   layout Copilot Studio requires.
+5. Wait for validation. Copilot Studio reads the YAML front matter and shows the skill's **name**
+   and **description**. A red validation error at this point means the archive layout or front
+   matter is wrong — see the table below.
+6. Select **Add** (or **Save**) to attach the skill, and confirm it now appears in the agent's
+   Skills list showing the same name as the front matter (e.g. `password-reset-procedure`).
+7. Repeat steps 3–6 for each remaining package in that agent's `_packages/` folder — agents in
+   this lab have between one and five.
+8. **Publish the agent** when its skills are in place. Like every agent change, an uploaded skill
+   reaches Teams and other channels only after the next publish (the Test pane sees it
+   immediately).
+9. **Verify it fires:** in the Test pane, send the skill's trigger utterance from its
+   `scripts/CONVERSATION-SCRIPT.md`, and confirm the reply follows the skill's procedure — for
+   `password-reset-procedure`, the agent must refuse to take a password and walk the self-service
+   route instead.
+
+| Upload problem | Cause | Fix |
+|---|---|---|
+| *Validation failed / file not recognised* | `SKILL.md` is not at the top level of the zip — the archive wraps it in a folder | Use the ready-made zip in `_packages/`, or rebuild with `python3 scripts/build_lab4_skill_packages.py` |
+| *Missing name or description* | The YAML front matter lacks a `name:` or `description:` line | Fix the front matter in `SKILL.md`, rebuild, re-upload |
+| Skill uploads but never fires | The `description` does not match how people phrase the request | Rewrite it as *"Use when someone…"*, rebuild, re-upload, re-test |
+| Old behaviour after an update | The previous version is still attached, or the agent was not re-published | Remove the old skill from the list, upload the new zip, then **Publish** |
 
 Three things follow, and all three are worth naming in class:
 
@@ -81,9 +118,11 @@ Three things follow, and all three are worth naming in class:
   relevant at all. A skill whose description does not match how people actually phrase the request
   never fires, and its instructions never run — however well written they are. Write it as *"use
   when someone…"*, not as a summary of the contents.
-- **Everything in the package is read by the model.** That is why the trainer commentary lives in a
-  separate `TEACHING-NOTES.md` that is deliberately excluded from the `.zip`. Explanatory prose
-  inside a skill file is not neutral — it is more instruction text competing for attention.
+- **Everything in the package is read by the model.** The supporting subfolders (`manual/`,
+  `templates/`, `scripts/`, `references/`) are part of the skill's working material, so keep them
+  written *for the model and the user*. Explanatory trainer prose inside a skill package is not
+  neutral — it is more instruction text competing for attention, which is why trainer commentary
+  stays out of the package altogether.
 - **The same package can go to many agents.** `personal-data-handling.zip` is uploaded to the HR
   parent *and* all four of its children. That is the argument for packaging over pasting: you can
   prove all five agents got the same file, and you can replace it in one place.
@@ -207,4 +246,4 @@ person locked out of their account. That is the axis worth closing the session o
 
 ---
 
-**Next:** [Lab 5 — Invoke an Agent: HR Support Agent](../Lab%205%20-%20Invoke%20Agents/index.md)
+**Next:** [Lab 4b — Multi-Agent Content Team](../Lab%204b%20-%20Multi-Agent%20Content%20Team/README.md) (optional), then [Lab 5 — Calling Agent from Workflow](../Lab%205%20-%20Calling%20Agent%20from%20Workflow/index.md)

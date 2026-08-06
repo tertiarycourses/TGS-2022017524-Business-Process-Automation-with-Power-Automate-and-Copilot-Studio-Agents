@@ -24,13 +24,13 @@ These match the tenant build exactly. Each is a **skill package** — upload it 
 **Build → Skills → Add skill → Upload a skill**. Build order matters: do Password Reset Procedure
 first, and Raise IT Support Ticket before the three that end at it.
 
-| # | Skill | Package to upload | Trainer notes |
-|---|---|---|---|
-| 1 | Password Reset Procedure | [`password-reset-procedure.zip`](skills/_packages/password-reset-procedure.zip) | [notes](skills/password-reset-procedure/TEACHING-NOTES.md) |
-| 2 | Raise IT Support Ticket | [`raise-it-support-ticket.zip`](skills/_packages/raise-it-support-ticket.zip) | [notes](skills/raise-it-support-ticket/TEACHING-NOTES.md) |
-| 3 | Hardware Issue Handling | [`hardware-issue-handling.zip`](skills/_packages/hardware-issue-handling.zip) | [notes](skills/hardware-issue-handling/TEACHING-NOTES.md) |
-| 4 | Network Troubleshooting | [`network-troubleshooting.zip`](skills/_packages/network-troubleshooting.zip) | [notes](skills/network-troubleshooting/TEACHING-NOTES.md) |
-| 5 | Software Troubleshooting | [`software-troubleshooting.zip`](skills/_packages/software-troubleshooting.zip) | [notes](skills/software-troubleshooting/TEACHING-NOTES.md) |
+| # | Skill | Package to upload |
+|---|---|---|
+| 1 | Password Reset Procedure | [`password-reset-procedure.zip`](skills/_packages/password-reset-procedure.zip) |
+| 2 | Raise IT Support Ticket | [`raise-it-support-ticket.zip`](skills/_packages/raise-it-support-ticket.zip) |
+| 3 | Hardware Issue Handling | [`hardware-issue-handling.zip`](skills/_packages/hardware-issue-handling.zip) |
+| 4 | Network Troubleshooting | [`network-troubleshooting.zip`](skills/_packages/network-troubleshooting.zip) |
+| 5 | Software Troubleshooting | [`software-troubleshooting.zip`](skills/_packages/software-troubleshooting.zip) |
 
 ### The three children
 

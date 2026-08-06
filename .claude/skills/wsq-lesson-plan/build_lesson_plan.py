@@ -8,7 +8,7 @@ Daily window 9:00am - 6:00pm (1-hour lunch; tea breaks within).
 Day 1: Power Automate workflows then Copilot Studio agents. Day 2: agent flows,
 HTTP, human review and RAG, ending with the
 assessment block: WA 1 hr + PP 1 hr, 4:00 - 6:00pm.
-The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.1.pptx
+The Slides column maps every session to courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.2.pptx
 (75 slides in the concept-first sequence: five concept modules, each followed by its labs).
 
 Writes: courseware/LP-<course>.docx
@@ -27,7 +27,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-lesson-plan/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.1"
+VERSION = "7.3"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -93,6 +93,10 @@ VERSIONS = [
      "and action family, RAG and human-in-the-loop.",
      "Course Development Team"],
     ["7.1", "6 Aug 2026", "Slide references realigned to the expanded 75-slide v7.1 deck: new Copilot Studio content folded into Modules 3-4 (model and harness, choosing a harness, modern orchestration, the new agent and workflow designers, skills as instructions on demand) plus a training-accounts slide in the course overview.",
+     "Course Development Team"],
+    ["7.2", "6 Aug 2026", "Lab 5 replaced — renamed from Invoke Agents to Calling Agent from Workflow: an agent flow that collects a blog topic at the Start node, drafts the post with M365 Copilot and posts it to the Training team's General channel. Day 2 session and deck references updated to the v7.2 deck.",
+     "Course Development Team"],
+    ["7.3", "6 Aug 2026", "Aligned to the 13-lab structure and the 80-slide v7.3 deck — Lab 4b (Multi-Agent Content Team) added as the optional Day 1 extension of Lab 4, Lab 5b (Calling Workflow from Agent) scheduled after Lab 5 on Day 2 (recap, Module 4, Lab 6 and Module 5 retimed to fit), and all slide mappings updated.",
      "Course Development Team"],
 ]
 
@@ -234,20 +238,21 @@ DAY1 = [
     ("2:30 – 3:15",  "45 min", "Module 2: conditions and branching; human in, on and out of the loop; how an approval suspends a running flow", LEC, "topic", MOD["m2"]),
     ("3:15 – 3:30",  "15 min", "Tea break", BRK, "break", "—"),
     ("3:30 – 4:15",  "45 min", f"{LAB_META['lab_3']['title']} — build and test the approved and rejected branches", HND, "lab", LAB_SLIDES["lab_3"]),
-    ("4:15 – 5:05",  "50 min", "Module 3: workflow versus agent; the new Copilot Studio (model and harness, the new agent designer); agent anatomy — instructions, skills, knowledge, tools; what is actually enforced; connected agents; publishing", LEC, "topic", MOD["m3"]),
-    ("5:05 – 5:50",  "45 min", f"{LAB_META['lab_4']['title']} — assemble the Procurement, HR, Sales and IT Support agents", HND, "lab", LAB_SLIDES["lab_4"]),
+    ("4:15 – 5:05",  "50 min", "Module 3: workflow versus agent; the new Copilot Studio (model and harness, the new agent designer); agent anatomy — instructions, skills, knowledge, tools; what is actually enforced; connected agents; agent settings; publishing and channels", LEC, "topic", MOD["m3"]),
+    ("5:05 – 5:50",  "45 min", f"{LAB_META['lab_4']['title']} — assemble the Procurement, HR, Sales and IT Support agents (optional extension: Lab 4b — Multi-Agent Content Team, 60–75 min, self-paced)", HND, "lab", f"{LAB_SLIDES['lab_4']}–{LAB_SLIDES['lab_4b']}"),
     ("5:50 – 6:00",  "10 min", "Day 1 recap and evidence check", DISC, "topic", MOD["m3"]),
 ]
 DAY2 = [
-    ("9:00 – 9:10",  "10 min", "Day 1 recap and Q&A", DISC, "topic", MOD["m3"]),
-    ("9:10 – 9:40",  "30 min", f"{LAB_META['lab_5']['title']} — ground the HR agent in SharePoint, test its refusals, publish to Teams", HND, "lab", LAB_SLIDES["lab_5"]),
-    ("9:40 – 10:10", "30 min", "Module 4: agent flows and the Agent node, the new workflow designer, HTTP request and response, JSON schema, structured output, the boundary of agency", LEC, "topic", MOD["m4"]),
-    ("10:10 – 11:10","60 min", f"{LAB_META['lab_6']['title']} — web form to agent flow, six ordered rules, four decisions", HND, "lab", LAB_SLIDES["lab_6"]),
-    ("11:10 – 11:25","15 min", "Tea break", BRK, "break", "—"),
-    ("11:25 – 12:05","40 min", f"{LAB_META['lab_7']['title']} — the agent alone in public, and the probes that break it", HND, "lab", LAB_SLIDES["lab_7"]),
-    ("12:05 – 1:05", "60 min", "Lunch", BRK, "break", "—"),
-    ("1:05 – 2:05",  "60 min", f"{LAB_META['lab_8']['title']} — the Human review gate and the run that will not proceed", HND, "lab", LAB_SLIDES["lab_8"]),
-    ("2:05 – 2:20",  "15 min", "Module 5: why retrieval rather than a bigger prompt; the RAG pipeline; chunking, embeddings and top_k", LEC, "topic", MOD["m5"]),
+    ("9:00 – 9:05",  "5 min",  "Day 1 recap and Q&A", DISC, "topic", MOD["m3"]),
+    ("9:05 – 9:35",  "30 min", f"{LAB_META['lab_5']['title']} — Start-node topic input, M365 Copilot drafts the blog, posted to the Training team's General channel", HND, "lab", LAB_SLIDES["lab_5"]),
+    ("9:35 – 10:05", "30 min", f"{LAB_META['lab_5b']['title']} — the same boundary crossed the other way: the Blog Writer Agent runs the published flow as its tool", HND, "lab", LAB_SLIDES["lab_5b"]),
+    ("10:05 – 10:25","20 min", "Module 4: agent flows and the Agent node, the new workflow designer, HTTP request and response, JSON schema, structured output, the boundary of agency", LEC, "topic", MOD["m4"]),
+    ("10:25 – 10:40","15 min", "Tea break", BRK, "break", "—"),
+    ("10:40 – 11:30","50 min", f"{LAB_META['lab_6']['title']} — web form to agent flow, six ordered rules, four decisions", HND, "lab", LAB_SLIDES["lab_6"]),
+    ("11:30 – 12:10","40 min", f"{LAB_META['lab_7']['title']} — the agent alone in public, and the probes that break it", HND, "lab", LAB_SLIDES["lab_7"]),
+    ("12:10 – 1:10", "60 min", "Lunch", BRK, "break", "—"),
+    ("1:10 – 2:10",  "60 min", f"{LAB_META['lab_8']['title']} — the Human review gate and the run that will not proceed", HND, "lab", LAB_SLIDES["lab_8"]),
+    ("2:10 – 2:20",  "10 min", "Module 5: why retrieval rather than a bigger prompt; the RAG pipeline; chunking, embeddings and top_k", LEC, "topic", MOD["m5"]),
     ("2:20 – 3:00",  "40 min", f"{LAB_META['lab_9']['title']} — RAG as a product setting: three nodes, no ingestion", HND, "lab", LAB_SLIDES["lab_9"]),
     ("3:00 – 3:15",  "15 min", "Tea break", BRK, "break", "—"),
     ("3:15 – 3:55",  "40 min", f"{LAB_META['lab_10']['title']} — rebuild the same chatbot on Pinecone and compare the levers", HND, "lab", LAB_SLIDES["lab_10"]),
@@ -262,6 +267,8 @@ def total(rows):
 for nm, rows in [("Day 1",DAY1),("Day 2",DAY2)]:
     assert total(rows) == 540, f"{nm} = {total(rows)} min (expected 540)"
 for lab_id, meta in LAB_META.items():
+    if meta.get("optional"):
+        continue  # optional labs (4b) run self-paced and hold no schedule slot
     scheduled = sum(
         int(duration.split()[0])
         for _, duration, activity, _, _, _ in DAY1 + DAY2
@@ -295,7 +302,7 @@ info_table(doc, [
     ("Delivery", "Instructor-led, hands-on (physical / virtual)"),
     ("Audience", "Business and operations staff who want to automate repetitive work; no coding required"),
     ("Prerequisites", "Basic Microsoft 365 familiarity (Outlook, Excel); a Microsoft 365 work or school account and a Power Platform Developer environment with Copilot Credits (see Lab 0)"),
-    ("Labs", "11 step-by-step labs across 2 days (Lab 0 setup plus Labs 1–10: five on Day 1 and six on Day 2), driven by 5 concept modules"),
+    ("Labs", "13 step-by-step labs across 2 days (Lab 0 setup plus Labs 1–10, plus the optional Lab 4b and Lab 5b: Labs 0–4b on Day 1, Labs 5–10 on Day 2), driven by 5 concept modules"),
     ("Assessment", "Written Assessment (SAQ) 1 hr + Practical Performance (PP) 1 hr — Day 2, 4:00 – 6:00pm, open book"),
 ])
 
@@ -313,10 +320,10 @@ bullets(doc, [
 
 heading(doc, "Daily Schedule", 1)
 para(doc, "The Slides column maps each session to the matching slides in the facilitator deck "
-          f"(Business Process Automation with Power Automate and Copilot Studio Agents-v7.1.pptx, {DECK_SLIDES} slides) so trainers can pace delivery against the deck.")
+          f"(Business Process Automation with Power Automate and Copilot Studio Agents-v{VERSION}.pptx, {DECK_SLIDES} slides) so trainers can pace delivery against the deck.")
 for nm, theme, rows in [
-    ("Day 1 — Workflows, then Agents", "Modules 1–3: automation concepts, triggers and actions, control flow and human in the loop, then agent anatomy — Labs 0–4", DAY1),
-    ("Day 2 — Agent Flows, Human Review, RAG & Assessment", "Modules 4–5: HTTP and the boundary of agency, the human review gate, and RAG twice over — Labs 5–10, then the assessment", DAY2),
+    ("Day 1 — Workflows, then Agents", "Modules 1–3: automation concepts, triggers and actions, control flow and human in the loop, then agent anatomy — Labs 0–4, with the optional Lab 4b", DAY1),
+    ("Day 2 — Agent Flows, Human Review, RAG & Assessment", "Modules 4–5: HTTP and the boundary of agency, the human review gate, and RAG twice over — Labs 5, 5b and 6–10, then the assessment", DAY2),
 ]:
     heading(doc, nm, 2)
     para(doc, theme + ".")
@@ -334,7 +341,10 @@ for day_number in (1, 2):
             continue
         slide_range = LAB_SLIDES[lab["id"]]
         heading(doc, f"{lab['title']} · Slides {slide_range}", 3)
-        para(doc, f"Duration: {lab['duration_minutes']} minutes. Follow the matching detailed, "
+        shown = lab.get("duration_label", lab["duration_minutes"])
+        duration = (f"Duration: {shown} minutes (optional — self-paced extension). "
+                    if lab.get("optional") else f"Duration: {shown} minutes. ")
+        para(doc, duration + "Follow the matching detailed, "
                   "step-by-step lab and its shared workflow visual in the Learner Guide.")
 
 heading(doc, "Tools & Resources", 1)

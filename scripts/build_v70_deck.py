@@ -31,7 +31,7 @@ if not SOURCE.exists():
 DECK = CW / "Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx"
 
 ALIGNMENT = json.loads((CW / "alignment_manifest.json").read_text(encoding="utf-8"))
-assert ALIGNMENT["version"] == "7.0"
+assert ALIGNMENT["version"] in ("7.0", "7.2", "7.3")  # manifest tracks the patched deck; this script builds the v7.0 baseline
 LABS = {lab["id"]: lab for lab in ALIGNMENT["labs"]}
 
 copy2(SOURCE, DECK)
@@ -306,7 +306,7 @@ def draw_lab_journey(s):
         ("2", "Log to Excel", "Commit the audit row before confirming", BLUE),
         ("3", "Leave Application Approval", "The flow pauses for a manager", TEAL),
         ("4", "Agents", "Instructions · skills · knowledge · tools", VIOLET),
-        ("5", "Invoke Agents", "SharePoint grounding, published to Teams", VIOLET),
+        ("5", "Calling Agent from Workflow", "Topic in, M365 Copilot blog, posted to Teams", VIOLET),
         ("6", "HTTP + Approval Agent", "Structured output; the AI never writes the record", GREEN),
         ("7", "HTTP + Chatbot", "The agent alone, in public", GREEN),
         ("8", "HTTP + Human Review", "The run that will not proceed", RED),

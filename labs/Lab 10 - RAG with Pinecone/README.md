@@ -697,4 +697,4 @@ Each brochure is about 2,700 characters.
 
 ---
 
-**Next:** [Back to the lab index](../README.md) — you have completed all ten labs.
+**Next:** [Back to the lab index](../README.md) — you have completed all thirteen labs.

@@ -3,8 +3,10 @@
 Labs for **Business Process Automation with Power Automate and Copilot Studio Agents**
 (TGS-2022017524).
 
-Eleven labs, built in order. Lab 0 prepares the environment; Labs 1–3 build deterministic
-Power Automate workflows; Labs 4–5 build and invoke Copilot Studio agents; Labs 6–8 put an
+Thirteen labs, built in order (Lab 4b is optional). Lab 0 prepares the environment; Labs 1–3 build deterministic
+Power Automate workflows; Lab 4 builds Copilot Studio agents and Lab 4b chains them into a multi-agent
+pipeline; Lab 5 calls the model from
+inside a workflow and Lab 5b inverts it — an agent calling the workflow as a tool; Labs 6–8 put an
 agent behind a website over HTTP and add a human gate; Labs 9–10 ground an agent in documents
 with RAG, first the built-in way and then with an external vector database.
 
@@ -16,7 +18,8 @@ with RAG, first the built-in way and then with an external vector database.
 | **3** | [Leave Application Approval](Lab%203%20-%20Leave%20Application%20Approval/index.md) | Power Automate + Approvals | **Human in the loop** — the flow pauses until a manager decides, then branches |
 | **4** | [Agents](Lab%204%20-%20Agents%20/README.md) | Copilot Studio agents | An agent is **instructions, skills, knowledge, tools and connected agents** — and which of those actually hold |
 | **4b** | [Multi-Agent Content Team](Lab%204b%20-%20Multi-Agent%20Content%20Team/README.md) *(optional)* | Copilot Studio connected agents | A **pipeline of specialists** — research → draft → review — ending at a human who approves |
-| **5** | [Invoke Agents](Lab%205%20-%20Invoke%20Agents/index.md) | Copilot Studio + SharePoint + Teams | **Grounding and publishing** — a SharePoint knowledge source, privacy boundaries, deployed to Teams |
+| **5** | [Calling Agent from Workflow](Lab%205%20-%20Calling%20Agent%20from%20Workflow/index.md) | Copilot Studio agent flow + M365 Copilot + Teams | **The workflow calls the model** — a Start-node topic, an M365 Copilot blog draft, posted to the Training team's General channel |
+| **5b** | [Calling Workflow from Agent](Lab%205b%20-%20Calling%20Workflow%20from%20Agent/index.md) | Copilot Studio agent + agent flow as a tool | **The agent calls the workflow** — a *When an agent calls the flow* trigger, an M365 Copilot draft, returned to the Blog Writer Agent through *Respond to the agent* |
 | **6** | [HTTP and Application Approval Agent](Lab%206%20-%20HTTP%20and%20Application%20Approval%20Agent/README.md) | Copilot Studio agent flow + SharePoint | The **boundary of agency** — the AI decides, deterministic actions do what must always happen |
 | **7** | [HTTP and Chatbot](Lab%207%20-%20HTTP%20and%20Chatbot/README.md) | Copilot Studio + knowledge | **The agent alone** — rules in the instruction, facts in the knowledge source, and a refusal it must never break |
 | **8** | [HTTP and Human Review](Lab%208%20-%20HTTP%20and%20Human%20Review/README.md) | Copilot Studio + Human review + Teams | **Human oversight** — the AI drafts, a licensed person approves, and the flow physically cannot proceed alone |
@@ -62,8 +65,10 @@ and is explicit about which parts the model can ignore:
 A control the model cannot reach beats a rule you asked it to follow. The optional **Lab 4b**
 turns the same parts into a pipeline: a Marketing Manager delegates a topic through Research,
 Blog and Review agents, and nothing is final until the person in the conversation approves it.
-Lab 5 then grounds an HR
-agent in a SharePoint policy source, tests its privacy refusals, and publishes it to Teams.
+Lab 5 then crosses the boundary in one direction — a workflow that calls M365 Copilot
+at a fixed step and posts the draft to Teams — and Lab 5b crosses it in the other: a
+Blog Writer Agent that calls the published Blog Writer Workflow as a tool, with the
+flow's Topic input and BlogPost output as the contract between them.
 
 **Labs 6–8 — the agent behind a website, and the human gate.**
 Lab 6 puts a public web form in front of an agent flow: a Compose action normalises the input, a

@@ -1,0 +1,20 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      user [label="Learner runs the flow\nenters a blog Topic", fillcolor="#EAF2FF"];
+      start [label="Start\nrequired Topic input", fillcolor="#FFF4E5"];
+      copilot [label="M365 Copilot\ndrafts the blog post", fillcolor="#F1EAFF"];
+      teams [label="Post message in\na chat or channel", fillcolor="#E8F7EE"];
+      channel [label="Training team\nGeneral channel", fillcolor="#EAF2FF"];
+      { rank=same; user; start; copilot; }
+      { rank=same; teams; channel; }
+      user -> start; start -> copilot [label=" topic"];
+      copilot -> teams [label=" blog text"];
+      teams -> channel;
+}

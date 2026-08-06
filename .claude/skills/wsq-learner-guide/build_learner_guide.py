@@ -24,7 +24,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.1"
+VERSION = "7.3"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -116,6 +116,15 @@ VERSIONS = [
      "aligned to the expanded 75-slide v7.1 deck (new Copilot Studio design content and "
      "the training-accounts slide).",
      "Course Development Team"],
+    ["7.2", "6 Aug 2026", "Lab 5 replaced — renamed from Invoke Agents to Calling Agent "
+     "from Workflow: an agent flow that collects a blog topic at the Start node, drafts "
+     "the post with M365 Copilot and posts it to the Training team's General channel.",
+     "Course Development Team"],
+    ["7.3", "6 Aug 2026", "Aligned to the 13-lab structure and the 80-slide v7.3 deck — "
+     "added Lab 4b (Multi-Agent Content Team, optional) and Lab 5b (Calling Workflow from "
+     "Agent) as full activities, and expanded Lab 4 with detailed step-by-step "
+     "skill-package upload instructions.",
+     "Course Development Team"],
 ]
 
 # ---- neutral (un-branded) cover + footer: this is client training, no Tertiary branding ----
@@ -163,9 +172,11 @@ DAYS = [
         "labs/Lab 3 - Leave Application Approval/index.md",
         "labs/Module 3 - Copilot Studio Agents.md",
         "labs/Lab 4 - Agents /README.md",
+        "labs/Lab 4b - Multi-Agent Content Team/README.md",
     ]),
     ("Day 2 — Agent Flows, Human Review and RAG", [
-        "labs/Lab 5 - Invoke Agents/index.md",
+        "labs/Lab 5 - Calling Agent from Workflow/index.md",
+        "labs/Lab 5b - Calling Workflow from Agent/index.md",
         "labs/Module 4 - Agent Flows, HTTP and the Boundary of Agency.md",
         "labs/Lab 6 - HTTP and Application Approval Agent/README.md",
         "labs/Lab 7 - HTTP and Chatbot/README.md",
@@ -253,7 +264,9 @@ def md_to_blocks(text, source_path):
             content = clean(" ".join(x for x in buf if x.strip()))
             if content: blocks.append(("note", content))
             continue
-        # numbered list (with indented sub-lines merged into the step)
+        # numbered list. Each item is [text, [sub-bullets]]: indented "- " lines
+        # become nested bullets; other indented lines are source line-wraps and
+        # join their step (or the open sub-bullet) with a single space.
         if re.match(r"^\d+\.\s+", s):
             items = []
             start_number = None
@@ -263,11 +276,16 @@ def md_to_blocks(text, source_path):
                 if mm:
                     if start_number is None:
                         start_number = int(mm.group(1))
-                    items.append(clean(mm.group(2)))
+                    items.append([clean(mm.group(2)), []])
                 elif re.match(r"^\s{2,}\S", raw) and not raw.strip().startswith("```"):
-                    # continuation / sub-bullet -> append to current step
-                    sub = re.sub(r"^\s*[-*]\s+", "", raw.strip())
-                    if items: items[-1] = items[-1] + "  —  " + clean(sub)
+                    if not items:
+                        pass
+                    elif re.match(r"^\s+[-*]\s+", raw):
+                        items[-1][1].append(clean(re.sub(r"^\s*[-*]\s+", "", raw.strip())))
+                    elif items[-1][1]:
+                        items[-1][1][-1] = items[-1][1][-1] + " " + clean(raw.strip())
+                    else:
+                        items[-1][0] = items[-1][0] + " " + clean(raw.strip())
                 elif raw.strip() == "":
                     # blank: peek if list continues
                     j = i + 1
@@ -279,11 +297,20 @@ def md_to_blocks(text, source_path):
                     break
                 i += 1
             blocks.append(("steps", items, start_number or 1)); continue
-        # bullet list
+        # bullet list (indented non-bullet lines are source line-wraps of the
+        # open item and join it with a single space)
         if re.match(r"^[-*]\s+", s):
             items = []
-            while i < n and re.match(r"^\s*[-*]\s+", lines[i]):
-                items.append(clean(re.sub(r"^\s*[-*]\s+", "", lines[i].strip()))); i += 1
+            while i < n:
+                raw = lines[i]
+                if re.match(r"^\s*[-*]\s+", raw):
+                    items.append(clean(re.sub(r"^\s*[-*]\s+", "", raw.strip())))
+                elif (re.match(r"^\s{2,}\S", raw) and items
+                      and not raw.strip().startswith("```")):
+                    items[-1] = items[-1] + " " + clean(raw.strip())
+                else:
+                    break
+                i += 1
             blocks.append(("bullets", items)); continue
         # plain paragraph: join source-wrapped lines so inline Markdown tokens
         # are not split across separate DOCX paragraphs or page boundaries.
@@ -333,9 +360,10 @@ p("Work through the labs **in order**: each one builds on the skills of the lab 
   "**Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.")
 note("Course flow at a glance — Day 1: Forms-driven email, Excel, branching and approval "
      "flows - trigger and actions, Excel logging and a leave approval that pauses for a "
-     "manager - then Copilot Studio agents and what they are made of (Labs 0-4). Day 2: "
-     "grounding and publishing an agent, three HTTP labs including a blocking human review "
-     "gate, and RAG built twice - with built-in knowledge and with Pinecone (Labs 5-10), "
+     "manager - then Copilot Studio agents and what they are made of (Labs 0-4, with the "
+     "optional multi-agent Lab 4b). Day 2: the agent and the workflow calling each other "
+     "(Labs 5 and 5b), three HTTP labs including a blocking human review "
+     "gate, and RAG built twice - with built-in knowledge and with Pinecone (Labs 6-10), "
      "then the WSQ assessment (4:00-6:00 PM).")
 rule()
 
@@ -415,9 +443,12 @@ def render_markdown(blocks):
         if k == "h2": out.append(f"## {b[1]}\n")
         elif k == "h3": out.append(f"### {b[1]}\n")
         elif k == "p": out.append(f"{b[1]}\n")
-        elif k == "steps": out.append("\n".join(
-            f"{i}. {link_copilot_studio(s)}" for i, s in enumerate(b[1], b[2])
-        ) + "\n")
+        elif k == "steps":
+            step_lines = []
+            for num, (txt, subs) in enumerate(b[1], b[2]):
+                step_lines.append(f"{num}. {link_copilot_studio(txt)}")
+                step_lines.extend(f"   - {sub}" for sub in subs)
+            out.append("\n".join(step_lines) + "\n")
         elif k == "bullets": out.append("\n".join(f"- {s}" for s in b[1]) + "\n")
         elif k == "code": out.append("```\n" + b[1] + "\n```\n")
         elif k == "table":
@@ -530,12 +561,18 @@ def render_docx(blocks):
         elif k == "steps":
             # Preserve the list's source start number. This keeps numbered
             # procedures continuous when a code block splits the Markdown list.
-            for number, s in enumerate(b[1], start=b[2]):
+            for number, (step_text, step_subs) in enumerate(b[1], start=b[2]):
                 paragraph = doc.add_paragraph()
                 paragraph.paragraph_format.left_indent = Inches(0.25)
                 paragraph.paragraph_format.first_line_indent = Inches(-0.25)
                 paragraph.add_run(f"{number}.  ")
-                _runs(paragraph, s)
+                _runs(paragraph, step_text)
+                for sub in step_subs:
+                    sp = doc.add_paragraph()
+                    sp.paragraph_format.left_indent = Inches(0.55)
+                    sp.paragraph_format.first_line_indent = Inches(-0.18)
+                    sp.add_run("•  ")
+                    _runs(sp, sub)
         elif k == "bullets":
             for s in b[1]:
                 _runs(doc.add_paragraph(style="List Bullet"), s)
