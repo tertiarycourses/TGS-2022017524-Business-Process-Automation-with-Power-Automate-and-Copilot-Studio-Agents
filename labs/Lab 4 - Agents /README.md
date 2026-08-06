@@ -31,6 +31,11 @@ extension, [**the HR Agent on a web page**](02%20-%20HR%20Agent/webchat/): an HR
 the agent as a chat widget via the **Microsoft 365 Agents SDK**, keeping the signed-in Entra
 identity.
 
+When the four agents are done, the optional
+[**Lab 4b — Multi-Agent Content Team**](../Lab%204b%20-%20Multi-Agent%20Content%20Team/)
+turns the same parts into a pipeline: a Marketing Manager delegating one topic through
+Research, Blog and Review agents, ending at a human approval.
+
 Each agent folder has the same five parts:
 
 ```

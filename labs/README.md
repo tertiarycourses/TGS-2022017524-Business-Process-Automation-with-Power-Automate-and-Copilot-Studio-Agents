@@ -15,6 +15,7 @@ with RAG, first the built-in way and then with an external vector database.
 | **2** | [Log to Excel](Lab%202%20-%20Log%20to%20Excel/index.md) | Power Automate + Excel Online | **Commit before you confirm** — write the audit row, then send the mail |
 | **3** | [Leave Application Approval](Lab%203%20-%20Leave%20Application%20Approval/index.md) | Power Automate + Approvals | **Human in the loop** — the flow pauses until a manager decides, then branches |
 | **4** | [Agents](Lab%204%20-%20Agents%20/README.md) | Copilot Studio agents | An agent is **instructions, skills, knowledge, tools and connected agents** — and which of those actually hold |
+| **4b** | [Multi-Agent Content Team](Lab%204b%20-%20Multi-Agent%20Content%20Team/README.md) *(optional)* | Copilot Studio connected agents | A **pipeline of specialists** — research → draft → review — ending at a human who approves |
 | **5** | [Invoke Agents](Lab%205%20-%20Invoke%20Agents/index.md) | Copilot Studio + SharePoint + Teams | **Grounding and publishing** — a SharePoint knowledge source, privacy boundaries, deployed to Teams |
 | **6** | [HTTP and Application Approval Agent](Lab%206%20-%20HTTP%20and%20Application%20Approval%20Agent/README.md) | Copilot Studio agent flow + SharePoint | The **boundary of agency** — the AI decides, deterministic actions do what must always happen |
 | **7** | [HTTP and Chatbot](Lab%207%20-%20HTTP%20and%20Chatbot/README.md) | Copilot Studio + knowledge | **The agent alone** — rules in the instruction, facts in the knowledge source, and a refusal it must never break |
@@ -58,7 +59,10 @@ and is explicit about which parts the model can ignore:
 | **Tool** | A flow that acts outside the conversation | **The flow's own logic is enforced** |
 | **Connected agent** | A separate agent with its own knowledge and audience | **The knowledge boundary is real** |
 
-A control the model cannot reach beats a rule you asked it to follow. Lab 5 then grounds an HR
+A control the model cannot reach beats a rule you asked it to follow. The optional **Lab 4b**
+turns the same parts into a pipeline: a Marketing Manager delegates a topic through Research,
+Blog and Review agents, and nothing is final until the person in the conversation approves it.
+Lab 5 then grounds an HR
 agent in a SharePoint policy source, tests its privacy refusals, and publishes it to Teams.
 
 **Labs 6–8 — the agent behind a website, and the human gate.**

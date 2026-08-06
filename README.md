@@ -54,6 +54,7 @@ Participants will be able to:
 | 2 | [Log to Excel](labs/Lab%202%20-%20Log%20to%20Excel/index.md) | 1 | Power Automate + Excel Online |
 | 3 | [Leave Application Approval](labs/Lab%203%20-%20Leave%20Application%20Approval/index.md) | 1 | Power Automate + Approvals |
 | 4 | [Agents — Procurement, HR, Sales, IT Support](labs/Lab%204%20-%20Agents%20/README.md) | 1 | Copilot Studio agents + agent flows + connected agents |
+| 4b | [Multi-Agent Content Team](labs/Lab%204b%20-%20Multi-Agent%20Content%20Team/README.md) *(optional)* | 1–2 | Copilot Studio connected agents |
 | 5 | [Invoke Agents](labs/Lab%205%20-%20Invoke%20Agents/index.md) | 2 | Copilot Studio + SharePoint + Teams |
 | 6 | [HTTP and Application Approval Agent](labs/Lab%206%20-%20HTTP%20and%20Application%20Approval%20Agent/README.md) | 2 | Copilot Studio agent flow + SharePoint |
 | 7 | [HTTP and Chatbot](labs/Lab%207%20-%20HTTP%20and%20Chatbot/README.md) | 2 | Copilot Studio + knowledge + website |
@@ -77,6 +78,9 @@ Full detail, including the ideas each lab teaches, is in [`labs/README.md`](labs
 - Optional Lab 4 extension: the HR Agent embedded in a web landing page as a chat widget
   via the Microsoft 365 Agents SDK (`labs/Lab 4 - Agents /02 - HR Agent/webchat/`),
   keeping the signed-in Entra identity
+- Optional Lab 4b: a four-agent content pipeline (Marketing Manager → Research → Blog →
+  Review) with per-agent build kits, three more uploadable skill packages, and marketing
+  knowledge files — ending at a human approval
 
 > **Import packages are not stored in this repository.** The `.zip` flow packages are
 > rebuildable distribution artifacts and are excluded from GitHub by policy. Learners

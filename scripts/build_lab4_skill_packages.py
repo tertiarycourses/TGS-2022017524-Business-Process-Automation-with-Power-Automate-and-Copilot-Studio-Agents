@@ -23,7 +23,7 @@ import sys
 import zipfile
 from pathlib import Path
 
-LAB = "labs/Lab 4 - Agents "
+LABS = ["labs/Lab 4 - Agents ", "labs/Lab 4b - Multi-Agent Content Team"]
 PACKAGE_DIR_NAME = "_packages"
 EXCLUDE_FROM_PACKAGE = {"TEACHING-NOTES.md"}
 
@@ -128,15 +128,18 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="validate only, write nothing")
     args = parser.parse_args()
 
-    lab_dir = repo_root() / LAB
-    if not lab_dir.is_dir():
-        print(f"ERROR: cannot find {lab_dir}", file=sys.stderr)
-        return 2
-
     failures: list[str] = []
     built = 0
 
-    for agent_dir in sorted(lab_dir.iterdir()):
+    agent_dirs: list[Path] = []
+    for lab in LABS:
+        lab_dir = repo_root() / lab
+        if not lab_dir.is_dir():
+            print(f"ERROR: cannot find {lab_dir}", file=sys.stderr)
+            return 2
+        agent_dirs.extend(sorted(lab_dir.iterdir()))
+
+    for agent_dir in agent_dirs:
         skills_dir = agent_dir / "skills"
         if not skills_dir.is_dir():
             continue
