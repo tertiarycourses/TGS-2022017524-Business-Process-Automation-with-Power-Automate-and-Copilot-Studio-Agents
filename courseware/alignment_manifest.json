@@ -1,8 +1,8 @@
 {
- "version": "7.3",
+ "version": "7.4",
  "course_title": "Business Process Automation with Power Automate and Copilot Studio Agents",
  "course_code": "TGS-2022017524",
- "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v7.3.pptx",
+ "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v7.4.pptx",
  "design_principle": "Concepts first, labs second. Every lab is preceded by the concept slides that explain it, and every concept slide names the lab where it is applied.",
  "modules": [
   {
@@ -244,7 +244,7 @@
    "title": "Lab 8 — HTTP and Human Review",
    "subtitle": "Client rapport assistant with a Teams approval gate",
    "duration_minutes": 60,
-   "platform": "Copilot Studio + Human review + Excel Online + Outlook + Teams",
+   "platform": "Copilot Studio + Human review + Outlook + Teams",
    "teaches": "Human in the loop — the AI drafts, and the workflow physically cannot proceed until a person approves.",
    "path": "labs/Lab 8 - HTTP and Human Review/README.md",
    "entry": "README.md"

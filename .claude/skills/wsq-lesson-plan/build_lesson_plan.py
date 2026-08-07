@@ -27,7 +27,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-lesson-plan/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.3"
+VERSION = "7.4"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -97,6 +97,8 @@ VERSIONS = [
     ["7.2", "6 Aug 2026", "Lab 5 replaced — renamed from Invoke Agents to Calling Agent from Workflow: an agent flow that collects a blog topic at the Start node, drafts the post with M365 Copilot and posts it to the Training team's General channel. Day 2 session and deck references updated to the v7.2 deck.",
      "Course Development Team"],
     ["7.3", "6 Aug 2026", "Aligned to the 13-lab structure and the 80-slide v7.3 deck — Lab 4b (Multi-Agent Content Team) added as the optional Day 1 extension of Lab 4, Lab 5b (Calling Workflow from Agent) scheduled after Lab 5 on Day 2 (recap, Module 4, Lab 6 and Module 5 retimed to fit), and all slide mappings updated.",
+     "Course Development Team"],
+    ["7.4", "7 Aug 2026", "Deck v7.4 — the Lab 8 workflow slide now shows the live simplified classroom flow (Excel logging removed) captured from the repaired designer build; slide count and mappings unchanged.",
      "Course Development Team"],
 ]
 

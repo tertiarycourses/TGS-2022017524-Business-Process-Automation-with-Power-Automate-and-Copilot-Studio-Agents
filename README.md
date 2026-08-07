@@ -2,9 +2,9 @@
 
 [![Duration](https://img.shields.io/badge/Duration-2%20Days-orange)]()
 [![Labs](https://img.shields.io/badge/Labs-13%20Hands--On-purple)]()
-[![Version](https://img.shields.io/badge/Courseware-7.3-blue)]()
+[![Version](https://img.shields.io/badge/Courseware-7.4-blue)]()
 
-This repository contains the Version 7.3 materials for the two-day WSQ course
+This repository contains the Version 7.4 materials for the two-day WSQ course
 **Business Process Automation with Power Automate and Copilot Studio Agents**
 (`TGS-2022017524`).
 
@@ -102,7 +102,7 @@ detailed build parts, test evidence and troubleshooting.
 | Learner Guide (Markdown) | [LEARNER-GUIDE.md](LEARNER-GUIDE.md) |
 | Learner Guide (Word/PDF) | `courseware/LG-Business Process Automation with Power Automate and Copilot Studio Agents.docx/.pdf` |
 | Lesson Plan (Word/PDF) | `courseware/LP-Business Process Automation with Power Automate and Copilot Studio Agents.docx/.pdf` |
-| Facilitator deck | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.3.pptx/.pdf` |
+| Facilitator deck | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v7.4.pptx/.pdf` |
 
 `courseware/alignment_manifest.json` and `courseware/slide_map.json` are the single source of
 truth that keeps the deck, Lesson Plan, Learner Guide and labs aligned.
