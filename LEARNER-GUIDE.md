@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 7.3.1**
+**Course Code:** TGS-2022017524  ·  **Version 7.3.2**
 
 ### Document Version Control Record
 
@@ -32,6 +32,7 @@
 | 7.2 | 6 Aug 2026 | Lab 5 replaced — renamed from Invoke Agents to Calling Agent from Workflow: an agent flow that collects a blog topic at the Start node, drafts the post with M365 Copilot and posts it to the Training team's General channel. | Course Development Team |
 | 7.3 | 6 Aug 2026 | Aligned to the 13-lab structure and the 80-slide v7.3 deck — added Lab 4b (Multi-Agent Content Team, optional) and Lab 5b (Calling Workflow from Agent) as full activities, and expanded Lab 4 with detailed step-by-step skill-package upload instructions. | Course Development Team |
 | 7.3.1 | 7 Aug 2026 | Lab 8 updated to the current Human review node: input types are Text/Yes-No/Email/Number/Date (no Choice type), Outcome is a Yes/No boolean compared against true in the If/Else, and the approval card arrives in the Teams Workflows bot chat rather than the Approvals app. Verified live and the classroom flow repaired end to end. | Course Development Team |
+| 7.3.2 | 7 Aug 2026 | Lab 8 build screenshots added — the finished designer canvas and the If/Else condition (Outcome Equals Yes) — captured from the live repaired flow. | Course Development Team |
 
 ## Table of Contents
 
@@ -2832,6 +2833,10 @@ Both are worth showing learners: neither is a bug in the platform, and neither w
 
 The agent classifies, reads tone, raises flags and drafts — then the Human review node stops the run until a licensed person approves in Teams. Approved replies are sent and logged; rejected ones go to a named person who must phone the client.
 
+This is the finished flow on the designer canvas (simplified classroom build — Excel logging removed):
+
+![Lab 8 flow as built in the workflow designer](<labs/Lab 8 - HTTP and Human Review/screenshots/lab8-flow-canvas.png>)
+
 ---
 
 **What "human in the loop" means**
@@ -3306,6 +3311,10 @@ Safest choice in class is the account you are signed in as.
 | Property | Operator | Value |
 | --- | --- | --- |
 | ⚡ Human review → **`Outcome`** | Equals | `Yes` |
+
+The condition, exactly as it should look — the Property is the ⚡-picked `Outcome` token and the Value is the literal text `Yes`:
+
+![If/Else condition: Outcome Equals Yes](<labs/Lab 8 - HTTP and Human Review/screenshots/lab8-ifelse-outcome-yes.png>)
 
 ⚠️ **There is no `outcome` or `result` property built into the node.** It publishes only the **inputs you defined**. Searching the picker for "outcome" before you have created that input returns nothing, and a hand-typed `body('Human_review')?['result']` silently never matches — so *every* enquiry falls to Else and nothing is ever sent.
 

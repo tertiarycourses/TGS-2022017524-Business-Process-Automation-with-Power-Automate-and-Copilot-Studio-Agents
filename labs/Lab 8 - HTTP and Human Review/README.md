@@ -26,6 +26,10 @@ The agent classifies, reads tone, raises flags and drafts — then the Human rev
 until a licensed person approves in Teams. Approved replies are sent and logged; rejected ones go to
 a named person who must phone the client.
 
+This is the finished flow on the designer canvas (simplified classroom build — Excel logging removed):
+
+![Lab 8 flow as built in the workflow designer](screenshots/lab8-flow-canvas.png)
+
 ---
 
 ## What "human in the loop" means
@@ -571,6 +575,11 @@ Safest choice in class is the account you are signed in as.
 | Property | Operator | Value |
 |---|---|---|
 | ⚡ Human review → **`Outcome`** | Equals | `Yes` |
+
+The condition, exactly as it should look — the Property is the ⚡-picked `Outcome` token and the
+Value is the literal text `Yes`:
+
+![If/Else condition: Outcome Equals Yes](screenshots/lab8-ifelse-outcome-yes.png)
 
 ⚠️ **There is no `outcome` or `result` property built into the node.** It publishes only the **inputs you
 defined**. Searching the picker for "outcome" before you have created that input returns nothing, and a
