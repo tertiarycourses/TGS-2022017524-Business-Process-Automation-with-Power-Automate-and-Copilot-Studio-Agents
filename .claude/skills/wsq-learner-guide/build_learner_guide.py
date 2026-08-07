@@ -24,7 +24,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.3"
+VERSION = "7.3.1"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -124,6 +124,11 @@ VERSIONS = [
      "added Lab 4b (Multi-Agent Content Team, optional) and Lab 5b (Calling Workflow from "
      "Agent) as full activities, and expanded Lab 4 with detailed step-by-step "
      "skill-package upload instructions.",
+     "Course Development Team"],
+    ["7.3.1", "7 Aug 2026", "Lab 8 updated to the current Human review node: input types "
+     "are Text/Yes-No/Email/Number/Date (no Choice type), Outcome is a Yes/No boolean compared "
+     "against true in the If/Else, and the approval card arrives in the Teams Workflows bot chat "
+     "rather than the Approvals app. Verified live and the classroom flow repaired end to end.",
      "Course Development Team"],
 ]
 

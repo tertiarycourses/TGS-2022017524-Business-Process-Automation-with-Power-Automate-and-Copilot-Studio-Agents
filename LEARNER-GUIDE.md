@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 7.3**
+**Course Code:** TGS-2022017524  ·  **Version 7.3.1**
 
 ### Document Version Control Record
 
@@ -31,6 +31,7 @@
 | 7.1 | 6 Aug 2026 | House cover updated with the Tertiary Infotech Academy logo; aligned to the expanded 75-slide v7.1 deck (new Copilot Studio design content and the training-accounts slide). | Course Development Team |
 | 7.2 | 6 Aug 2026 | Lab 5 replaced — renamed from Invoke Agents to Calling Agent from Workflow: an agent flow that collects a blog topic at the Start node, drafts the post with M365 Copilot and posts it to the Training team's General channel. | Course Development Team |
 | 7.3 | 6 Aug 2026 | Aligned to the 13-lab structure and the 80-slide v7.3 deck — added Lab 4b (Multi-Agent Content Team, optional) and Lab 5b (Calling Workflow from Agent) as full activities, and expanded Lab 4 with detailed step-by-step skill-package upload instructions. | Course Development Team |
+| 7.3.1 | 7 Aug 2026 | Lab 8 updated to the current Human review node: input types are Text/Yes-No/Email/Number/Date (no Choice type), Outcome is a Yes/No boolean compared against true in the If/Else, and the approval card arrives in the Teams Workflows bot chat rather than the Approvals app. Verified live and the classroom flow repaired end to end. | Course Development Team |
 
 ## Table of Contents
 
@@ -3187,12 +3188,14 @@ Click **+** → **Response**.
   "status": "received",
   "ticketId": "@{outputs('Normalise_Enquiry')?['ticketId']}",
   "urgency": "@{body('Rapport_Agent')?['structuredOutput/urgency']}",
-  "escalated": @{body('Rapport_Agent')?['structuredOutput/escalate']},
+  "escalated": @{toLower(string(body('Rapport_Agent')?['structuredOutput/escalate']))},
   "message": "Thank you. Your message has reached the Meridian client relationship team and has been logged under the reference below. A licensed relationship manager will review it personally and reply to you by email. We do not send investment advice through this chat."
 }
 ```
 
 ⚠️ **`escalated` has no quotes, deliberately.** Quote it and it returns the *string* `"false"` — and in JavaScript `Boolean("false")` is `true`, so the widget would tell every calm client that a manager is calling them.
+
+⚠️ **…and it is wrapped in `toLower(string(...))`, also deliberately** (verified live 7 Aug 2026). The model sometimes writes the escalate field as the capitalised string `True`, and a bare token then renders `"escalated": True` — which is **not valid JSON**, so the widget dies with `Unexpected token 'T' … is not valid JSON`. `toLower(string(...))` normalises `true`/`True`/`"True"` to the lowercase literal `true`, which is a valid unquoted JSON boolean either way.
 
 **Five fields, and the draft is not one of them.** The agent worked out `emotionalTone`, `concernCategory` and `complianceFlags`; none is returned. Sending a client `"emotionalTone": "Angry"` would be a poor experience and a disclosure no compliance officer would sign.
 
@@ -3281,10 +3284,12 @@ You are the licensed representative. Nothing reaches the client unless you appro
 
 | Name | Type | Default |
 | --- | --- | --- |
-| `Outcome` | Choice — `Approve` / `Reject` | **leave blank** |
-| `Name` | Text | — |
+| `Outcome` | **Yes/No** | **leave blank** |
+| `Name` | Text | **leave blank** |
 
-⚠️ **Do not default `Outcome` to `Approve`.** The field then arrives at the approver already answered: confirming takes no thought, rejecting takes noticing. You will have turned the gate into a rubber stamp with a one-word setting that is invisible on the canvas. If a default is required, use **`Reject`** — then inattention fails safe.
+> **The input types are Text, Yes/No, Email, Number and Date — there is no Choice type** (verified 7 Aug 2026; earlier versions of this designer offered a Choice input with `Approve`/`Reject` options). `Outcome` is therefore a **Yes/No** question and publishes a **boolean**: the approver sees Yes/No radio buttons under the label `Outcome`, and the If/Else in Node 7 compares the token against **`true`**. The approval framing text ("Approve to send this reply as-is…") already tells the approver that **Yes = approve, No = reject**.
+
+⚠️ **Do not give `Outcome` a default.** A pre-answered field arrives at the approver already decided: confirming takes no thought, rejecting takes noticing. You will have turned the gate into a rubber stamp with a one-word setting that is invisible on the canvas. The same goes for `Name` — it is the self-declared approver identity, so it must be typed by the approver, not pre-filled.
 
 ⚠️ **`Assigned to` must be a user in your own M365 tenant, picked from the dropdown.** Type the full address, wait for the directory lookup, then **click the resolved suggestion** so it becomes a chip. Three ways to get this wrong, all of which look fine in the designer and fail at runtime with `BadRequest — Required field 'assignedTo' is missing or empty`:
 
@@ -3300,7 +3305,7 @@ Safest choice in class is the account you are signed in as.
 
 | Property | Operator | Value |
 | --- | --- | --- |
-| ⚡ Human review → **`Outcome`** | Equals | `Approve` |
+| ⚡ Human review → **`Outcome`** | Equals | `true` |
 
 ⚠️ **There is no `outcome` or `result` property built into the node.** It publishes only the **inputs you defined**. Searching the picker for "outcome" before you have created that input returns nothing, and a hand-typed `body('Human_review')?['result']` silently never matches — so *every* enquiry falls to Else and nothing is ever sent.
 
@@ -3308,16 +3313,16 @@ Safest choice in class is the account you are signed in as.
 
 **Task 5 — Approve in Microsoft Teams (5 min)**
 
-The approval request is delivered to the **Approvals** app inside Microsoft Teams.
+The request is delivered as an **adaptive card in the "Workflows" bot chat** in Microsoft Teams (verified 7 Aug 2026 — it does **not** appear in the Teams *Approvals* app, so do not send learners hunting there).
 
 1. Open teams.microsoft.com (or the Teams desktop app)
 2. Sign in as **the same account named in *Assigned to***
-3. Left sidebar → **•••** (More apps) → search **Approvals** *(or go straight to approvals.microsoft.com)*
-4. Open the request titled `[ESCALATE] Draft reply to …`
-5. Fill in **Name** (your name — this lands in the `Approved By` column) and **Outcome**
-6. Submit
+3. Open **Chat** and find the conversation with the **Workflows** bot — the card arrives there, titled `Request information | Microsoft Copilot Studio` and starting with `APPROVAL REQUIRED — draft reply to a client` *(delivery can take a minute or two after the run reaches the Human review node)*
+4. Read the card — it carries the ticket, the agent's assessment and the full proposed reply
+5. Fill in **Name** (your name — this lands in the `Approved By` column) and set **Outcome** to **Yes** (approve) or **No** (reject)
+6. Select **Submit**
 
-The run resumes immediately and takes the matching branch.
+The run resumes and takes the matching branch. (Response processing adds a minute or two — watch the run flip from *Running* to *Succeeded* in Activity.)
 
 > **Teams, not email.** The `Channel` dropdown offers Outlook as well, and on some tenants the Outlook route silently fails to deliver while the run still shows *Running*. **Teams is the reliable channel** — use it unless you have a specific reason not to.
 
@@ -3572,7 +3577,8 @@ Every row in `Approved_Replies` names a human in `Approved By`. Every row in `Ha
 | --- | --- |
 | `Parse JSON` / *Error parsing NaN value, position 1* | You are using a Parse JSON node with *Text response*. Switch the agent's **Output** to **Custom structured output** and delete the parse node. |
 | `This input references action "Parse_Draft"` | A field still points at the deleted node. Replace with `body('Rapport_Agent')?['structuredOutput/…']`. If you cannot find it, delete the node and rebuild — faster than hunting. |
-| The If branch never fires | The condition is testing a property that does not exist. It must be the **`Outcome` input you defined**, picked from ⚡, `Equals` `Approve`. |
+| The If branch never fires | The condition is testing a property that does not exist, or its Value is empty. It must be the **`Outcome` input you defined**, picked from ⚡, `Equals` `true` — and if you delete and re-create the input, re-pick the token too, or the old reference silently resolves to nothing. |
+| The approval never "arrives" | It did — in the **Workflows bot chat**, not the Approvals app. Open Teams → Chat → Workflows. |
 | `Compliance Flags` writes `System.Object[]` | It is an array. Wrap it: `join(…, ', ')`. |
 | The Excel **Table** dropdown is empty | The range is not formatted as a table. Select the headers → **Ctrl+T**. |
 | Excel **File** picker cannot see the workbook | It is in a different account's OneDrive, or a personal OneDrive. It must be **OneDrive for Business** on the account the connector authenticated as. |

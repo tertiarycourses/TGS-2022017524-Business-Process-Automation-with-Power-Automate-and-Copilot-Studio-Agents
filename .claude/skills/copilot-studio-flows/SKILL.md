@@ -235,6 +235,13 @@ Quote it and the field returns the *string* `"false"` — and in JavaScript
 `Boolean("false")` is `true`. Every browser consumer then reads the flag as set.
 Strings keep their quotes; booleans must not have them.
 
+**And wrap the token: `@{toLower(string(...))}`** (verified live 7 Aug 2026). An
+agent's structured-output "boolean" sometimes arrives as the capitalised string
+`True`; a bare unquoted token then renders `"escalated": True` — invalid JSON —
+and the calling page dies with `Unexpected token 'T' … is not valid JSON`.
+`toLower(string(...))` yields the lowercase literal `true`/`false` whether the
+model produced a real boolean or a Python-style string.
+
 ### Arrays need `join()` before they reach Excel or a text field
 
 `join(body('Agent')?['structuredOutput/complianceFlags'], ', ')`. Without it the
@@ -270,10 +277,31 @@ run falls to the Else branch and nothing is ever sent.
 
 | Name | Type | Default |
 |---|---|---|
-| `Outcome` | Choice: `Approve` / `Reject` | **leave blank** |
-| `Name` | Text | — |
+| `Outcome` | **Yes/No** | **leave blank** |
+| `Name` | Text | **leave blank** |
 
-Then the If/Else condition is that `Outcome` token, `Equals`, `Approve`.
+Then the If/Else condition is that `Outcome` token (⚡ picker), `Equals`, `true`.
+
+**There is NO Choice input type** (re-verified 7 Aug 2026). The type picker
+offers Text, Yes/No, Email, Number, Date only — earlier guidance saying
+"Choice: Approve/Reject" describes a control that no longer exists. A Yes/No
+input publishes a **boolean**, so the If/Else must compare against `true`,
+never the strings "Approve" or "Yes". Frame the approve/reject meaning in the
+Message text instead ("Approve to send… Reject to hand over…").
+
+**Deleting and re-creating an input silently breaks the If/Else.** The old
+token keeps rendering with the same name in the condition but resolves to
+nothing — every response then falls to Else. After any input rebuild, remove
+the token and re-pick it. (Found live 7 Aug 2026: a learner-edited Lab 8 had
+`Outcome Equals <empty value>` — approvals were processed and the run completed
+via Else, which contained nothing, so approving "did nothing".)
+
+**The request lands in the Teams "Workflows" bot CHAT as an adaptive card —
+NOT in the Teams Approvals app** (re-verified 7 Aug 2026; earlier note saying
+Approvals app is wrong for this node). Card title:
+`Request information | Microsoft Copilot Studio`. Delivery and response
+processing each take a minute or two — a run sitting at *Running* for a couple
+of minutes after Submit is normal.
 
 ### It does not record WHO responded
 
