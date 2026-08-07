@@ -570,7 +570,7 @@ Safest choice in class is the account you are signed in as.
 
 | Property | Operator | Value |
 |---|---|---|
-| ⚡ Human review → **`Outcome`** | Equals | `true` |
+| ⚡ Human review → **`Outcome`** | Equals | `Yes` |
 
 ⚠️ **There is no `outcome` or `result` property built into the node.** It publishes only the **inputs you
 defined**. Searching the picker for "outcome" before you have created that input returns nothing, and a
@@ -902,7 +902,7 @@ an offence — and proved why the approval gate exists.
 |---|---|
 | `Parse JSON` / *Error parsing NaN value, position 1* | You are using a Parse JSON node with *Text response*. Switch the agent's **Output** to **Custom structured output** and delete the parse node. |
 | `This input references action "Parse_Draft"` | A field still points at the deleted node. Replace with `body('Rapport_Agent')?['structuredOutput/…']`. If you cannot find it, delete the node and rebuild — faster than hunting. |
-| The If branch never fires | The condition is testing a property that does not exist, or its Value is empty. It must be the **`Outcome` input you defined**, picked from ⚡, `Equals` `true` — and if you delete and re-create the input, re-pick the token too, or the old reference silently resolves to nothing. |
+| The If branch never fires | The condition is testing a property that does not exist, or its Value is empty. It must be the **`Outcome` input you defined**, picked from ⚡, `Equals` `Yes` (the run-time value is the string `Yes`/`No`, not a boolean — check a real run's Outputs) — and if you delete and re-create the input, re-pick the token too, or the old reference silently resolves to nothing. |
 | The approval never "arrives" | It did — in the **Workflows bot chat**, not the Approvals app. Open Teams → Chat → Workflows. |
 | `Compliance Flags` writes `System.Object[]` | It is an array. Wrap it: `join(…, ', ')`. |
 | The Excel **Table** dropdown is empty | The range is not formatted as a table. Select the headers → **Ctrl+T**. |

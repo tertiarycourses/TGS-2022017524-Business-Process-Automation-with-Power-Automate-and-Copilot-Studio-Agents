@@ -280,14 +280,20 @@ run falls to the Else branch and nothing is ever sent.
 | `Outcome` | **Yes/No** | **leave blank** |
 | `Name` | Text | **leave blank** |
 
-Then the If/Else condition is that `Outcome` token (⚡ picker), `Equals`, `true`.
+Then the If/Else condition is that `Outcome` token (⚡ picker), `Equals`, `Yes`.
 
 **There is NO Choice input type** (re-verified 7 Aug 2026). The type picker
 offers Text, Yes/No, Email, Number, Date only — earlier guidance saying
-"Choice: Approve/Reject" describes a control that no longer exists. A Yes/No
-input publishes a **boolean**, so the If/Else must compare against `true`,
-never the strings "Approve" or "Yes". Frame the approve/reject meaning in the
-Message text instead ("Approve to send… Reject to hand over…").
+"Choice: Approve/Reject" describes a control that no longer exists. Frame the
+approve/reject meaning in the Message text instead ("Approve to send… Reject
+to hand over…").
+
+**The Yes/No input LIES about its type.** The ⚡ picker shows it as *boolean*,
+but a real run's Human review → Run Details → Outputs shows it publishes the
+**string `Yes` / `No`**. Comparing against `true` never matches (three live
+runs all fell to Else); the condition value must be the literal `Yes`. When a
+condition silently takes the wrong branch, read the node's actual Outputs —
+never trust the picker's declared type.
 
 **Deleting and re-creating an input silently breaks the If/Else.** The old
 token keeps rendering with the same name in the condition but resolves to
@@ -303,12 +309,13 @@ Approvals app is wrong for this node). Card title:
 processing each take a minute or two — a run sitting at *Running* for a couple
 of minutes after Submit is normal.
 
-### It does not record WHO responded
+### It records the responder's object ID — but nothing human-readable
 
-No responder, no email, no timestamp — just the inputs. So an "Approved By"
-audit column has to be a **self-declared text input**, which is a convention, not
-evidence. Say this plainly in courseware rather than implying the platform
-captured an identity.
+Run outputs now include `responderObjectId` (the Entra object ID of whoever
+submitted the card — observed 7 Aug 2026) alongside your defined inputs. There
+is still no display name, email or timestamp in the outputs, so an "Approved
+By" audit column remains a **self-declared text input** in practice — but do
+not claim the platform records nothing; the object ID is there for forensics.
 
 ### `assignedTo` fails at runtime while looking fine in the designer
 
