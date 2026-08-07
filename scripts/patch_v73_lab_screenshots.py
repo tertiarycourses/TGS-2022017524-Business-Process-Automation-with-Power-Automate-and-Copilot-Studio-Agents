@@ -31,7 +31,7 @@ DECK = "courseware/Business Process Automation with Power Automate and Copilot S
 
 BORDER = RGBColor(0xCB, 0xD5, 0xE1)  # slate-200, matches muted house greys
 SLIDE_W = 13.333
-BAND_T, BAND_B = 2.05, 5.95          # free zone between subtitle and LAB card
+BAND_T, BAND_B = 2.05, 5.88          # free zone between subtitle and LAB card
 GAP = 0.35
 D_MAX_W, D_MAX_H = 10.2, 1.85        # cap for the existing concept diagram
 S_MAX_W = 10.8                       # cap for the screenshot
@@ -123,12 +123,14 @@ for sh in list(s60.shapes):
     t = Emu(sh.top).inches if sh.top is not None else 0
     if sh.shape_type == 13:
         continue
-    if 3.70 <= t <= 5.80:          # three takeaway cards (text lives in LG)
+    if 2.10 <= t <= 3.50:          # pipeline row: +0.06 clears subtitle descenders
+        sh.top = Emu(sh.top) + Inches(0.06)
+    elif 3.70 <= t <= 5.80:        # three takeaway cards (text lives in LG)
         doomed.append(sh)
 for sh in doomed:
     sh._element.getparent().remove(sh._element)
 stream, (pw, ph) = grab(6)
-top = 3.72                          # pipeline row ends 3.46; keep clear of it
+top = 3.74                          # pipeline row ends 3.52; keep clear of it
 add_shot(s60, stream, pw / ph, (BAND_B - top) * pw / ph, top)
 print(f"slide 60: removed {len(doomed)} card shapes, shot h {BAND_B-top:.2f}")
 
@@ -137,7 +139,7 @@ s62 = slides[61]
 diagram = pics_of(62)[0]
 d_w = 6.33
 d_h = d_w * Emu(diagram.height).inches / Emu(diagram.width).inches
-col_w = 5.0
+col_w = 4.75
 comp_w = d_w + 0.30 + col_w
 left0 = (SLIDE_W - comp_w) / 2
 diagram.width, diagram.height = Inches(d_w), Inches(d_h)
