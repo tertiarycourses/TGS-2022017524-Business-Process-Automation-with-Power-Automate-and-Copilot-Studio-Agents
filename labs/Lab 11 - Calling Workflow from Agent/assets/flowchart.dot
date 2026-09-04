@@ -1,0 +1,22 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12,
+        margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial",
+        fontsize=10, fontcolor="#365C82"];
+
+      user [label="Learner chats with\nLab 11 - Blog Writer Agent", fillcolor="#EAF2FF"];
+      agent [label="Lab 11 - Calling Workflow from Agent\ndecides to use its tool", fillcolor="#FFE9EC"];
+      trigger [label="When an agent\ncalls the flow\nrequired Topic input", fillcolor="#FFF4E5"];
+      copilot [label="M365 Copilot\ndrafts the blog post", fillcolor="#F1EAFF"];
+      respond [label="Respond to the agent\nBlogPost output", fillcolor="#E8F7EE"];
+      { rank=same; user; agent; trigger; }
+      { rank=same; respond; copilot; }
+      user -> agent [label=" topic"];
+      agent -> trigger [label=" calls tool"];
+      trigger -> copilot [label=" topic"];
+      copilot -> respond [label=" blog text", constraint=false];
+      respond -> agent [label=" BlogPost", style=dashed];
+}

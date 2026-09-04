@@ -1,0 +1,14 @@
+{
+ "lab2": {
+  "source": "me",
+  "drive": "b!SjecQDKqRUqeM67rgiO4VeKrsryxCPJLodXkA7TDWkyK1tEZN9r7TLlK5TAsG_h-",
+  "file": "01LGABAFVPE64FFLLAQVG2VQLXX7UTFNKU",
+  "table": "{00000000-000C-0000-FFFF-FFFF00000000}"
+ },
+ "lab3": {
+  "source": "me",
+  "drive": "me",
+  "file": "/Power Automate Lab Data/Lab 3 - Leave Register.xlsx",
+  "table": "LeaveRegister"
+ }
+}

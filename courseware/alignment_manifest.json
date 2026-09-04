@@ -1,279 +1,422 @@
 {
- "version": "7.4",
- "course_title": "Business Process Automation with Power Automate and Copilot Studio Agents",
- "course_code": "TGS-2022017524",
- "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v7.4.pptx",
- "design_principle": "Concepts first, labs second. Every lab is preceded by the concept slides that explain it, and every concept slide names the lab where it is applied.",
- "modules": [
-  {
-   "id": "m1",
-   "day": 1,
-   "title": "Module 1 — Business Process Automation and Power Automate",
-   "concepts": [
-    "business process automation",
-    "Power Platform map",
-    "flows",
-    "triggers",
-    "actions",
-    "dynamic content",
-    "run history"
-   ],
-   "labs": [
-    "lab_0",
-    "lab_1",
-    "lab_2"
-   ]
-  },
-  {
-   "id": "m2",
-   "day": 1,
-   "title": "Module 2 — Control Flow and Human in the Loop",
-   "concepts": [
-    "conditions",
-    "branching",
-    "approvals",
-    "human in the loop",
-    "human on the loop",
-    "human out of the loop"
-   ],
-   "labs": [
-    "lab_3"
-   ]
-  },
-  {
-   "id": "m3",
-   "day": 1,
-   "title": "Module 3 — Copilot Studio Agents",
-   "concepts": [
-    "agent anatomy",
-    "instructions",
-    "skills",
-    "knowledge",
-    "tools",
-    "connected agents",
-    "enforcement hierarchy",
-    "multi-agent orchestration",
-    "publishing to Teams",
-    "agent settings",
-    "publishing channels"
-   ],
-   "labs": [
-    "lab_4",
-    "lab_4b",
-    "lab_5",
-    "lab_5b"
-   ]
-  },
-  {
-   "id": "m4",
-   "day": 2,
-   "title": "Module 4 — Agent Flows, HTTP and the Boundary of Agency",
-   "concepts": [
-    "agent flows",
-    "HTTP trigger",
-    "request and response",
-    "JSON schema",
-    "structured output",
-    "boundary of agency",
-    "Copilot Credits"
-   ],
-   "labs": [
-    "lab_6",
-    "lab_7",
-    "lab_8"
-   ]
-  },
-  {
-   "id": "m5",
-   "day": 2,
-   "title": "Module 5 — Retrieval Augmented Generation",
-   "concepts": [
-    "grounding",
-    "RAG pipeline",
-    "chunking",
-    "embeddings",
-    "vector search",
-    "top_k",
-    "built-in knowledge versus external vector store",
-    "hallucination testing"
-   ],
-   "labs": [
-    "lab_9",
-    "lab_10"
-   ]
-  }
- ],
- "labs": [
-  {
-   "id": "lab_0",
-   "number": 0,
-   "day": 1,
-   "module": "m1",
-   "title": "Lab 0 — Environment Setup",
-   "subtitle": "Copilot Studio Training (Developer) environment",
-   "duration_minutes": 40,
-   "platform": "Power Platform admin centre",
-   "teaches": "One Copilot Studio Training (Developer) environment, with Dataverse and Copilot Credits, stands behind every later lab.",
-   "path": "labs/Lab 0 - Environment Setup/index.md",
-   "entry": "index.md"
-  },
-  {
-   "id": "lab_1",
-   "number": 1,
-   "day": 1,
-   "module": "m1",
-   "title": "Lab 1 — Trigger and Actions",
-   "subtitle": "Form to email confirmation",
-   "duration_minutes": 40,
-   "platform": "Power Automate + Microsoft Forms + Outlook",
-   "teaches": "A trigger starts a flow; actions consume the trigger's outputs as dynamic content.",
-   "path": "labs/Lab 1 - Trigger and Actions/index.md",
-   "entry": "index.md"
-  },
-  {
-   "id": "lab_2",
-   "number": 2,
-   "day": 1,
-   "module": "m1",
-   "title": "Lab 2 — Log to Excel",
-   "subtitle": "Log the enquiry, then send the email",
-   "duration_minutes": 45,
-   "platform": "Power Automate + Excel Online",
-   "teaches": "Commit before you confirm — the audit row is written before the acknowledgement is sent.",
-   "path": "labs/Lab 2 - Log to Excel/index.md",
-   "entry": "index.md"
-  },
-  {
-   "id": "lab_3",
-   "number": 3,
-   "day": 1,
-   "module": "m2",
-   "title": "Lab 3 — Leave Application Approval",
-   "subtitle": "The flow pauses for a manager",
-   "duration_minutes": 45,
-   "platform": "Power Automate + Approvals + Outlook",
-   "teaches": "A running flow suspends at the approval action and branches on the human decision.",
-   "path": "labs/Lab 3 - Leave Application Approval/index.md",
-   "entry": "index.md"
-  },
-  {
-   "id": "lab_4",
-   "number": 4,
-   "day": 1,
-   "module": "m3",
-   "title": "Lab 4 — Agents",
-   "subtitle": "Procurement, HR, Sales and IT Support",
-   "duration_minutes": 45,
-   "platform": "Copilot Studio agents + agent flows + SharePoint + Teams",
-   "teaches": "An agent is instructions, skills, knowledge, tools and connected agents — and only some of those are enforced.",
-   "path": "labs/Lab 4 - Agents /README.md",
-   "entry": "README.md"
-  },
-  {
-   "id": "lab_4b",
-   "number": "4b",
-   "day": 1,
-   "module": "m3",
-   "title": "Lab 4b — Multi-Agent Content Team",
-   "subtitle": "Marketing Manager, Research, Blog and Review — one pipeline, four agents, and a human at the end",
-   "duration_minutes": 75,
-   "optional": true,
-   "platform": "Copilot Studio connected agents",
-   "teaches": "One topic, four agents: the Marketing Manager owns the conversation and delegates by stage of work — and nothing is final until a person approves.",
-   "path": "labs/Lab 4b - Multi-Agent Content Team/README.md",
-   "entry": "README.md",
-   "duration_label": "60–75"
-  },
-  {
-   "id": "lab_5",
-   "number": 5,
-   "day": 2,
-   "module": "m3",
-   "title": "Lab 5 — Calling Agent from Workflow",
-   "subtitle": "Blog-writer agent flow: topic in, Teams post out",
-   "duration_minutes": 30,
-   "platform": "Copilot Studio agent flow + M365 Copilot + Teams",
-   "teaches": "Build an agent flow that collects a blog topic at the Start node, drafts the post with M365 Copilot, and posts it to the Training team's General channel.",
-   "path": "labs/Lab 5 - Calling Agent from Workflow/index.md",
-   "entry": "index.md"
-  },
-  {
-   "id": "lab_5b",
-   "number": "5b",
-   "day": 2,
-   "module": "m3",
-   "title": "Lab 5b — Calling Workflow from Agent",
-   "subtitle": "A blog-writer agent that calls a workflow as its tool",
-   "duration_minutes": 30,
-   "platform": "Copilot Studio + M365 Copilot",
-   "teaches": "The mirror image of Lab 5: the agent decides when to call the workflow, and the flow's inputs and outputs are the contract it programs against.",
-   "path": "labs/Lab 5b - Calling Workflow from Agent/index.md",
-   "entry": "index.md"
-  },
-  {
-   "id": "lab_6",
-   "number": 6,
-   "day": 2,
-   "module": "m4",
-   "title": "Lab 6 — HTTP and Application Approval Agent",
-   "subtitle": "Marina Trust Bank customer onboarding",
-   "duration_minutes": 50,
-   "platform": "Copilot Studio agent flow + SharePoint + Outlook",
-   "teaches": "The boundary of agency — the AI decides what to do; deterministic actions do what must always happen.",
-   "path": "labs/Lab 6 - HTTP and Application Approval Agent/README.md",
-   "entry": "README.md"
-  },
-  {
-   "id": "lab_7",
-   "number": 7,
-   "day": 2,
-   "module": "m4",
-   "title": "Lab 7 — HTTP and Chatbot",
-   "subtitle": "Investment advisor chatbot",
-   "duration_minutes": 40,
-   "platform": "Copilot Studio + SharePoint knowledge + static website",
-   "teaches": "The agent alone — rules in the instruction, facts in the knowledge source, and a refusal it must never break.",
-   "path": "labs/Lab 7 - HTTP and Chatbot/README.md",
-   "entry": "README.md"
-  },
-  {
-   "id": "lab_8",
-   "number": 8,
-   "day": 2,
-   "module": "m4",
-   "title": "Lab 8 — HTTP and Human Review",
-   "subtitle": "Client rapport assistant with a Teams approval gate",
-   "duration_minutes": 60,
-   "platform": "Copilot Studio + Human review + Outlook + Teams",
-   "teaches": "Human in the loop — the AI drafts, and the workflow physically cannot proceed until a person approves.",
-   "path": "labs/Lab 8 - HTTP and Human Review/README.md",
-   "entry": "README.md"
-  },
-  {
-   "id": "lab_9",
-   "number": 9,
-   "day": 2,
-   "module": "m5",
-   "title": "Lab 9 — RAG with Knowledge Base",
-   "subtitle": "Cook & Bake Academy, built-in knowledge",
-   "duration_minutes": 40,
-   "platform": "Copilot Studio Knowledge + SharePoint",
-   "teaches": "RAG as a product setting — three nodes, no ingestion, and nothing you can inspect.",
-   "path": "labs/Lab 9 - RAG with Knowledge Base/README.md",
-   "entry": "README.md"
-  },
-  {
-   "id": "lab_10",
-   "number": 10,
-   "day": 2,
-   "module": "m5",
-   "title": "Lab 10 — RAG with Pinecone",
-   "subtitle": "The same chatbot, with the levers back",
-   "duration_minutes": 40,
-   "platform": "Copilot Studio + Power Automate + Pinecone",
-   "teaches": "What the convenience cost — chunking, embeddings, dimension and top_k, back in your hands.",
-   "path": "labs/Lab 10 - RAG with Pinecone/README.md",
-   "entry": "README.md"
-  }
- ]
+  "version": "8.1",
+  "course_title": "Business Process Automation with Power Automate and Copilot Studio Agents",
+  "course_code": "TGS-2022017524",
+  "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v8.1.pptx",
+  "design_principle": "Concepts first, labs second. Every lab is preceded by the concept slides that explain it, and every concept slide names the lab where it is applied.",
+  "naming_rule": "Workflows in the tenant are named exactly as the lab title ('Lab N - <Title>'); agents are named 'Lab N - <Agent Name>' (e.g. 'Lab 5 - HR Agent'); helper workflows and every artefact carry the lab prefix ('Lab 6 - Raise Requisition', 'Lab 2 - Enquiry Log.xlsx', 'Lab 12 - Customers'). Agent names are capped at 30 characters by Copilot Studio, so learners use e.g. 'Lab 9 - Marketing Manager' (25). The trainer's canonical workflows AND agents both carry the suffix ' (DO NOT DELETE)'; agent base names are shortened to fit the 30-character cap (e.g. 'Lab 5 - HR (DO NOT DELETE)', 'Lab 6 - Proc (DO NOT DELETE)', 'Lab 9 - Mgr (DO NOT DELETE)'); learners name their own builds plainly. Every hands-on build uses the Copilot Studio new-experience designer; classic Power Automate is never opened.",
+  "modules": [
+    {
+      "id": "m1",
+      "day": 1,
+      "title": "Module 1 — Business Process Automation and Power Automate",
+      "concepts": [
+        "business process automation",
+        "Power Platform map",
+        "the Copilot Studio workflow designer",
+        "triggers",
+        "connector actions",
+        "dynamic content",
+        "Activity and run details"
+      ],
+      "labs": [
+        "lab_0",
+        "lab_1",
+        "lab_2"
+      ]
+    },
+    {
+      "id": "m2",
+      "day": 1,
+      "title": "Module 2 — Control Flow and Human in the Loop",
+      "concepts": [
+        "If/Else",
+        "Classify",
+        "approvals",
+        "human in the loop",
+        "human on the loop",
+        "human out of the loop",
+        "Human review node",
+        "email classification"
+      ],
+      "labs": [
+        "lab_3",
+        "lab_4"
+      ]
+    },
+    {
+      "id": "m3",
+      "day": 1,
+      "title": "Module 3 — Copilot Studio Agents",
+      "concepts": [
+        "the new experience",
+        "model and harness",
+        "agent anatomy",
+        "instructions",
+        "knowledge",
+        "tools",
+        "skills",
+        "connected agents",
+        "enforcement hierarchy",
+        "multi-agent orchestration",
+        "calling an agent from a workflow",
+        "calling a workflow from an agent",
+        "publishing to channels"
+      ],
+      "labs": [
+        "lab_5",
+        "lab_6",
+        "lab_7",
+        "lab_8",
+        "lab_9",
+        "lab_10",
+        "lab_11"
+      ]
+    },
+    {
+      "id": "m4",
+      "day": 2,
+      "title": "Module 4 — Agent Flows, HTTP and the Boundary of Agency",
+      "concepts": [
+        "HTTP trigger",
+        "request and response",
+        "JSON schema",
+        "structured output",
+        "boundary of agency",
+        "Human review node",
+        "Copilot Credits"
+      ],
+      "labs": [
+        "lab_12",
+        "lab_13",
+        "lab_14"
+      ]
+    },
+    {
+      "id": "m5",
+      "day": 2,
+      "title": "Module 5 — Retrieval Augmented Generation",
+      "concepts": [
+        "grounding",
+        "RAG pipeline",
+        "chunking",
+        "embeddings",
+        "vector search",
+        "top_k",
+        "built-in knowledge versus external vector store",
+        "hallucination testing"
+      ],
+      "labs": [
+        "lab_15",
+        "lab_16",
+        "lab_17"
+      ]
+    }
+  ],
+  "labs": [
+    {
+      "id": "lab_0",
+      "number": 0,
+      "day": 1,
+      "module": "m1",
+      "title": "Lab 0 — Environment Setup",
+      "subtitle": "Training Class Sandbox (assigned by your trainer)",
+      "duration_minutes": 20,
+      "platform": "Power Platform admin centre + Copilot Studio",
+      "teaches": "One Training Class Sandbox, with Dataverse and Copilot Credits, stands behind every later lab — and one designer builds everything.",
+      "path": "labs/Lab 0 - Environment Setup/index.md",
+      "entry": "index.md"
+    },
+    {
+      "id": "lab_1",
+      "number": 1,
+      "day": 1,
+      "module": "m1",
+      "title": "Lab 1 — Trigger and Actions",
+      "subtitle": "Form to email confirmation",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio workflow + Microsoft Forms + Outlook",
+      "teaches": "A trigger starts a workflow; connector actions consume the trigger's outputs as dynamic content.",
+      "path": "labs/Lab 1 - Trigger and Actions/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 1 - Trigger and Actions",
+        "Lab 1 - Course Enquiry Form"
+      ]
+    },
+    {
+      "id": "lab_2",
+      "number": 2,
+      "day": 1,
+      "module": "m1",
+      "title": "Lab 2 — Log to Excel",
+      "subtitle": "Log the enquiry, then send the email",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio workflow + Excel Online",
+      "teaches": "Commit before you confirm — the audit row is written before the acknowledgement is sent.",
+      "path": "labs/Lab 2 - Log to Excel/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 2 - Log to Excel",
+        "Lab 2 - Enquiry Log.xlsx"
+      ]
+    },
+    {
+      "id": "lab_3",
+      "number": 3,
+      "day": 1,
+      "module": "m2",
+      "title": "Lab 3 — Leave Application Approval",
+      "subtitle": "The workflow pauses for a manager",
+      "duration_minutes": 35,
+      "platform": "Copilot Studio workflow + Approvals + Outlook",
+      "teaches": "A running workflow suspends at the approval action and branches with If/Else on the human decision.",
+      "path": "labs/Lab 3 - Leave Application Approval/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 3 - Leave Application Approval",
+        "Lab 3 - Leave Application Form",
+        "Lab 3 - Leave Register.xlsx"
+      ]
+    },
+    {
+      "id": "lab_4",
+      "number": 4,
+      "day": 1,
+      "module": "m2",
+      "title": "Lab 4 — Email Classification",
+      "subtitle": "An inbox workflow that sorts, replies, books and escalates",
+      "duration_minutes": 45,
+      "platform": "Copilot Studio workflow + Outlook + Classify + Human review + Teams",
+      "teaches": "The Classify node sorts each email into five categories; each port runs a deterministic handler, and the Priority branch stops at a human in Teams.",
+      "path": "labs/Lab 4 - Email Classification/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 4 - Email Classification",
+        "Lab 4 - Other"
+      ]
+    },
+    {
+      "id": "lab_5",
+      "number": 5,
+      "day": 1,
+      "module": "m3",
+      "title": "Lab 5 — Your First Agent",
+      "subtitle": "An HR agent: instructions, knowledge, test, publish",
+      "duration_minutes": 35,
+      "platform": "Copilot Studio (new experience)",
+      "teaches": "An agent is instructions plus a model plus knowledge — and the Preview tab is where you find out what it will refuse.",
+      "path": "labs/Lab 5 - Your First Agent/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 5 - HR Agent",
+        "Lab 5 - HR Policies"
+      ]
+    },
+    {
+      "id": "lab_6",
+      "number": 6,
+      "day": 1,
+      "module": "m3",
+      "title": "Lab 6 — Procurement Agent with Tools",
+      "subtitle": "A workflow as a tool, and the audit row it writes",
+      "duration_minutes": 35,
+      "platform": "Copilot Studio agent + workflow as a tool + Excel Online",
+      "teaches": "The agent decides a tool applies and fills its inputs; the workflow's own logic is enforced — and the reference number it returns is the proof it ran.",
+      "path": "labs/Lab 6 - Procurement Agent with Tools/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 6 - Procurement Agent",
+        "Lab 6 - Raise Requisition",
+        "Lab 6 - Requisition Log.xlsx"
+      ]
+    },
+    {
+      "id": "lab_7",
+      "number": 7,
+      "day": 1,
+      "module": "m3",
+      "title": "Lab 7 — Sales Agent with Knowledge",
+      "subtitle": "Grounded in 20 brochures, and refusing to invent",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio agent + SharePoint knowledge",
+      "teaches": "Grounding is giving the agent facts and taking away every other source — a public-facing agent whose worst failure is an invented fee.",
+      "path": "labs/Lab 7 - Sales Agent with Knowledge/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 7 - Sales Agent",
+        "Lab 7 - Course Brochures"
+      ]
+    },
+    {
+      "id": "lab_8",
+      "number": 8,
+      "day": 1,
+      "module": "m3",
+      "title": "Lab 8 — IT Support Agent with Skills",
+      "subtitle": "Five uploaded skill packages, and the one rule none of them can enforce",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio agent + skill packages",
+      "teaches": "A skill is a procedure the model decides to apply, not a permission — and a tool the agent does not have is a control.",
+      "path": "labs/Lab 8 - IT Support Agent with Skills/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 8 - IT Support Agent"
+      ]
+    },
+    {
+      "id": "lab_9",
+      "number": 9,
+      "day": 2,
+      "module": "m3",
+      "title": "Lab 9 — Multi-Agent Content Team",
+      "subtitle": "Manager, Research, Blog and Review — one pipeline, four agents, and a human at the end",
+      "duration_minutes": 35,
+      "platform": "Copilot Studio connected agents",
+      "teaches": "One topic, four agents: the manager owns the conversation and delegates by stage of work — and nothing is final until a person approves.",
+      "path": "labs/Lab 9 - Multi-Agent Content Team/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 9 - Marketing Manager",
+        "Lab 9 - Research Agent",
+        "Lab 9 - Blog Agent",
+        "Lab 9 - Review Agent"
+      ]
+    },
+    {
+      "id": "lab_10",
+      "number": 10,
+      "day": 2,
+      "module": "m3",
+      "title": "Lab 10 — Calling Agent from Workflow",
+      "subtitle": "Blog-writer workflow: topic in, Teams post out",
+      "duration_minutes": 25,
+      "platform": "Copilot Studio workflow + M365 Copilot + Teams",
+      "teaches": "The workflow calls the model at a fixed step, then acts on the result deterministically.",
+      "path": "labs/Lab 10 - Calling Agent from Workflow/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 10 - Calling Agent from Workflow"
+      ]
+    },
+    {
+      "id": "lab_11",
+      "number": 11,
+      "day": 2,
+      "module": "m3",
+      "title": "Lab 11 — Calling Workflow from Agent",
+      "subtitle": "A blog-writer agent that calls a workflow as its tool",
+      "duration_minutes": 25,
+      "platform": "Copilot Studio agent + workflow as a tool",
+      "teaches": "The mirror image of Lab 10: the agent decides when to call the workflow, and the flow's inputs and outputs are the contract it programs against.",
+      "path": "labs/Lab 11 - Calling Workflow from Agent/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 11 - Blog Writer Agent",
+        "Lab 11 - Blog Writer Tool"
+      ]
+    },
+    {
+      "id": "lab_12",
+      "number": 12,
+      "day": 2,
+      "module": "m4",
+      "title": "Lab 12 — HTTP and Application Approval Agent",
+      "subtitle": "Marina Trust Bank customer onboarding",
+      "duration_minutes": 45,
+      "platform": "Copilot Studio workflow + SharePoint + Outlook",
+      "teaches": "The boundary of agency — the AI decides what to do; deterministic actions do what must always happen.",
+      "path": "labs/Lab 12 - HTTP and Application Approval Agent/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 12 - HTTP and Application Approval Agent",
+        "Lab 12 - Customers",
+        "Lab 12 - Onboarding Log"
+      ]
+    },
+    {
+      "id": "lab_13",
+      "number": 13,
+      "day": 2,
+      "module": "m4",
+      "title": "Lab 13 — HTTP and Chatbot",
+      "subtitle": "Investment advisor chatbot",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio workflow + SharePoint knowledge + website",
+      "teaches": "The agent alone — rules in the instruction, facts in the knowledge source, and a refusal it must never break.",
+      "path": "labs/Lab 13 - HTTP and Chatbot/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 13 - HTTP and Chatbot",
+        "Lab 13 - Investment FAQ"
+      ]
+    },
+    {
+      "id": "lab_14",
+      "number": 14,
+      "day": 2,
+      "module": "m4",
+      "title": "Lab 14 — HTTP and Human Review",
+      "subtitle": "Client rapport assistant with a Teams approval gate",
+      "duration_minutes": 35,
+      "platform": "Copilot Studio workflow + Human review + Excel Online + Teams",
+      "teaches": "Human in the loop — the AI drafts, and the workflow physically cannot proceed until a person approves.",
+      "path": "labs/Lab 14 - HTTP and Human Review/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 14 - HTTP and Human Review",
+        "Lab 14 - Handover Queue.xlsx"
+      ]
+    },
+    {
+      "id": "lab_15",
+      "number": 15,
+      "day": 2,
+      "module": "m5",
+      "title": "Lab 15 — RAG with Knowledge Base",
+      "subtitle": "Cook & Bake Academy, built-in knowledge",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio Knowledge + SharePoint",
+      "teaches": "RAG as a product setting — three nodes, no ingestion, and nothing you can inspect.",
+      "path": "labs/Lab 15 - RAG with Knowledge Base/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 15 - RAG with Knowledge Base",
+        "Lab 15 - Course Brochures"
+      ]
+    },
+    {
+      "id": "lab_16",
+      "number": 16,
+      "day": 2,
+      "module": "m5",
+      "title": "Lab 16 — RAG with Pinecone",
+      "subtitle": "The same chatbot, with the levers back",
+      "duration_minutes": 30,
+      "platform": "Copilot Studio workflow + Pinecone",
+      "teaches": "What the convenience cost — chunking, embeddings, dimension and top_k, back in your hands.",
+      "path": "labs/Lab 16 - RAG with Pinecone/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 16 - RAG with Pinecone",
+        "lab16-course-brochures"
+      ]
+    },
+    {
+      "id": "lab_17",
+      "number": 17,
+      "day": 2,
+      "module": "m5",
+      "title": "Lab 17 — Publish to Teams, Microsoft 365 Copilot and the Web",
+      "subtitle": "Channels + — where a published agent meets its users",
+      "duration_minutes": 25,
+      "platform": "Copilot Studio Channels + Microsoft Teams + Microsoft 365 Copilot + website",
+      "teaches": "Publish is what channels serve; each channel needs something different, and none of them changes the agent — a channel is a door, not a brain.",
+      "path": "labs/Lab 17 - Publish to Teams, Microsoft 365 Copilot and the Web/index.md",
+      "entry": "index.md",
+      "tenant_names": [
+        "Lab 5 - HR Agent"
+      ]
+    }
+  ]
 }

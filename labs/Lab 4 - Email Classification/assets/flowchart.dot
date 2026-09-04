@@ -1,0 +1,36 @@
+digraph G {
+  graph [rankdir=TB, bgcolor="white", pad="0.25", nodesep="0.35", ranksep="0.5",
+         fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC",
+        color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=11,
+        margin="0.14,0.10"];
+  edge [color="#365C82", penwidth=1.6, arrowsize=0.8, fontname="Arial",
+        fontsize=9, fontcolor="#365C82"];
+
+      trigger [label="Start\nWhen a new email arrives (V3)\nInbox", fillcolor="#EAF2FF"];
+      classify [label="Classify\nSubject · From · Importance · Body\nMeeting | Need Reply | Priority | Informational | Other", fillcolor="#F1EAFF"];
+      meetagent [label="Agent: Meeting Handler\nstructured output\nmeetingTitle · meetingStart · meetingEnd", fillcolor="#FFE9EC"];
+      createevt [label="Create event (V4)\nTeams meeting with the sender"];
+      replymtg [label="Reply to email (V3)\n\"meeting booked\""];
+      drafter [label="Agent: Reply Drafter\ntext response", fillcolor="#FFE9EC"];
+      replydraft [label="Reply to email (V3)\nBody = Reply Drafter text"];
+      triage [label="Agent: Priority Triage\nstructured output\nsummary · suggestedReply", fillcolor="#FFE9EC"];
+      review [label="Human review: Priority check\nChannel Teams\nOutcome (Yes/No) · Name (Text)", fillcolor="#FFF4E5"];
+      ifelse [label="If/Else\nOutcome Equals Yes", shape=diamond, fillcolor="#FFF4E5"];
+      replyok [label="Reply to email (V3)\nsuggestedReply + Approved by: Name", fillcolor="#E8F7EE"];
+      escalate [label="Send an email (V2)\nto the trainer (literal address)"];
+      flag [label="Flag email (V2)"];
+      move [label="Move email (V2)\nfolder: Lab 4 - Other"];
+
+      trigger -> classify;
+      classify -> meetagent [label=" Meeting"];
+      meetagent -> createevt -> replymtg;
+      classify -> drafter [label=" Need Reply"];
+      drafter -> replydraft;
+      classify -> triage [label=" Priority"];
+      triage -> review -> ifelse;
+      ifelse -> replyok [label=" Yes"];
+      ifelse -> escalate [label=" No"];
+      classify -> flag [label=" Informational"];
+      classify -> move [label=" Other"];
+}

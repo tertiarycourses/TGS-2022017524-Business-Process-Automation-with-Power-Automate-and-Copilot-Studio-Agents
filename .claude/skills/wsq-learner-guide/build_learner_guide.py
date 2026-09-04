@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
 Single-source Learner Guide generator for
-"Microsoft Copilot Studio & Power Automate for Business Workflow Automation".
+"Business Process Automation with Power Automate and Copilot Studio Agents" (TGS-2022017524).
 
-Compiles the actual lab + module markdown under ./labs/ into BOTH:
+Compiles the actual lab + module markdown under ./labs/ (18 labs, Lab 0-17, every lab's
+entry file is index.md, plus the five Module readings) into BOTH:
   - LEARNER-GUIDE.md                                            (repo root)
-  - courseware/Microsoft Copilot Studio & Power Automate ... Learner Guide.docx
-so the two are always aligned. Re-run after editing any lab.
+  - courseware/LG-Business Process Automation with Power Automate and Copilot Studio Agents.docx
+so the two are always aligned. Re-run after editing any lab. Images referenced from a lab's
+markdown (assets/flowchart.png, screenshots/*.png) are resolved relative to that lab's folder
+and embedded at build time, so new screenshots need no change here.
 """
 import os, re, sys
 
@@ -24,7 +27,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "7.3.2"
+VERSION = "8.1"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -133,6 +136,28 @@ VERSIONS = [
     ["7.3.2", "7 Aug 2026", "Lab 8 build screenshots added — the finished designer canvas and "
      "the If/Else condition (Outcome Equals Yes) — captured from the live repaired flow.",
      "Course Development Team"],
+    ["8.0", "4 September 2026", "Restructured to 18 individual labs (Lab 0–17) built in the new "
+     "Copilot Studio; new Lab 4 Email Classification, Labs 5–8 one agent each, Lab 17 "
+     "publishing; all flows rebuilt as Copilot Studio workflows; real new-designer screenshots "
+     "embedded in every lab; tenant naming aligned to the built environment (workflows "
+     "(DO NOT DELETE) on workflows and agents, 30-character agent-name cap); Copilot Credits note",
+     "Course Development Team"],
+    ["8.0.1", "4 September 2026", "Environment model updated — learners now build in a dedicated "
+     "per-class Training Class Sandbox environment (reset between cohorts) instead of the trainer's "
+     "build environment; the reference (DO NOT DELETE) workflows and agents were moved to a separate "
+     "master reference Sandbox and are read-only for learners. Lab 0 rewritten around switching to "
+     "the assigned class environment, with a Developer/Sandbox/Trial comparison and a self-study "
+     "path for creating a personal Developer environment.",
+     "Course Development Team"],
+    ["8.0.2", "4 September 2026", "Training Class environment change carried through the guide — "
+     "every lab now directs learners to select their assigned Training Class Sandbox environment "
+     "in the environment picker before building, never the Developer or Default environment; the "
+     "master reference Sandbox holding the (DO NOT DELETE) workflows and agents is called out as "
+     "read-only. Both days re-timed to the house standard 9:30am – 6:30pm, with the assessment "
+     "block at 4:30 – 6:30pm.",
+     "Course Development Team"],
+    ["8.1", "4 September 2026", "Deck lab order corrected — Lab 17 (Publish to Teams, Microsoft 365 Copilot and the Web) now appears LAST, after the two RAG labs, matching the order the Lesson Plan schedules and the Learner Guide follows. Previously the deck grouped it with the Module 3 agent labs, so the slides jumped Lab 11 to Lab 17 and back to Lab 12. No lab content, duration or timing changed.",
+     "Course Development Team"],
 ]
 
 # ---- neutral (un-branded) cover + footer: this is client training, no Tertiary branding ----
@@ -170,6 +195,7 @@ def add_footer_neutral(doc, title):
     sr = sp.add_run(f"{title}  ·  © {ORG}"); sr.font.size = Pt(7.5); sr.font.color.rgb = GREY
 
 # ---- course structure: ordered (day-heading, [files]) ----
+# 18 labs (Lab 0-17); every lab's entry file is index.md. Order = delivery order.
 DAYS = [
     ("Day 1 — Workflows, then Agents", [
         "labs/Module 1 - Business Process Automation and Power Automate.md",
@@ -178,28 +204,40 @@ DAYS = [
         "labs/Lab 2 - Log to Excel/index.md",
         "labs/Module 2 - Control Flow and Human in the Loop.md",
         "labs/Lab 3 - Leave Application Approval/index.md",
+        "labs/Lab 4 - Email Classification/index.md",
         "labs/Module 3 - Copilot Studio Agents.md",
-        "labs/Lab 4 - Agents /README.md",
-        "labs/Lab 4b - Multi-Agent Content Team/README.md",
+        "labs/Lab 5 - Your First Agent/index.md",
+        "labs/Lab 6 - Procurement Agent with Tools/index.md",
+        "labs/Lab 7 - Sales Agent with Knowledge/index.md",
+        "labs/Lab 8 - IT Support Agent with Skills/index.md",
     ]),
-    ("Day 2 — Agent Flows, Human Review and RAG", [
-        "labs/Lab 5 - Calling Agent from Workflow/index.md",
-        "labs/Lab 5b - Calling Workflow from Agent/index.md",
+    ("Day 2 — Multi-Agent, Agent Flows, Human Review, RAG and Publishing", [
+        "labs/Lab 9 - Multi-Agent Content Team/index.md",
+        "labs/Lab 10 - Calling Agent from Workflow/index.md",
+        "labs/Lab 11 - Calling Workflow from Agent/index.md",
         "labs/Module 4 - Agent Flows, HTTP and the Boundary of Agency.md",
-        "labs/Lab 6 - HTTP and Application Approval Agent/README.md",
-        "labs/Lab 7 - HTTP and Chatbot/README.md",
-        "labs/Lab 8 - HTTP and Human Review/README.md",
+        "labs/Lab 12 - HTTP and Application Approval Agent/index.md",
+        "labs/Lab 13 - HTTP and Chatbot/index.md",
+        "labs/Lab 14 - HTTP and Human Review/index.md",
         "labs/Module 5 - Retrieval Augmented Generation.md",
-        "labs/Lab 9 - RAG with Knowledge Base/README.md",
-        "labs/Lab 10 - RAG with Pinecone/README.md",
+        "labs/Lab 15 - RAG with Knowledge Base/index.md",
+        "labs/Lab 16 - RAG with Pinecone/index.md",
+        "labs/Lab 17 - Publish to Teams, Microsoft 365 Copilot and the Web/index.md",
     ]),
 ]
+# A missing lab file is a build error, not a warning: the guide must never silently
+# ship without a lab.
+for _day, _files in DAYS:
+    for _rel in _files:
+        assert os.path.exists(os.path.join(REPO, _rel)), f"DAYS entry not found: {_rel}"
+assert sum(1 for _d, _f in DAYS for _r in _f if "/Lab " in _r) == 18
 
 
 # ============================================================================
 # Markdown -> generic blocks
 # ============================================================================
 LINK = re.compile(r"\[([^\]]+)\]\([^)]+\)")
+_CELL_SPLIT = re.compile(r"(?<!\\)\|")
 # Lab markdown carries raw <a href="..." target="_blank">text</a> for new-tab links.
 # Word has no equivalent, and the raw tag would print literally — keep the text only.
 _ANCHOR_RE = re.compile(r'<a\s+[^>]*href="([^"]+)"[^>]*>(.*?)</a>', re.I | re.S)
@@ -253,11 +291,25 @@ def md_to_blocks(text, source_path):
         if s.startswith("|") and "|" in s[1:]:
             rows = []
             while i < n and lines[i].strip().startswith("|"):
-                cells = [c.strip() for c in lines[i].strip().strip("|").split("|")]
+                # Split on unescaped pipes only: a cell may carry "\|" for a
+                # literal pipe (e.g. "Build \| Activity \| Monitor" tabs).
+                cells = [c.strip().replace("\\|", "|")
+                         for c in _CELL_SPLIT.split(lines[i].strip().strip("|"))]
                 if not re.match(r"^:?-{2,}:?$", cells[0]):  # skip separator row
                     rows.append([clean(c) for c in cells])
                 i += 1
-            if rows: blocks.append(("table", rows))
+            if rows:
+                # Normalise ragged rows to the header width. Overflow cells come
+                # from an unescaped pipe inside the first (label) column, so fold
+                # them back into it; short rows are padded.
+                width = len(rows[0])
+                for r in rows[1:]:
+                    if len(r) > width:
+                        extra = len(r) - width
+                        r[: extra + 1] = [" | ".join(r[: extra + 1])]
+                    while len(r) < width:
+                        r.append("")
+                blocks.append(("table", rows))
             continue
         # blockquote (collect consecutive)
         if s.startswith(">"):
@@ -359,20 +411,25 @@ def rule(): B.append(("rule",))
 
 # Title + intro
 B.append(("h1", "Learner Guide"))
-p(f"Welcome! This Learner Guide takes you **click-by-click** through every hands-on lab in the WSQ course "
-  f"**{TITLE}** (Course Code: {COURSE_CODE}). Over two days you go from your first Power Automate flow "
-  f"to AI business agents in Microsoft Copilot Studio — and finish by connecting an agent to your flows in a "
-  f"complete end-to-end automated workflow.")
+p(f"Welcome! This Learner Guide takes you **click-by-click** through all 18 hands-on labs (Labs 0–17) in the "
+  f"WSQ course **{TITLE}** (Course Code: {COURSE_CODE}). Over two days you go from your first workflow to AI "
+  f"business agents — every build is made in one designer, **Microsoft Copilot Studio (new experience)**, where "
+  f"workflows and agents live side by side; classic Power Automate is only the connector engine running "
+  f"underneath and you never open it directly. You finish by publishing an agent to Microsoft Teams, "
+  f"Microsoft 365 Copilot and the web.")
 p("Work through the labs **in order**: each one builds on the skills of the lab before it. Whenever you see a "
   "**Checkpoint**, stop and confirm your flow or agent behaves as described before moving on. The "
   "**Common Errors & Quick Fixes** and per-lab **Troubleshooting** tables will get you unstuck fast.")
-note("Course flow at a glance — Day 1: Forms-driven email, Excel, branching and approval "
-     "flows - trigger and actions, Excel logging and a leave approval that pauses for a "
-     "manager - then Copilot Studio agents and what they are made of (Labs 0-4, with the "
-     "optional multi-agent Lab 4b). Day 2: the agent and the workflow calling each other "
-     "(Labs 5 and 5b), three HTTP labs including a blocking human review "
-     "gate, and RAG built twice - with built-in knowledge and with Pinecone (Labs 6-10), "
-     "then the WSQ assessment (4:00-6:00 PM).")
+note("Course flow at a glance — Day 1: the environment (Lab 0), Forms-driven workflows with "
+     "no AI in them - trigger and actions, Excel logging and a leave approval that pauses for a "
+     "manager (Labs 1-3) - an inbox workflow where a Classify node chooses the branch and "
+     "Priority mail stops at a human in Teams (Lab 4), then the agent one part at a time: "
+     "instructions and knowledge, tools, public knowledge, skills (Labs 5-8). Day 2: a "
+     "multi-agent content team (Lab 9), the workflow and the agent calling each other (Labs "
+     "10-11), three HTTP labs including a blocking human review gate (Labs 12-14), RAG built "
+     "twice - with built-in knowledge and with Pinecone (Labs 15-16) - and publishing the agent "
+     "to Teams, Microsoft 365 Copilot and the web (Lab 17), then the WSQ assessment "
+     "(4:00-6:00 PM).")
 rule()
 
 # Common errors reference (mirrors the deck's quick-fix slide)
@@ -389,8 +446,10 @@ B.append(("table", [
     ["Excel cell shows ########", "The column is only too narrow", "Auto-fit the column — the value is fine"],
     ["An unwanted ‘For each’ wraps your action", "You inserted a list/array value into a single-value field",
      "Use single-value fields (Outcome, trigger inputs); delete the For each and re-add a plain action"],
-    ["Agent can’t see its flow", "Agent and flow are in different environments",
-     "Set both Copilot Studio and Power Automate to the same environment (Copilot Studio Training)"],
+    ["Agent can’t see its workflow", "Agent and workflow are in different environments",
+     "Build both in the Training Class environment your trainer assigned — check the environment picker before every lab"],
+    ["Agent node returns an empty answer", "The Instructions box escaped a pasted expression, or a ⚡ chip points at a deleted action",
+     "Build the per-call text in a Compose node and insert one ⚡ chip; a reference to nothing resolves to empty, not to an error"],
 ]))
 rule()
 
@@ -461,10 +520,11 @@ def render_markdown(blocks):
         elif k == "code": out.append("```\n" + b[1] + "\n```\n")
         elif k == "table":
             rows = b[1]
-            out.append("| " + " | ".join(rows[0]) + " |")
+            esc = lambda c: c.replace("|", "\\|")  # literal pipes must not split GitHub table cells
+            out.append("| " + " | ".join(esc(c) for c in rows[0]) + " |")
             out.append("| " + " | ".join("---" for _ in rows[0]) + " |")
             for r in rows[1:]:
-                out.append("| " + " | ".join(r) + " |")
+                out.append("| " + " | ".join(esc(c) for c in r) + " |")
             out.append("")
         elif k == "note": out.append(f"> {b[1]}\n")
         elif k == "image":

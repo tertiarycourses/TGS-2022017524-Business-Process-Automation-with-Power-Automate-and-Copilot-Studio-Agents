@@ -14,8 +14,8 @@ from pptx import Presentation
 from pptx.util import Inches
 
 ROOT = Path(__file__).resolve().parents[1]
-DECK = ROOT / "courseware" / (
-    "Business Process Automation with Power Automate and Copilot Studio Agents-v7.0.pptx"
+DECK = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "courseware" / (
+    "Business Process Automation with Power Automate and Copilot Studio Agents-v8.0.pptx"
 )
 
 FOOTER_TOP = Inches(6.93)
@@ -26,7 +26,7 @@ MARGIN = Inches(0.35)
 prs = Presentation(DECK)
 problems = []
 
-BUILT_FIRST, BUILT_LAST = 7, 60   # the slides this project generates
+BUILT_FIRST, BUILT_LAST = 1, 10**6   # v8.0 builds every slide; pass a deck path as argv[1]
 
 for idx, slide in enumerate(prs.slides, 1):
     if not (BUILT_FIRST <= idx <= BUILT_LAST):

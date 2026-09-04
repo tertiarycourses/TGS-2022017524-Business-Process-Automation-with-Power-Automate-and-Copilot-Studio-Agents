@@ -1,0 +1,17 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6", fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC", color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12, margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial", fontsize=10, fontcolor="#365C82"];
+  graph [rankdir=TB];
+      user [label="Colleague chats with\nLab 6 - Procurement Agent", fillcolor="#EAF2FF"];
+      agent [label="Agent\ninstructions · knowledge (policy, vendor register)\n2 skills · decides the tool applies", fillcolor="#FFE9EC"];
+      trigger [label="Lab 6 - Raise Requisition\nWhen an agent calls the flow\nItem · Quantity · Justification · Requester", fillcolor="#FFF4E5"];
+      compose [label="Compose: Reference\nREQ-yyyymmdd-XXXXXX"];
+      excel [label="Add a row into a table\nLab 6 - Requisition Log.xlsx · RequisitionLog"];
+      respond [label="Respond to the agent\nReference · Status", fillcolor="#E8F7EE"];
+      { rank=same; user; agent; trigger; }
+      user -> agent [label=" raise a requisition"];
+      agent -> trigger [label=" calls the tool"];
+      trigger -> compose -> excel -> respond;
+      respond -> agent [label=" Reference", style=dashed, constraint=false];
+}

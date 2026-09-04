@@ -1,0 +1,17 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6", fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC", color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12, margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial", fontsize=10, fontcolor="#365C82"];
+      agent [label="Lab 5 - HR Agent\ntested in Preview", fillcolor="#EAF2FF"];
+      publish [label="Publish\n(the published version is what channels serve)", fillcolor="#FFE9EC"];
+      channels [label="Channels +", fillcolor="#FFF4E5"];
+      teams [label="Microsoft Teams\navailability → link → Add in Teams"];
+      copilot [label="Microsoft 365 Copilot\nneeds a Copilot licence"];
+      web [label="Demo website / custom website\nembed code · authentication setting"];
+      test [label="Test as the user\nin each channel", fillcolor="#F1EAFF"];
+      further [label="Going further\nAgents SDK web chat\nsigned-in identity", fillcolor="#E8F7EE"];
+      agent -> publish -> channels;
+      channels -> teams; channels -> copilot; channels -> web;
+      teams -> test; copilot -> test; web -> test;
+      test -> further [style=dashed];
+}

@@ -1,0 +1,333 @@
+{
+ "properties": {
+  "connectionReferences": {
+   "shared_microsoftforms-1": {
+    "api": {
+     "name": "shared_microsoftforms"
+    },
+    "connection": {
+     "connectionReferenceLogicalName": "new_sharedmicrosoftforms_1d67e88d"
+    },
+    "runtimeSource": "embedded",
+    "connectionName": "shared-microsoftform-8af73895-2193-4fc8-8193-e432c05170a3"
+   }
+  },
+  "definition": {
+   "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+   "contentVersion": "1.0.0.0",
+   "parameters": {
+    "$authentication": {
+     "defaultValue": {},
+     "type": "SecureObject"
+    },
+    "$connections": {
+     "defaultValue": {},
+     "type": "Object"
+    }
+   },
+   "triggers": {
+    "When_a_new_response_is_submitted": {
+     "type": "OpenApiConnectionWebhook",
+     "inputs": {
+      "parameters": {
+       "form_id": "fhM3CmXWj0KZxBlaU1-dsJHN4KVxmTdLvxXfe8ZpcedUOUlUMkI3NjYwTFpXWERYS0s0RklSV1FKVS4u"
+      },
+      "host": {
+       "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
+       "operationId": "CreateFormWebhook",
+       "connectionName": "shared_microsoftforms-1"
+      }
+     },
+     "splitOn": "@triggerOutputs()?['body/value']",
+     "metadata": {
+      "associatedData": {
+       "graph": {
+        "name": "Lab 1 - Trigger and Actions (DO NOT DELETE)",
+        "nodes": [
+         {
+          "id": "start-3d6ad28c-7510-460b-92e1-ff43ad8e2b12",
+          "name": "When a new response is submitted",
+          "type": "start",
+          "version": 1,
+          "position": {
+           "x": 250,
+           "y": 228
+          },
+          "data": {
+           "config": {
+            "triggerType": "connector",
+            "connector": {
+             "apiName": "shared_microsoftforms",
+             "operationName": "CreateFormWebhook",
+             "connectionName": "shared_microsoftforms-1",
+             "inputs": {
+              "form_id": "fhM3CmXWj0KZxBlaU1-dsJHN4KVxmTdLvxXfe8ZpcedUOUlUMkI3NjYwTFpXWERYS0s0RklSV1FKVS4u"
+             },
+             "displayName": "When a new response is submitted",
+             "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1819/1.0.1819.4795/microsoftforms/icon.png",
+             "brandColor": "",
+             "operationType": "OpenApiConnectionWebhook",
+             "parametersSchema": {
+              "type": "object",
+              "properties": {
+               "form_id": {
+                "type": "string",
+                "title": "Form Id",
+                "x-ms-dynamic-list": {
+                 "operationId": "ListForms",
+                 "parameters": {},
+                 "itemValuePath": "id",
+                 "itemTitlePath": "title"
+                },
+                "description": "Pick a form.",
+                "minLength": 1,
+                "x-ms-visibility": "important",
+                "x-ms-property-name-alias": "form_id"
+               }
+              },
+              "required": [
+               "form_id"
+              ]
+             },
+             "triggerBatchMode": "Batch",
+             "outputSchema": {
+              "webhook": {
+               "type": "object",
+               "properties": {
+                "body": {
+                 "type": "object",
+                 "properties": {
+                  "value": {
+                   "type": "array",
+                   "title": "List of response notifications",
+                   "items": {
+                    "type": "object",
+                    "properties": {
+                     "resourceData": {
+                      "type": "object",
+                      "properties": {
+                       "responseId": {
+                        "type": "integer",
+                        "title": "Response Id",
+                        "description": "Unique identifier of the response. Use with 'Get response details' action to fetch the content of the form response.",
+                        "x-ms-property-name-alias": "resourceData/responseId"
+                       }
+                      },
+                      "required": [],
+                      "x-ms-property-name-alias": "resourceData"
+                     }
+                    },
+                    "required": []
+                   },
+                   "x-ms-property-name-alias": "body/value"
+                  }
+                 },
+                 "required": [],
+                 "x-ms-property-name-alias": "body"
+                }
+               }
+              }
+             }
+            }
+           },
+           "outcomes": [
+            {
+             "id": "default",
+             "label": "Default",
+             "outcomeSchema": {
+              "type": "object",
+              "properties": {
+               "resourceData": {
+                "type": "object",
+                "properties": {
+                 "responseId": {
+                  "type": "integer",
+                  "title": "Response Id",
+                  "description": "Unique identifier of the response. Use with 'Get response details' action to fetch the content of the form response.",
+                  "x-ms-property-name-alias": "body/resourceData/responseId"
+                 }
+                },
+                "required": [],
+                "x-ms-property-name-alias": "body/resourceData"
+               }
+              },
+              "required": []
+             }
+            }
+           ]
+          },
+          "measured": {
+           "width": 299,
+           "height": 66
+          }
+         },
+         {
+          "id": "connector-20839b8a-2d40-4346-8633-e48f74973186",
+          "name": "Get response details",
+          "type": "connector",
+          "version": 1,
+          "position": {
+           "x": 625,
+           "y": 228
+          },
+          "data": {
+           "config": {
+            "apiName": "shared_microsoftforms",
+            "displayName": "Microsoft Forms",
+            "iconUri": "https://static.powerapps.com/resource/ppcr/releases/v1.0.1819/1.0.1819.4795/microsoftforms/icon.png",
+            "brandColor": "",
+            "operationName": "GetFormResponseById",
+            "connectionName": "shared_microsoftforms-1",
+            "operationType": "OpenApiConnection",
+            "parametersSchema": {
+             "type": "object",
+             "properties": {
+              "form_id": {
+               "type": "string",
+               "title": "Form Id",
+               "x-ms-dynamic-list": {
+                "operationId": "ListForms",
+                "parameters": {},
+                "itemValuePath": "id",
+                "itemTitlePath": "title"
+               },
+               "description": "Unique identifier of the form",
+               "minLength": 1,
+               "x-ms-visibility": "important",
+               "x-ms-property-name-alias": "form_id"
+              },
+              "response_id": {
+               "type": "integer",
+               "title": "Response Id",
+               "format": "int32",
+               "description": "Unique identifier of the response",
+               "x-ms-visibility": "important",
+               "x-ms-property-name-alias": "response_id"
+              }
+             },
+             "required": [
+              "form_id",
+              "response_id"
+             ]
+            },
+            "parameters": {
+             "form_id": "fhM3CmXWj0KZxBlaU1-dsJHN4KVxmTdLvxXfe8ZpcedUOUlUMkI3NjYwTFpXWERYS0s0RklSV1FKVS4u",
+             "response_id": "@triggerOutputs()?['body/resourceData/responseId']"
+            }
+           },
+           "outcomes": [
+            {
+             "id": "default",
+             "label": "Default",
+             "outcomeSchema": {
+              "type": "object",
+              "properties": {
+               "r07b82f997fa545ab86bb3b7879fa7e96": {
+                "type": "string",
+                "title": "Tel",
+                "description": "Answer to the question above",
+                "x-ms-property-name-alias": "body/r07b82f997fa545ab86bb3b7879fa7e96"
+               },
+               "ra7b2b2c768fe4bbfae38bd8bc152cb04": {
+                "type": "string",
+                "title": "Name",
+                "description": "Answer to the question above",
+                "x-ms-property-name-alias": "body/ra7b2b2c768fe4bbfae38bd8bc152cb04"
+               },
+               "rf5e39878c6694d9d9bbe3fdfe7840b5b": {
+                "type": "string",
+                "title": "Message",
+                "description": "Answer to the question above",
+                "x-ms-property-name-alias": "body/rf5e39878c6694d9d9bbe3fdfe7840b5b"
+               },
+               "r34f434c08f984a8fa4bb1d0033e55dd3": {
+                "type": "string",
+                "title": "Email",
+                "description": "Answer to the question above",
+                "x-ms-property-name-alias": "body/r34f434c08f984a8fa4bb1d0033e55dd3"
+               },
+               "responder": {
+                "type": "string",
+                "title": "Responders' Email",
+                "description": "Email address of responder who submitted the form.",
+                "x-ms-property-name-alias": "body/responder"
+               },
+               "submitDate": {
+                "type": "string",
+                "title": "Submission time",
+                "format": "date-time",
+                "description": "Timestamp when a new response is submitted",
+                "x-ms-property-name-alias": "body/submitDate"
+               }
+              },
+              "required": []
+             }
+            }
+           ]
+          },
+          "measured": {
+           "width": 240,
+           "height": 66
+          }
+         }
+        ],
+        "edges": [
+         {
+          "id": "edge-start-3d6ad28c-7510-460b-92e1-ff43ad8e2b12-connector-20839b8a-2d40-4346-8633-e48f74973186",
+          "source": "start-3d6ad28c-7510-460b-92e1-ff43ad8e2b12",
+          "target": "connector-20839b8a-2d40-4346-8633-e48f74973186"
+         }
+        ],
+        "connectionReferences": {
+         "shared_microsoftforms-1": {
+          "api": {
+           "name": "shared_microsoftforms"
+          },
+          "connection": {
+           "connectionReferenceLogicalName": "new_sharedmicrosoftforms_1d67e88d"
+          },
+          "runtimeSource": "embedded",
+          "connectionName": "shared-microsoftform-8af73895-2193-4fc8-8193-e432c05170a3"
+         }
+        }
+       },
+       "nodeActionMapping": {
+        "connector-20839b8a-2d40-4346-8633-e48f74973186": [
+         "Get_response_details"
+        ]
+       }
+      }
+     }
+    }
+   },
+   "actions": {
+    "Get_response_details": {
+     "type": "OpenApiConnection",
+     "inputs": {
+      "parameters": {
+       "form_id": "fhM3CmXWj0KZxBlaU1-dsJHN4KVxmTdLvxXfe8ZpcedUOUlUMkI3NjYwTFpXWERYS0s0RklSV1FKVS4u",
+       "response_id": "@triggerOutputs()?['body/resourceData/responseId']"
+      },
+      "host": {
+       "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms",
+       "connectionName": "shared_microsoftforms-1",
+       "operationId": "GetFormResponseById"
+      }
+     },
+     "metadata": {
+      "description": "Get response details",
+      "nodeId": "connector-20839b8a-2d40-4346-8633-e48f74973186"
+     }
+    }
+   },
+   "outputs": {},
+   "metadata": {
+    "telemetryMetadata": {
+     "creationSource": "WorkflowDesigner",
+     "modifiedSources": "WorkflowDesigner"
+    }
+   }
+  }
+ },
+ "schemaVersion": "1.0.0.0"
+}

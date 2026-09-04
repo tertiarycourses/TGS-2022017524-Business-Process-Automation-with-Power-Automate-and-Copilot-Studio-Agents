@@ -55,3 +55,10 @@ courseware/archive/*-with-reference-slides.pptx
 # papers and model answers. The generic engine (build_assessment.py) stays.
 .claude/skills/wsq-assessment/build_assessment_course.py
 .claude/skills/wsq-assessment/build_wsq_assessment.py
+
+# Dataverse API build helpers — never commit session tokens or request bodies
+scripts/copilot_studio_api/token.txt
+scripts/copilot_studio_api/_body.json
+scripts/copilot_studio_api/ids.json
+scripts/copilot_studio_api/urls.json
+scripts/copilot_studio_api/__pycache__/

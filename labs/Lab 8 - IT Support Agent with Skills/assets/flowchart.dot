@@ -1,0 +1,13 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6", fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC", color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12, margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial", fontsize=10, fontcolor="#365C82"];
+      create [label="Agents → New agent\nLab 8 - IT Support Agent", fillcolor="#EAF2FF"];
+      instr [label="Instructions box\npaste agent/instructions.md", fillcolor="#FFE9EC"];
+      knowledge [label="Knowledge +\nservice-catalogue · known-issues · asset-register\nremove Search all websites", fillcolor="#FFF4E5"];
+      skills [label="Skills + (upload, in order)\npassword-reset-procedure · raise-it-support-ticket\nhardware-issue-handling · network-troubleshooting\nsoftware-troubleshooting"];
+      preview [label="Preview tab\nthe password probe must be refused", fillcolor="#F1EAFF"];
+      publish [label="Publish", fillcolor="#E8F7EE"];
+      create -> instr -> knowledge -> skills -> preview -> publish;
+      preview -> skills [label=" a skill did not fire? fix its description", style=dashed, constraint=false];
+}

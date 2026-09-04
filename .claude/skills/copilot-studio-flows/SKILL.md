@@ -782,3 +782,114 @@ first — on this gateway there is nothing to work around.
   than one "the fix didn't work" was actually testing the previous version.
 - When something works in isolation but not end to end, suspect **version drift
   or connection context** before suspecting logic.
+
+---
+
+## 2026-09-04 — new designer facts (verified live, Copilot Studio Training (Developer), admin account)
+
+Twelve reference workflows (Labs 1–4, 6, 10–16) were created through the Dataverse Web API
+(`scripts/copilot_studio_api/` in the course repo: `wfapi.py`, `wfapi_ext.py`, `build_labN.py`,
+`FORMATS.md`) and then saved/published in the designer; nine reference agents were built by
+hand in the agent designer. Everything below was observed, not inferred.
+
+### Workflow designer — palette and nodes
+- **+ below a node opens the "Add" dialog**: a Search box and two tabs **Featured | Connectors**.
+  Featured = Favorites (Variable, Connectors, Function) + Actions (Agent, Classify, Copilot,
+  Human review, If/Else, Switch, Loop …). Connector actions: **Connectors tab → search →
+  action**. The left **Add** panel lists Agent, Classify, Copilot, Human review, Connector,
+  Function, Variable, If/Else, Loop, Note.
+- **Response is a first-class action** (Connectors → search "Response", category Request).
+  Graph: `builtinFunction`, `operationId`/`operationName` `"response"`, category
+  `providers/Microsoft.ProcessSimple/operationGroups/Request`, parameters
+  `{statusCode, headers, body}` → compiles to `{"type":"Response"}`. Only **Status code** is
+  visible; **Headers** and **Body** are under *Advanced parameters → Show all*. The Body token
+  editor auto-closes `{` while typing (`{"reply": "hello"}` became `{reply": "hello"}"`) — paste
+  the body in one go or set it through the API. The **End** node (Terminate) is optional after it.
+- **HTTP action** (Connectors → search "HTTP"): `builtinFunction`, `operationId` `"httpaction"`,
+  category `…/operationGroups/Http`, parameters `{method, uri, headers, body, queries}` →
+  `{"type":"Http"}`. Method is a dropdown; Headers / Queries / Body / Authentication are under
+  **Show all** — the Pinecone `Api-Key` goes there. Output `body('HTTP')`.
+- **Compose** lives under **Function** (Data Operations): `operationId` `"composeNew"`, category
+  `…/operationGroups/DataOperation`, parameters `{"inputs": …}` → `{"type":"Compose"}`;
+  reference `outputs('Node_Name')`. A whole-field `@json(...)` yields an object, so
+  `outputs('Enquiry')?['ticketId']` works.
+- **Human review inputs** are added with **Add an input → Text / Yes/No / Email / Number /
+  Date** (no Choice type any more). Output keys: `outputs('Human_review')?['body/boolean']`
+  (the Yes/No answer — compare with `equals(…, 'Yes')`; if it never matches, read the run's
+  outputs and switch to `true`) and `['body/text']`. The ⚡ picker shows them as the node's
+  **Yes/No** and **Text** outputs. Channel Teams; the card lands in the Teams **Workflows** bot
+  chat and on this tenant may be delayed or never arrive — the run parks at *Running*.
+- **Classify node** fields: **Input to classify**, **Categories** (name + description; a built-in
+  *Other*), **Examples**. It compiles to an InvokeDefinition plus a Switch on
+  `outputs('Classify_email')?['body']?['structuredOutput']?['predictedCategory']`; wire each
+  branch from the category's source handle.
+- **Agent node knowledge**: Knowledge → **Add a knowledge** → dialog *Add knowledge* (Featured:
+  Public websites, SharePoint) → SharePoint → **SharePoint link** → **Add** is enabled only for a
+  **%20-encoded** folder URL (raw spaces leave it disabled) → **Add to agent**. Graph:
+  `config.inlineKnowledge[{id, displayName, description, type:"sharepoint", site, originalSite}]`
+  → compiles into `botDefinition.knowledgeSources`.
+- **Respond to the agent** is **+ → Actions → Agent → Respond to the agent** (only offered when
+  the trigger is *When an agent calls the workflow*). The "Skills → Respond to the agent" found by
+  the Connectors search is a different thing — it demands a Skills connection whose listing fails
+  and the node stays *Needs setup*. Graph: `builtinFunction`, `operationId` `"response"`,
+  `kind:"Skills"`, output keys typed `text`, `text_1` … with the label in `title` → compiles to
+  `{"type":"Response","kind":"Skills"}`.
+- **Manual trigger inputs**: Start → *Add an input* → Text stores the input under the type name
+  (`text`, `text_1` …) with the label in `title`; reference `triggerBody()?['text']`.
+- **Excel Online AddRowV2**: the pickers store ids (`source` "me", `drive` = the OneDrive drive id,
+  `file` = item id, `table` = `{00000000-000C-0000-FFFF-FFFF00000000}`), but the **path form**
+  (`drive` "me", `file` "/Power Automate Lab Data/<name>.xlsx", `table` "<TableName>") is accepted
+  and resolves the columns. UI order: Location *OneDrive for Business* → Document Library
+  *OneDrive* → File → Table.
+- **Teams Post message**: the admin belongs to one team only, *Tertiary Infotech - WSQ Courses*
+  (there is no "Training" team); `poster` "Flow bot", `location` "Channel", groupId/channelId ids.
+- **M365 Copilot node** needs the admin's `shared_m365copilotv2` connection with
+  `runtimeSource` "invoker"; output `body/response`.
+
+### Expressions and compile behaviour
+- **`setProperty()` is an unknown function** (canvas shows *Unknown function: setProperty*, same
+  class as `workflow()`; assume `addProperty()` too). Build JSON objects with
+  `json(concat('{"reply":', substring(string(createArray(X)), 1, sub(length(string(createArray(X))), 2)), '}'))`
+  — `string(createArray(X))` JSON-escapes the value. `createArray()` with no arguments fails at
+  run time — use `json('[]')` in null-safe `join()`/`coalesce()` calls. Booleans unquoted via
+  `toLower(string(x))`. Expression length is not a limit (1,600-char literal passed).
+- **Forms trigger `splitOn`** is only compiled when the trigger config has
+  `"triggerBatchMode": "Batch"` **and** the trigger's `parametersSchema`/`outputSchema` (webhook
+  body `value[]`) — copy them from a UI-saved workflow. Without them
+  `triggerOutputs()?['body/resourceData/responseId']` is null and Get response details fails
+  with *The response ID in request URL is invalid*.
+- Forms question ids appear in the Get response details node's `outcomeSchema` only after the
+  node panel has been opened once (dynamic-schema fetch) and the workflow saved.
+- **Publish compiles** the definition even when Save is greyed out. A server-side validator
+  reports under the **Review** badge (e.g. *input parameter(s) of operation 'HTTP' contains
+  invalid expression(s)*, *Action "X" references action "Y," which is not on the canvas*).
+- **PATCH on a designer-saved row fails with 0x80040203** (*published update … unpublished
+  active row*) → deactivate (`statecode 0 / statuscode 1`), delete and **recreate** the workflow.
+- The rename-nudge (click title, End, Space, Backspace, Enter) dirties the draft so Save
+  compiles; never type a character — the title is fully selected and would be replaced.
+
+### Agent designer
+- **Agent names are capped at 30 characters** (`<textarea maxlength="30">`; *Agent name must be
+  30 characters or fewer*). Workflow names are not. Reference agents therefore shorten the base name so ` (DO NOT DELETE)` still fits (e.g. `Lab 5 - HR (DO NOT DELETE)`).
+- The agent only gets its id on the first **Save**; removing the default *Search all websites*
+  chip before that save is silently reverted.
+- **Knowledge +**: File upload (multi-select, text-based files incl. .pdf/.md/.txt/.csv; 10 per
+  batch is safe, 23 chips on one agent fine) or Add SharePoint / OneDrive / Public websites.
+  **Skills +**: Upload a skill (.md or .zip with SKILL.md + YAML name/description); rail lists
+  newest first. **Tools + → Workflows lists only workflows whose trigger is *When an agent calls
+  the workflow*, and only Published ones are clickable** (others greyed *Not published*);
+  clicking adds immediately; chip → *Workflow details* (Description; Inputs *How is this filled?*
+  AI | Value; Outputs). **Connected agents +** accepts published agents only; Description required.
+- **Settings** is under `…` (More options) — no gear icon. Its **Done** button is always
+  disabled: changes apply immediately, close with ✕, then Save + Publish. **Safety & access →
+  Authentication**: *No authentication* / *Authenticate with Microsoft*. Switching to No
+  authentication + Publish makes the **Demo website** channel appear automatically (URL + iframe
+  embed under *View details*); with Authenticate with Microsoft the tile is greyed
+  *Requires "No authentication"*.
+- **Channels + → Teams + Microsoft 365**: Availability (cannot change after publishing), About
+  info, Use and share (**View in Teams / View in Copilot / Submit to org catalog** — only the
+  last needs an admin), App manifest (Download .zip). Adding the channel is immediate.
+- **Copilot Credits enforcement**: with 0 credits every Preview, demo-website and Agent-node
+  reply is *"You need credits to continue … Error code: EnforcementUsageCredits"*; Save and
+  Publish still work. Fix in the Power Platform admin center → Licensing → Copilot Studio →
+  Manage Copilot Credits. Do not debug a build for this message.

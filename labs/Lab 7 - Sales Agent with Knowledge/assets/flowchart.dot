@@ -1,0 +1,14 @@
+digraph G {
+  graph [rankdir=LR, bgcolor="white", pad="0.25", nodesep="0.45", ranksep="0.6", fontname="Arial", dpi=180];
+  node [shape=box, style="rounded,filled", fillcolor="#F5F8FC", color="#8FA6C0", penwidth=1.5, fontname="Arial", fontsize=12, margin="0.16,0.12"];
+  edge [color="#365C82", penwidth=1.7, arrowsize=0.8, fontname="Arial", fontsize=10, fontcolor="#365C82"];
+      create [label="Agents → New agent\nLab 7 - Sales Agent", fillcolor="#EAF2FF"];
+      instr [label="Instructions box\npaste agent/instructions.md", fillcolor="#FFE9EC"];
+      sp [label="SharePoint folder\nLab 7 - Course Brochures\n20 brochures + pricing-rules.md", fillcolor="#FFF4E5"];
+      knowledge [label="Knowledge +\nadd the SharePoint folder\nremove Search all websites", fillcolor="#FFF4E5"];
+      skills [label="Skills +\ncourse-enquiry.zip\nenrolment-intake.zip"];
+      preview [label="Preview tab\nfee questions · 3 invention probes", fillcolor="#F1EAFF"];
+      publish [label="Publish", fillcolor="#E8F7EE"];
+      create -> instr -> knowledge -> skills -> preview -> publish;
+      sp -> knowledge [style=dashed];
+}

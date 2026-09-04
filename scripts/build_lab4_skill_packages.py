@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Build Copilot Studio skill packages for Lab 4.
+"""Build Copilot Studio skill packages for Labs 5 to 9.
 
-Each skill lives in  labs/Lab 4 - Agents /<NN - Agent>/skills/<skill-name>/
-containing SKILL.md (uploadable) and TEACHING-NOTES.md (trainer-only).
+Each skill lives in a  skills/<skill-name>/  folder somewhere under one of the
+agent labs (the lab root itself, or a going-further/ kit, or a numbered agent
+folder inside Lab 9), containing SKILL.md (uploadable) and TEACHING-NOTES.md
+(trainer-only).
 
 This script validates every SKILL.md and writes one .zip per skill into that
-agent's skills/_packages/ folder, with SKILL.md at the TOP LEVEL of the archive
+skills/_packages/ folder, with SKILL.md at the TOP LEVEL of the archive
 (no wrapping parent folder) as Microsoft's packaging guidance requires.
 
 TEACHING-NOTES.md is deliberately excluded from the archive — everything inside
@@ -23,7 +25,13 @@ import sys
 import zipfile
 from pathlib import Path
 
-LABS = ["labs/Lab 4 - Agents ", "labs/Lab 4b - Multi-Agent Content Team"]
+LABS = [
+    "labs/Lab 5 - Your First Agent",
+    "labs/Lab 6 - Procurement Agent with Tools",
+    "labs/Lab 7 - Sales Agent with Knowledge",
+    "labs/Lab 8 - IT Support Agent with Skills",
+    "labs/Lab 9 - Multi-Agent Content Team",
+]
 PACKAGE_DIR_NAME = "_packages"
 EXCLUDE_FROM_PACKAGE = {"TEACHING-NOTES.md"}
 
@@ -131,18 +139,21 @@ def main() -> int:
     failures: list[str] = []
     built = 0
 
-    agent_dirs: list[Path] = []
+    labs_root = repo_root() / "labs"
+    skills_dirs: list[Path] = []
     for lab in LABS:
         lab_dir = repo_root() / lab
         if not lab_dir.is_dir():
             print(f"ERROR: cannot find {lab_dir}", file=sys.stderr)
             return 2
-        agent_dirs.extend(sorted(lab_dir.iterdir()))
+        # every skills/ folder under the lab: the lab root, going-further/ kits,
+        # and the numbered agent folders inside Lab 6.
+        skills_dirs.extend(
+            sorted(p for p in lab_dir.rglob("skills") if p.is_dir() and PACKAGE_DIR_NAME not in p.parts)
+        )
 
-    for agent_dir in agent_dirs:
-        skills_dir = agent_dir / "skills"
-        if not skills_dir.is_dir():
-            continue
+    for skills_dir in skills_dirs:
+        agent_dir = skills_dir.parent
 
         skill_dirs = sorted(
             d for d in skills_dir.iterdir() if d.is_dir() and d.name != PACKAGE_DIR_NAME
@@ -150,7 +161,7 @@ def main() -> int:
         if not skill_dirs:
             continue
 
-        print(f"\n{agent_dir.name}")
+        print(f"\n{agent_dir.relative_to(labs_root)}")
         out_dir = skills_dir / PACKAGE_DIR_NAME
         for skill_dir in skill_dirs:
             try:
