@@ -1,8 +1,8 @@
 {
-  "version": "8.1",
+  "version": "8.2",
   "course_title": "Business Process Automation with Power Automate and Copilot Studio Agents",
   "course_code": "TGS-2022017524",
-  "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v8.1.pptx",
+  "deck": "Business Process Automation with Power Automate and Copilot Studio Agents-v8.2.pptx",
   "design_principle": "Concepts first, labs second. Every lab is preceded by the concept slides that explain it, and every concept slide names the lab where it is applied.",
   "naming_rule": "Workflows in the tenant are named exactly as the lab title ('Lab N - <Title>'); agents are named 'Lab N - <Agent Name>' (e.g. 'Lab 5 - HR Agent'); helper workflows and every artefact carry the lab prefix ('Lab 6 - Raise Requisition', 'Lab 2 - Enquiry Log.xlsx', 'Lab 12 - Customers'). Agent names are capped at 30 characters by Copilot Studio, so learners use e.g. 'Lab 9 - Marketing Manager' (25). The trainer's canonical workflows AND agents both carry the suffix ' (DO NOT DELETE)'; agent base names are shortened to fit the 30-character cap (e.g. 'Lab 5 - HR (DO NOT DELETE)', 'Lab 6 - Proc (DO NOT DELETE)', 'Lab 9 - Mgr (DO NOT DELETE)'); learners name their own builds plainly. Every hands-on build uses the Copilot Studio new-experience designer; classic Power Automate is never opened.",
   "modules": [

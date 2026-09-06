@@ -30,8 +30,8 @@ from pptx.util import Inches, Pt
 ROOT = Path(__file__).resolve().parents[1]
 CW = ROOT / "courseware"
 ASSETS = CW / "assets"
-VERSION = "8.1"
-VERSION_DATE = "4 September 2026"
+VERSION = "8.2"
+VERSION_DATE = "6 September 2026"
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
 DECK = CW / f"{TITLE}-v{VERSION}.pptx"
 SLIDE_MAP = CW / "slide_map.json"
@@ -689,19 +689,38 @@ def draw_repository(s):
 
 
 def draw_training_account(s):
-    lead(s, "One assigned Microsoft 365 training account per learner — the same login for every lab, in your class environment.")
-    for i in range(10):
-        row, col = divmod(i, 2)
-        x = Inches(0.72 + col * 6.05)
-        y = Inches(2.15 + row * 0.62)
-        box(s, x, y, Inches(5.8), Inches(0.52), LIGHT, LINE)
-        text(s, x + Inches(0.15), y, Inches(3.9), Inches(0.52), f"training{i + 1}@tertiaryinfotech.onmicrosoft.com", 12, INK, True)
-        text(s, x + Inches(4.05), y, Inches(1.7), Inches(0.52), "Reserved for the trainer" if i == 0 else f"Learner account {i}", 10, GREY)
-    takeaway(s, 5.35, "Password for training2 – training10:  Tertiary@0808", BLUE)
+    lead(s, "Two sets of credentials. Your trainer assigns you one of each — use the same pair for every lab.")
+
+    # --- Set 1: Microsoft 365 Premium (Office 365 + Copilot 365, 6 pax each) ---
+    text(s, Inches(0.72), Inches(2.10), Inches(11.85), Inches(0.28),
+         "1 · MICROSOFT 365 PREMIUM  —  m365.cloud.microsoft  ·  Office 365 + Copilot 365, 6 learners per account", 12, VIOLET, True)
+    m365 = [("training1-tertiary@outlook.com", "Learners 1–6"),
+            ("training2-tertiary@outlook.com", "Learners 7–12")]
+    for i, (user, who) in enumerate(m365):
+        y = Inches(2.42 + i * 0.58)
+        box(s, Inches(0.72), y, Inches(11.85), Inches(0.52), LIGHT, LINE)
+        rect(s, Inches(0.72), y, Inches(0.09), Inches(0.52), VIOLET)
+        text(s, Inches(1.0), y, Inches(5.6), Inches(0.52), user, 12, INK, True)
+        text(s, Inches(6.7), y, Inches(3.0), Inches(0.52), "Password: from your trainer", 12, VIOLET, True)
+        text(s, Inches(9.9), y, Inches(2.5), Inches(0.52), who, 11, GREY)
+
+    # --- Set 2: Copilot Studio / Power Automate training accounts ---
+    text(s, Inches(0.72), Inches(3.72), Inches(11.85), Inches(0.28),
+         "2 · COPILOT STUDIO / POWER AUTOMATE  —  copilotstudio.microsoft.com  ·  your class environment", 12, BLUE, True)
+    training = [("training1@tertiaryinfotech.onmicrosoft.com", "Training Class 1"),
+                ("training2@tertiaryinfotech.onmicrosoft.com", "Training Class 2")]
+    for i, (user, who) in enumerate(training):
+        y = Inches(4.04 + i * 0.58)
+        box(s, Inches(0.72), y, Inches(11.85), Inches(0.52), LIGHT, LINE)
+        rect(s, Inches(0.72), y, Inches(0.09), Inches(0.52), BLUE)
+        text(s, Inches(1.0), y, Inches(5.6), Inches(0.52), user, 12, INK, True)
+        text(s, Inches(6.7), y, Inches(3.0), Inches(0.52), "Password: from your trainer", 12, BLUE, True)
+        text(s, Inches(9.9), y, Inches(2.5), Inches(0.52), who, 11, GREY)
+
+    takeaway(s, 5.28, "Your trainer gives you the passwords in class. Sign in to Microsoft 365 at m365.cloud.microsoft, Copilot Studio at copilotstudio.microsoft.com.", BLUE)
     # One line only: a second wrapped line autogrows the box past B6.85in into the footer.
-    # (The "Default has no Copilot Credits" point is already made on the Power Platform slide.)
-    note(s, 6.05, "STAY IN YOUR CLASS ENVIRONMENT",
-         "Confirm your Training Class environment (e.g. Training Class 1) shows bottom-left before you build anything.", RED, 0.8)
+    note(s, 6.02, "STAY IN YOUR CLASS ENVIRONMENT",
+         "Confirm your Training Class environment (e.g. Training Class 1) shows bottom-left before you build anything.", RED, 0.80)
 
 
 # ===========================================================================

@@ -1,6 +1,6 @@
 # Learner Guide
 
-**Course Code:** TGS-2022017524  ·  **Version 8.1**
+**Course Code:** TGS-2022017524  ·  **Version 8.2**
 
 ### Document Version Control Record
 
@@ -37,6 +37,7 @@
 | 8.0.1 | 4 September 2026 | Environment model updated — learners now build in a dedicated per-class Training Class Sandbox environment (reset between cohorts) instead of the trainer's build environment; the reference (DO NOT DELETE) workflows and agents were moved to a separate master reference Sandbox and are read-only for learners. Lab 0 rewritten around switching to the assigned class environment, with a Developer/Sandbox/Trial comparison and a self-study path for creating a personal Developer environment. | Course Development Team |
 | 8.0.2 | 4 September 2026 | Training Class environment change carried through the guide — every lab now directs learners to select their assigned Training Class Sandbox environment in the environment picker before building, never the Developer or Default environment; the master reference Sandbox holding the (DO NOT DELETE) workflows and agents is called out as read-only. Both days re-timed to the house standard 9:30am – 6:30pm, with the assessment block at 4:30 – 6:30pm. | Course Development Team |
 | 8.1 | 4 September 2026 | Deck lab order corrected — Lab 17 (Publish to Teams, Microsoft 365 Copilot and the Web) now appears LAST, after the two RAG labs, matching the order the Lesson Plan schedules and the Learner Guide follows. Previously the deck grouped it with the Module 3 agent labs, so the slides jumped Lab 11 to Lab 17 and back to Lab 12. No lab content, duration or timing changed. | Course Development Team |
+| 8.2 | 6 September 2026 | Training-account credentials revised — the “Your Training Account” slide and Lab 0 now list two credential sets: the Microsoft 365 Premium learner accounts (Office 365 + Copilot 365, 6 learners each) first, then the two Copilot Studio / Power Automate training accounts (training1 and training2). Passwords are no longer printed in the courseware — the trainer issues them in class. The previous ten-account training1–training10 list is retired. | Course Development Team |
 
 ## Table of Contents
 
@@ -288,6 +289,30 @@ Approximately 20 minutes (plus about 15 minutes if you need to create a Microsof
 - The trainer's finished reference builds live in a **separate master reference environment**, not in yours. Every reference **workflow** there is named `Lab N - … (DO NOT DELETE)`; every reference **agent** likewise — agent names are capped at 30 characters by Copilot Studio, so the agent's base name is shortened to make the suffix fit. They are read-only for you: open them to compare, never edit or delete them
 
 > **Which account should I use?** - **Option A — You already have a Microsoft 365 work/school account** (e.g. `name@company.com`). Try this first — you may already have everything you need. Skip Part A and go straight to **Part B**. - **Option B — You do NOT have a work/school account** (only a personal `@outlook.com` / `@gmail.com`). Copilot Studio requires a *work or school* account, so you create one via a free **Microsoft 365 Business trial** in **Part A**, then continue from Part B. - **In a classroom**, the trainer normally issues a ready-made account (`training1@…onmicrosoft.com` or similar) that already has access to your class environment. Ask before creating anything.
+
+**Classroom credentials**
+
+In a classroom your trainer assigns you **two accounts** — one of each set — and gives you the passwords in class. Use the same pair for every lab; you do not create anything in Part A.
+
+**1 · Microsoft 365 Premium** — sign in at https://m365.cloud.microsoft/ for Office 365 and Copilot 365 (6 learners share each account):
+
+| Account | Assigned to |
+| --- | --- |
+| `training1-tertiary@outlook.com` | Learners 1–6 |
+| `training2-tertiary@outlook.com` | Learners 7–12 |
+
+**2 · Copilot Studio / Power Automate** — sign in at https://copilotstudio.microsoft.com in your class environment:
+
+All accounts are on the `@tertiaryinfotech.onmicrosoft.com` domain:
+
+| Account | Environment |
+| --- | --- |
+| `training1@tertiaryinfotech.onmicrosoft.com` | Training Class 1 |
+| `training2@tertiaryinfotech.onmicrosoft.com` | Training Class 2 |
+
+> **Passwords are issued by your trainer at the start of the class** — they are not printed in the courseware. Ask if you have not been given one.
+
+> **Confirm your environment before you build anything.** The environment name shows bottom-left in Copilot Studio — it must read your assigned Training Class.
 
 > **⚠️ Why not the Microsoft 365 Developer Program?** Since 2024 the free Developer Program E5 sandbox requires an active **Visual Studio Enterprise or Professional subscription**. Without one you see *"You don't currently qualify for a Microsoft 365 Developer Program sandbox subscription."* — so this course does **not** use that path. Use Option B instead.
 

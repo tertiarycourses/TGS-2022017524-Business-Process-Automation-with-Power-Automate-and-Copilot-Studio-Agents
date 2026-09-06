@@ -236,7 +236,7 @@ def draw_training_accounts(s):
         text(s, x + Inches(0.16), y + Inches(0.02), Inches(3.9), Inches(0.5), email, 12, INK, True)
         text(s, x + Inches(4.0), y + Inches(0.02), Inches(1.75), Inches(0.5), who, 10, VIOLET if i == 0 else GREY,
              False, PP_ALIGN.RIGHT)
-    takeaway(s, 5.62, "Password for training2 – training10:  Tertiary@0808", VIOLET)
+    takeaway(s, 5.62, "Passwords are issued by your trainer in class.", VIOLET)
     text(s, Inches(0.72), Inches(6.34), Inches(11.85), Inches(0.3),
          "Sign in at copilotstudio.microsoft.com and make.powerautomate.com with the account the trainer "
          "assigns you — stay in the shared training environment and do not change the password.", 11, GREY)

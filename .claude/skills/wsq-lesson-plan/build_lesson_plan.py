@@ -31,7 +31,7 @@ from docx.oxml import OxmlElement
 # script lives at .claude/skills/wsq-lesson-plan/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "8.1"
+VERSION = "8.2"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -124,6 +124,8 @@ VERSIONS = [
      "4:30 – 6:30pm. Lab 0 environment references corrected to the Training Class Sandbox.",
      "Course Development Team"],
     ["8.1", "4 September 2026", "Deck lab order corrected — Lab 17 (Publish to Teams, Microsoft 365 Copilot and the Web) now appears LAST, after the two RAG labs, matching the order the Lesson Plan schedules and the Learner Guide follows. Previously the deck grouped it with the Module 3 agent labs, so the slides jumped Lab 11 to Lab 17 and back to Lab 12. No lab content, duration or timing changed.",
+     "Course Development Team"],
+    ["8.2", "6 September 2026", "Training-account credentials revised — the \u201cYour Training Account\u201d slide and Lab 0 now list two credential sets: the Microsoft 365 Premium learner accounts (Office 365 + Copilot 365, 6 learners each) first, then the two Copilot Studio / Power Automate training accounts (training1 and training2). Passwords are no longer printed in the courseware \u2014 the trainer issues them in class. The previous ten-account training1\u2013training10 list is retired.",
      "Course Development Team"],
 ]
 

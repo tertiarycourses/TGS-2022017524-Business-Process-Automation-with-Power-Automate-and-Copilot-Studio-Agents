@@ -25,6 +25,30 @@ Approximately 20 minutes (plus about 15 minutes if you need to create a Microsof
 > - **Option B — You do NOT have a work/school account** (only a personal `@outlook.com` / `@gmail.com`). Copilot Studio requires a *work or school* account, so you create one via a free **Microsoft 365 Business trial** in **Part A**, then continue from Part B.
 > - **In a classroom**, the trainer normally issues a ready-made account (`training1@…onmicrosoft.com` or similar) that already has access to your class environment. Ask before creating anything.
 
+### Classroom credentials
+
+In a classroom your trainer assigns you **two accounts** — one of each set — and gives you the passwords in class. Use the same pair for every lab; you do not create anything in Part A.
+
+**1 · Microsoft 365 Premium** — sign in at <a href="https://m365.cloud.microsoft/" target="_blank" rel="noopener">https://m365.cloud.microsoft/</a> for Office 365 and Copilot 365 (6 learners share each account):
+
+| Account | Assigned to |
+|---|---|
+| `training1-tertiary@outlook.com` | Learners 1–6 |
+| `training2-tertiary@outlook.com` | Learners 7–12 |
+
+**2 · Copilot Studio / Power Automate** — sign in at <a href="https://copilotstudio.microsoft.com" target="_blank" rel="noopener">https://copilotstudio.microsoft.com</a> in your class environment:
+
+All accounts are on the `@tertiaryinfotech.onmicrosoft.com` domain:
+
+| Account | Environment |
+|---|---|
+| `training1@tertiaryinfotech.onmicrosoft.com` | Training Class 1 |
+| `training2@tertiaryinfotech.onmicrosoft.com` | Training Class 2 |
+
+> **Passwords are issued by your trainer at the start of the class** — they are not printed in the courseware. Ask if you have not been given one.
+
+> **Confirm your environment before you build anything.** The environment name shows bottom-left in Copilot Studio — it must read your assigned Training Class.
+
 > **⚠️ Why not the Microsoft 365 Developer Program?** Since 2024 the free Developer Program E5 sandbox requires an active **Visual Studio Enterprise or Professional subscription**. Without one you see *"You don't currently qualify for a Microsoft 365 Developer Program sandbox subscription."* — so this course does **not** use that path. Use Option B instead.
 
 ## Scenario

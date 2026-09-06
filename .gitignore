@@ -48,7 +48,10 @@ outputs/
 
 # Local-only history: superseded deck carrying third-party reference screenshots,
 # and the top-level archive of legacy assessment-plan documents.
-courseware/archive/*-with-reference-slides.pptx
+# Superseded deck versions. These are rebuildable, they bloat the repo, and
+# older ones printed live training passwords on the account slide — the repo
+# is public, so they must never be published again.
+courseware/archive/
 /archive/
 
 # Course-specific assessment builders — they embed the confidential question

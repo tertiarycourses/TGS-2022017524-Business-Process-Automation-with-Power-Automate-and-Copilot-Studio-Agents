@@ -149,7 +149,7 @@ detailed build parts, test evidence, troubleshooting and key takeaways.
 | Learner Guide (Markdown) | [LEARNER-GUIDE.md](LEARNER-GUIDE.md) |
 | Learner Guide (Word/PDF) | `courseware/LG-Business Process Automation with Power Automate and Copilot Studio Agents.docx/.pdf` |
 | Lesson Plan (Word/PDF) | `courseware/LP-Business Process Automation with Power Automate and Copilot Studio Agents.docx/.pdf` |
-| Facilitator deck | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v8.1.pptx/.pdf` |
+| Facilitator deck | `courseware/Business Process Automation with Power Automate and Copilot Studio Agents-v8.2.pptx/.pdf` |
 
 `courseware/alignment_manifest.json` (lab table, durations, tenant names) and
 `courseware/slide_map.json` (written by the deck builder) keep the deck, Lesson Plan, Learner
@@ -158,7 +158,7 @@ Guide and labs aligned. Superseded deck versions live in `courseware/archive/`.
 Rebuild everything (labs/ is the ground truth — never hand-edit the LG/LP DOCX):
 
 ```bash
-python3 scripts/build_v80_deck.py                                # facilitator deck v8.1 (self-contained; picks up labs/*/screenshots, writes slide_map.json, archives the previous copy)
+python3 scripts/build_v80_deck.py                                # facilitator deck v8.2 (self-contained; picks up labs/*/screenshots, writes slide_map.json, archives the previous copy)
 python3 .claude/skills/wsq-lesson-plan/build_lesson_plan.py      # Lesson Plan
 python3 .claude/skills/wsq-learner-guide/build_learner_guide.py  # Learner Guide DOCX + LEARNER-GUIDE.md
 soffice --headless --convert-to pdf --outdir courseware "courseware/<file>.pptx|.docx"

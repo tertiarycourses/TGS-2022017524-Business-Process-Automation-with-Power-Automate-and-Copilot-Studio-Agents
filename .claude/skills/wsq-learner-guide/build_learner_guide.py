@@ -27,7 +27,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 # script lives at .claude/skills/wsq-learner-guide/ — repo root is 3 levels up
 REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 TITLE = "Business Process Automation with Power Automate and Copilot Studio Agents"
-VERSION = "8.1"
+VERSION = "8.2"
 COURSE_CODE = "TGS-2022017524"
 ORG = "Tertiary Infotech Academy Pte Ltd"
 UEN = "201200696W"
@@ -157,6 +157,8 @@ VERSIONS = [
      "block at 4:30 – 6:30pm.",
      "Course Development Team"],
     ["8.1", "4 September 2026", "Deck lab order corrected — Lab 17 (Publish to Teams, Microsoft 365 Copilot and the Web) now appears LAST, after the two RAG labs, matching the order the Lesson Plan schedules and the Learner Guide follows. Previously the deck grouped it with the Module 3 agent labs, so the slides jumped Lab 11 to Lab 17 and back to Lab 12. No lab content, duration or timing changed.",
+     "Course Development Team"],
+    ["8.2", "6 September 2026", "Training-account credentials revised — the \u201cYour Training Account\u201d slide and Lab 0 now list two credential sets: the Microsoft 365 Premium learner accounts (Office 365 + Copilot 365, 6 learners each) first, then the two Copilot Studio / Power Automate training accounts (training1 and training2). Passwords are no longer printed in the courseware \u2014 the trainer issues them in class. The previous ten-account training1\u2013training10 list is retired.",
      "Course Development Team"],
 ]
 
@@ -651,11 +653,65 @@ def render_docx(blocks):
         elif k == "table":
             rows = b[1]
             t = doc.add_table(rows=0, cols=len(rows[0])); t.style = "Table Grid"; t.alignment = WD_TABLE_ALIGNMENT.CENTER
+            # Word autofits every column to an equal share, which breaks long
+            # unbreakable tokens (emails, URLs) mid-word. Size each column by its
+            # content instead, subject to a floor so a narrow column (e.g. "#")
+            # still fits its digits plus cell padding.
+            TABLE_W = 6.0    # the section text block; matches the LP builder
+            PAD = 0.20       # Word's left+right cell padding
+            CH = 0.072       # ~9.5pt Arial average character width, in inches
+            def _plain(v):
+                return re.sub(r"[*`]", "", v)
+            def _tokens(v):
+                """Widest token, counting a `code` span at Consolas' wider pitch."""
+                widest = 1.0
+                for part in re.split(r"(`[^`]*`)", v):
+                    if not part:
+                        continue
+                    mono = part.startswith("`") and part.endswith("`") and len(part) > 1
+                    for w in re.sub(r"[*`]", "", part).split():
+                        widest = max(widest, len(w) * (1.25 if mono else 1.0))
+                return widest
+            _cols = len(rows[0])
+            # A column must fit its widest unbreakable token; it wants its widest
+            # cell, capped so one verbose cell cannot swallow the whole table.
+            _tok = [max(_tokens(r[ci]) for r in rows) for ci in range(_cols)]
+            _cell = [max(len(_plain(r[ci])) for r in rows) for ci in range(_cols)]
+            _want = [max(_tok[ci], min(_cell[ci], _tok[ci] * 2 + 8)) for ci in range(_cols)]
+            # Each column's own floor: enough for its widest unbreakable token
+            # (so "Method" or an email never wraps mid-word), capped so a single
+            # very long token cannot claim the whole table.
+            _min = [min(max(0.34, PAD + _tok[ci] * CH), TABLE_W / _cols)
+                    for ci in range(_cols)]
+            _sum = sum(_want) or 1
+            _w = [TABLE_W * v / _sum for v in _want]
+            # Raise every starved column to its floor, then take the deficit back
+            # from the columns still above theirs, in proportion to their slack.
+            for _ in range(_cols + 1):
+                deficit = sum(_min[ci] - _w[ci] for ci in range(_cols) if _w[ci] < _min[ci])
+                if deficit <= 1e-9:
+                    break
+                slack = sum(_w[ci] - _min[ci] for ci in range(_cols) if _w[ci] > _min[ci])
+                if slack <= 1e-9:
+                    _w = [TABLE_W / _cols] * _cols
+                    break
+                _w = [_min[ci] if _w[ci] < _min[ci]
+                      else _w[ci] - (_w[ci] - _min[ci]) * deficit / slack
+                      for ci in range(_cols)]
+            t.autofit = False
+            for ci in range(_cols):
+                t.columns[ci].width = Inches(_w[ci])
             for ri, row in enumerate(rows):
                 cells = t.add_row().cells
                 for ci, val in enumerate(row):
+                    cells[ci].width = t.columns[ci].width
                     cells[ci].text = ""; pp = cells[ci].paragraphs[0]
                     if ri == 0:
+                        # Repeat the header on every page a table spills onto, so a
+                        # split table never leaves an orphaned header behind.
+                        trPr = cells[ci]._tc.getparent().get_or_add_trPr()
+                        if trPr.find(qn("w:tblHeader")) is None:
+                            trPr.append(OxmlElement("w:tblHeader"))
                         rr = pp.add_run(re.sub(r"[*`]", "", val)); rr.bold = True; rr.font.color.rgb = RGBColor(0xFF,0xFF,0xFF); rr.font.size = Pt(9.5)
                         _shade(cells[ci], "1F6FEB")
                     else:

@@ -84,7 +84,7 @@ for j,em in enumerate(emails[5:]):
 rect(s,Inches(0.85),Inches(5.70),Inches(11.7),Inches(0.65),BLUE)
 txt(s,Inches(0),Inches(5.70),SW,Inches(0.65),[
     [("Password:  ",17,WHITE,True),
-     ("Tertiary@888",17,WHITE,False),
+     ("issued by your trainer",17,WHITE,False),
      ("   ·   same for all accounts",14,LBLUE,False)]],
     align=PP_ALIGN.CENTER,anchor=MSO_ANCHOR.MIDDLE)
 

@@ -3,7 +3,7 @@
 (Copilot sign-in) slide.
 
 Adds the two shared outlook.com personal accounts (training1-tertiary /
-training2-tertiary, password Tertiary@888) as a house-style slide directly
+training2-tertiary; passwords are issued by the trainer) as a house-style slide directly
 after "Your Training Account", then renumbers every footer page number.
 Edits the v7.1 deck in place; the pre-patch copy is archived first by the
 calling shell step.
@@ -123,7 +123,7 @@ def draw_personal_accounts(s):
         box(s, x, y, Inches(5.8), Inches(0.9), WHITE, LINE)
         text(s, x + Inches(0.24), y, Inches(3.9), Inches(0.9), email, 15, INK, True)
         text(s, x + Inches(3.9), y, Inches(1.75), Inches(0.9), who, 11, GREY, False, PP_ALIGN.RIGHT)
-    takeaway(s, 3.7, "Password for both accounts:  Tertiary@888", TEAL)
+    takeaway(s, 3.7, "Passwords for both accounts are issued by your trainer in class.", TEAL)
     text(s, Inches(0.72), Inches(4.6), Inches(11.85), Inches(0.6),
          "These are shared personal accounts, separate from your assigned "
          "training account on the tertiaryinfotech tenant — sign in with them only where a lab calls for a "

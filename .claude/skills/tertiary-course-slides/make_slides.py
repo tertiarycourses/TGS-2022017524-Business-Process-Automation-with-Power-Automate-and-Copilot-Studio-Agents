@@ -281,7 +281,7 @@ txt(_s,Inches(1.05),Inches(1.89),Inches(2.2),Inches(0.44),[[("Workspace URL",13,
 txt(_s,Inches(3.3),Inches(1.89),Inches(9.0),Inches(0.44),[[("http://n8n.srv923061.hstgr.cloud:5678",14,INK,False)]],anchor=MSO_ANCHOR.MIDDLE)
 rect(_s,Inches(0.85),Inches(2.43),Inches(11.6),Inches(0.5),RGBColor(0xEB,0xF4,0xFF))
 txt(_s,Inches(1.05),Inches(2.47),Inches(2.2),Inches(0.44),[[("Password",13,BLUE,True)]],anchor=MSO_ANCHOR.MIDDLE)
-txt(_s,Inches(3.3),Inches(2.47),Inches(3.5),Inches(0.44),[[("Tertiary@888",14,TEAL,True)]],anchor=MSO_ANCHOR.MIDDLE)
+txt(_s,Inches(3.3),Inches(2.47),Inches(3.5),Inches(0.44),[[("issued by your trainer",14,TEAL,True)]],anchor=MSO_ANCHOR.MIDDLE)
 txt(_s,Inches(6.9),Inches(2.47),Inches(4.8),Inches(0.44),[[("(same for all accounts)",12,GREY,False)]],anchor=MSO_ANCHOR.MIDDLE)
 _RH=Inches(0.355); _TY=Inches(3.08)
 for _ci in range(2):
